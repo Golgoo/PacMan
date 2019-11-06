@@ -12,6 +12,7 @@
     </content>
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Spring-4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="gluegen-rt-natives-linux-i586" level="project" />
+    <orderEntry type="library" name="DebugTool" level="project" />
   </component>
 </module>
