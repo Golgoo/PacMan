@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="DebugTool">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Librarys/DebugTool.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
