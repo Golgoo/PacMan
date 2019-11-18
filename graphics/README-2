@@ -1,5 +1,3 @@
-	- Dossier libs : contient les librairies à inclure pour utiliser le moteur graphique sous linux.
-	- Dossier natives : est à copier à la racine d'un futur projet utilisant le moteur graphique ( soucis de compatibilité JVM > 1.8 et JOGL ).
 	- Dossier documentation : contient un .html et un .css qui explique en détails toutes les fonctions permettant de controller le moteur graphique ( il n'y a qu'un seul objet pour ça ).
 	- Dossier example : qui contient des sources pour illustrer des examples d'utilisations basiques, notez que tous le contenu d'un exemple doit être placer dans le package par défault pour fonctionner tout de suite.
 
