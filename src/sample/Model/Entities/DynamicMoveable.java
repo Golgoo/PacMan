@@ -21,6 +21,7 @@ public class DynamicMoveable implements Moveable {
         return position;
     }
 
+
     public Entity move(InputKey.Direction direction){
 
         /*if(isMoving && !wantsToGoBack(direction))

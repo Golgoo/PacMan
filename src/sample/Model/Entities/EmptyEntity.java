@@ -1,7 +1,6 @@
 package sample.Model.Entities;
 
 
-import javafx.scene.image.Image;
 
 public class EmptyEntity implements Entity,Consumable {
 
@@ -26,10 +25,6 @@ public class EmptyEntity implements Entity,Consumable {
         return true;
     }
 
-    @Override
-    public Image toImageView() {
-        return null;
-    }
 
     @Override
     public String toString() {

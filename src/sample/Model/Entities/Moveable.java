@@ -2,6 +2,8 @@ package sample.Model.Entities;
 
 import sample.Model.InputKey;
 
+import java.util.List;
+
 public interface Moveable {
-   List<Moveable> move(InputKey.Direction direction);
+   List<Entity> move(InputKey.Direction direction);
 }

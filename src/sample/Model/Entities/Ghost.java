@@ -3,6 +3,8 @@ package sample.Model.Entities;
 import javafx.scene.image.Image;
 import sample.Model.InputKey;
 
+import java.util.List;
+
 public class Ghost implements Entity, Moveable {
 
     DynamicMoveable dynamicGhost;
@@ -23,13 +25,13 @@ public class Ghost implements Entity, Moveable {
         return false;
     }
 
-    @Override
+
     public Image toImageView() {
         return null;
     }
 
     @Override
-    public Entity move(InputKey.Direction direction) {
+    public List<Moveable> move(InputKey.Direction direction) {
         return null;
     }
 }

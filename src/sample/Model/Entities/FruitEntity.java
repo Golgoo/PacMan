@@ -25,10 +25,6 @@ public class FruitEntity implements Entity, Consumable {
         return true;
     }
 
-    @Override
-    public Image toImageView() {
-        return null;
-    }
 
     @Override
     public String toString() {

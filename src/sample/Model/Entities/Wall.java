@@ -20,11 +20,6 @@ public class Wall implements Entity {
     }
 
     @Override
-    public Image toImageView() {
-        return null;
-    }
-
-    @Override
     public String toString() {
         return "W";
     }

@@ -18,5 +18,14 @@
     </orderEntry>
     <orderEntry type="library" name="gluegen-rt-natives-linux-i586" level="project" />
     <orderEntry type="library" name="DebugTool" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.2/junit-3.8.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
