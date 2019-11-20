@@ -3,9 +3,9 @@ package sample.Model.Entities;
 import javafx.scene.image.Image;
 import sample.Model.InputKey;
 
-public class Ghost implements Cell, Entity{
+public class Ghost implements Entity, Moveable {
 
-    DynamicEntity dynamicGhost;
+    DynamicMoveable dynamicGhost;
 
 
     @Override
@@ -29,7 +29,7 @@ public class Ghost implements Cell, Entity{
     }
 
     @Override
-    public Cell move(InputKey.Direction direction) {
+    public Entity move(InputKey.Direction direction) {
         return null;
     }
 }

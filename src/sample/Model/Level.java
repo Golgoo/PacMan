@@ -10,7 +10,7 @@ import static sample.Model.Entities.FactoryCell.*;
 public class Level {
     int columns;
     int rows;
-    Cell[][] grid;
+    Entity[][] grid;
     Pacman pacman;
 
     public Level(File file) {
@@ -41,9 +41,9 @@ public class Level {
     }
 
     private void loadGrid(File file) {
-        grid = new Cell[rows][columns];
+        grid = new Entity[rows][columns];
         Scanner scanner = null;
-        Cell newCell;
+        Entity newEntity;
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
@@ -55,7 +55,7 @@ public class Level {
                     int result = scanner.nextInt();
                     grid[i][j] = FactoryCell.getCell(EntityCode.values()[result], new Position(i,j));
                     if(result == 3)
-                        pacman = new Pacman(new DynamicEntity(this,new Position(i,j)));
+                        pacman = new Pacman(new DynamicMoveable(this,new Position(i,j)));
                 }
             }
             if(scanner.hasNextLine())
@@ -88,9 +88,9 @@ public class Level {
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        for(Cell[] T : grid){
+        for(Entity[] T : grid){
             s.append("\n");
-            for(Cell elt: T)
+            for(Entity elt: T)
                 s.append(" ").append(elt.toString());
         }
         return "Level{" +
@@ -100,11 +100,11 @@ public class Level {
                 '}';
     }
 
-    public Cell getCell(Position position) {
+    public Entity getCell(Position position) {
         return grid[position.getxPos()][position.getyPos()];
     }
-    public void setGridCell(Cell cell){
-        grid[cell.getPosition().getxPos()][cell.getPosition().getyPos()] = cell;
+    public void setGridCell(Entity entity){
+        grid[entity.getPosition().getxPos()][entity.getPosition().getyPos()] = entity;
     }
 
     public Pacman getPacman() {

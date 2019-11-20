@@ -3,7 +3,7 @@ package sample.Model.Entities;
 import sample.Model.InputKey;
 import sample.Model.Level;
 
-public class DynamicEntity implements Entity{
+public class DynamicMoveable implements Moveable {
 
     private volatile Level currentMap;
 
@@ -12,7 +12,7 @@ public class DynamicEntity implements Entity{
 
     private static boolean isMoving = false;
 
-    public DynamicEntity(Level currentMap, Position position) {
+    public DynamicMoveable(Level currentMap, Position position) {
         this.currentMap = currentMap;
         this.position = position;
     }
@@ -21,19 +21,19 @@ public class DynamicEntity implements Entity{
         return position;
     }
 
-    public Cell move(InputKey.Direction direction){
+    public Entity move(InputKey.Direction direction){
 
         /*if(isMoving && !wantsToGoBack(direction))
             return null;
 
         isMoving = true;*/
 
-        Cell nextCell = getNextCell(direction);
-        if(nextCell.isAccessible()){
+        Entity nextEntity = getNextCell(direction);
+        if(nextEntity.isAccessible()){
             previousPosition = position;
-            position = nextCell.getPosition();
+            position = nextEntity.getPosition();
             //isMoving = false;
-            return nextCell;
+            return nextEntity;
         }
 
         return null;
@@ -49,7 +49,7 @@ public class DynamicEntity implements Entity{
 
 
 
-    public Cell getNextCell(InputKey.Direction direction){
+    public Entity getNextCell(InputKey.Direction direction){
         if(direction == InputKey.Direction.Up)
             return getCell(position.getxPos()-1, position.getyPos());
         else if(direction == InputKey.Direction.Down)
@@ -62,7 +62,7 @@ public class DynamicEntity implements Entity{
         return null;
     }
 
-    public Cell getCell(int xPos, int yPos){
+    public Entity getCell(int xPos, int yPos){
         return currentMap.getCell(new Position(xPos, yPos));
     }
 

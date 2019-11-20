@@ -3,13 +3,13 @@ package sample.Model.Entities;
 import javafx.scene.image.Image;
 import sample.Model.InputKey;
 
-public class Pacman implements Cell, Entity {
+public class Pacman implements Entity, Moveable {
 
-    private DynamicEntity dynamicPacman;
+    private DynamicMoveable dynamicPacman;
 
     private InputKey.Direction direction;
 
-    public Pacman(DynamicEntity dynamicPacman) {
+    public Pacman(DynamicMoveable dynamicPacman) {
         this.dynamicPacman = dynamicPacman;
     }
 
@@ -19,14 +19,14 @@ public class Pacman implements Cell, Entity {
     }
 
     @Override
-    public Cell move(InputKey.Direction direction) {
-        Cell newCell = dynamicPacman.move(direction);
-        if(newCell != null){
+    public Entity move(InputKey.Direction direction) {
+        Entity newEntity = dynamicPacman.move(direction);
+        if(newEntity != null){
             System.out.println(getPosition());
-            Collision.treatCollision(this,newCell);
-            ((Consumable)newCell).use();
+            Collision.treatCollision(this, newEntity);
+            ((Consumable) newEntity).use();
             System.out.println(dynamicPacman.getCurrentMap());
-            return newCell;
+            return newEntity;
         }
         return null;
     }

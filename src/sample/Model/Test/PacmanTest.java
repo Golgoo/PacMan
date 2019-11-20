@@ -1,8 +1,7 @@
 package sample.Model.Test;
 
 import junit.framework.TestCase;
-import sample.Model.Entities.Cell;
-import sample.Model.Entities.DynamicEntity;
+import sample.Model.Entities.Entity;
 import sample.Model.Entities.Pacman;
 import sample.Model.Entities.Position;
 import sample.Model.InputKey;
@@ -21,14 +20,14 @@ public class PacmanTest extends TestCase {
         assertEquals(lastPos,pacman.getPosition());
 
 
-        Cell cellBeforeMove = pacman.move(InputKey.Direction.Right);
+        Entity entityBeforeMove = pacman.move(InputKey.Direction.Right);
         assertNotSame(lastPos,pacman.getPosition());
-        assertNotSame(level.getCell(pacman.getPosition()), cellBeforeMove);
+        assertNotSame(level.getCell(pacman.getPosition()), entityBeforeMove);
 
         lastPos = pacman.getPosition();
-        cellBeforeMove = pacman.move(InputKey.Direction.Left);
+        entityBeforeMove = pacman.move(InputKey.Direction.Left);
         assertNotSame(lastPos,pacman.getPosition());
-        assertSame(level.getCell(pacman.getPosition()).toString(), cellBeforeMove.toString());
+        assertSame(level.getCell(pacman.getPosition()).toString(), entityBeforeMove.toString());
 
 
 

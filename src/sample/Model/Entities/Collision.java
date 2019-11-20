@@ -5,8 +5,8 @@ import sample.Model.Level;
 public class Collision {
     static Level level;
 
-    public static void treatCollision (Pacman pacman, Cell cell){
-        level.setGridCell(new EmptyCell(cell.getPosition()));
+    public static void treatCollision (Pacman pacman, Entity entity){
+        level.setGridCell(new EmptyEntity(entity.getPosition()));
     }
 
     public static void setLevel(Level level) {

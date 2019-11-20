@@ -3,11 +3,11 @@ package sample.Model.Entities;
 
 import javafx.scene.image.Image;
 
-public class EmptyCell implements Cell,Consumable {
+public class EmptyEntity implements Entity,Consumable {
 
     Position position;
 
-    public EmptyCell(Position position) {
+    public EmptyEntity(Position position) {
         this.position = position;
     }
 

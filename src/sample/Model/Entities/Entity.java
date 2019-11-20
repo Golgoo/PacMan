@@ -1,7 +1,9 @@
 package sample.Model.Entities;
 
-import sample.Model.InputKey;
 
 public interface Entity {
-   Cell move(InputKey.Direction direction);
+    Position getPosition();
+
+    boolean isAccessible();
+
 }

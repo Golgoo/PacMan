@@ -2,11 +2,11 @@ package sample.Model.Entities;
 
 import javafx.scene.image.Image;
 
-public class FruitCell implements Cell, Consumable {
+public class FruitEntity implements Entity, Consumable {
 
     Position position;
 
-    public FruitCell(Position position) {
+    public FruitEntity(Position position) {
         this.position = position;
     }
 
