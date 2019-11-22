@@ -13,7 +13,7 @@ public class Model {
     }
 
     private void initializeLevel() {
-        level = new Level(new File("src/levels/level1.txt"));
+        level = new Level(new File("src/levels/level.txt"));
     }
 
     public Level getLevel() {

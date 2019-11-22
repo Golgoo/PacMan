@@ -1,7 +1,8 @@
 package sample.Model.Entities;
 
-import javafx.scene.image.Image;
+import Sound.Sound;
 import sample.Model.InputKey;
+import sample.Model.Level;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class PacMan implements Entity, Moveable, Living {
         this.dynamicPacman = new DynamicMoveable()
         this.dynamicPacman = dynamicPacman;
     }*/
+
     @Override
     public String toString() {
         return "P";
@@ -40,7 +42,12 @@ public class PacMan implements Entity, Moveable, Living {
 
     @Override
     public List<Entity> move(InputKey.Direction direction) {
+        System.out.println(direction);
         List<Entity> entitiesOnSamePosition = dynamicPacman.move(direction);
+        if (entitiesOnSamePosition.isEmpty())
+            return entitiesOnSamePosition;
+        for(Entity entity : entitiesOnSamePosition)
+            resolveCollision(entity);
         /*if(newEntity != null){
             System.out.println(getPosition());
             Collision.treatCollision(this, newEntity);
@@ -76,5 +83,30 @@ public class PacMan implements Entity, Moveable, Living {
     @Override
     public boolean isAlive() {
         return alive;
+    }
+
+
+    @Override
+    public void resolveCollision(Collideable collideable) {
+        collideable.resolveCollision(this);
+    }
+
+    @Override
+    public void resolveCollision(PacMan pacMan) {
+
+    }
+
+    @Override
+    public void resolveCollision(Ghost ghost) {
+
+    }
+
+    @Override
+    public void resolveCollision(FruitEntity fruitEntity) {
+        Level level = dynamicPacman.getLevel();
+        level.setScore(level.getScore()+1);
+        level.getEntityList().remove(fruitEntity);
+        System.out.println("Remove " + fruitEntity.toString());
+        System.out.println("Score : " + level.getScore());
     }
 }

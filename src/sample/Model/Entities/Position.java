@@ -19,8 +19,8 @@ public class Position implements Comparator<Position> {
     @Override
     public String toString() {
         return "Position{" +
-                "xPos=" + xPos +
-                ", yPos=" + yPos +
+                "x=" + xPos +
+                ", y=" + yPos +
                 '}';
     }
 

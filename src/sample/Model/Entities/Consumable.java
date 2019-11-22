@@ -1,5 +1,5 @@
 package sample.Model.Entities;
 
-public interface Consumable {
+public interface Consumable extends Collideable{
     void consume();
 }

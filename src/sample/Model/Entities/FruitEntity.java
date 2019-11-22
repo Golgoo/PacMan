@@ -1,6 +1,5 @@
 package sample.Model.Entities;
 
-import javafx.scene.image.Image;
 
 public class FruitEntity implements Entity, Consumable {
 
@@ -38,6 +37,28 @@ public class FruitEntity implements Entity, Consumable {
 
     @Override
     public String toString() {
-        return "F";
+        return "FruitEntity" +
+                " " + position.toString() +
+                '}';
+    }
+
+    @Override
+    public void resolveCollision(Collideable collideable) {
+        collideable.resolveCollision(this);
+    }
+
+    @Override
+    public void resolveCollision(PacMan pacMan) {
+        pacMan.resolveCollision(this);
+    }
+
+    @Override
+    public void resolveCollision(Ghost ghost) {
+
+    }
+
+    @Override
+    public void resolveCollision(FruitEntity fruitEntity) {
+
     }
 }

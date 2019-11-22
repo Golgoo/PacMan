@@ -1,7 +1,7 @@
 package sample.Model.Entities;
 
 
-public interface Entity {
+public interface Entity extends Collideable{
     Position getPosition();
 
     boolean isAccessible();

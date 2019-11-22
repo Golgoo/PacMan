@@ -10,7 +10,6 @@ public class DynamicMoveable implements Moveable, Entity {
 
     private volatile Level level;
 
-    private Position previousPosition;
     private Position position;
     private double vitesse;
 
@@ -73,15 +72,22 @@ public class DynamicMoveable implements Moveable, Entity {
     public List<Entity> move(InputKey.Direction direction){
 
         Position nextWantedPosition = computeNextWantedPosition(direction);
+
+        if(isOutsideMap(nextWantedPosition))
+            return new ArrayList<Entity>();
+
         List<Entity> nextPositionEntities = getEntitiesAt(nextWantedPosition);
         if(areAccessibleEntities(nextPositionEntities)){
-            previousPosition = position;
             position = nextWantedPosition;
             //isMoving = false;
             return nextPositionEntities;
         }
 
-        return null;
+        return nextPositionEntities;
+    }
+
+    private boolean isOutsideMap(Position nextWantedPosition) {
+        return level.isOutsideMap(nextWantedPosition);
     }
 
     private boolean areAccessibleEntities(List<Entity> nextPositionEntities) {
@@ -97,15 +103,35 @@ public class DynamicMoveable implements Moveable, Entity {
         this.position = position;
     }
 
-
-    public Level getCurrentMap() {
+    public Level getLevel() {
         return level;
     }
+
     public double getVitesse() {
         return vitesse;
     }
 
     public void setVitesse(double vitesse) {
         this.vitesse = vitesse;
+    }
+
+    @Override
+    public void resolveCollision(Collideable collideable) {
+
+    }
+
+    @Override
+    public void resolveCollision(PacMan pacMan) {
+
+    }
+
+    @Override
+    public void resolveCollision(Ghost ghost) {
+
+    }
+
+    @Override
+    public void resolveCollision(FruitEntity fruitEntity) {
+
     }
 }

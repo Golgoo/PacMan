@@ -37,11 +37,6 @@ public class Ghost implements Entity, Moveable, Living {
     }
 
 
-    public Image toImageView() {
-        return null;
-    }
-
-
     @Override
     public Position computeNextWantedPosition(InputKey.Direction direction) {
         return null;
@@ -61,5 +56,25 @@ public class Ghost implements Entity, Moveable, Living {
     @Override
     public boolean isAlive() {
         return alive;
+    }
+
+    @Override
+    public void resolveCollision(Collideable collideable) {
+
+    }
+
+    @Override
+    public void resolveCollision(PacMan pacMan) {
+
+    }
+
+    @Override
+    public void resolveCollision(Ghost ghost) {
+
+    }
+
+    @Override
+    public void resolveCollision(FruitEntity fruitEntity) {
+
     }
 }
