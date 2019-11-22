@@ -6,4 +6,8 @@ public interface Entity {
 
     boolean isAccessible();
 
+    int getId();
+
+    Context getGameContext();
+
 }

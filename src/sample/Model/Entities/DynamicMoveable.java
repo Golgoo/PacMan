@@ -3,17 +3,23 @@ package sample.Model.Entities;
 import sample.Model.InputKey;
 import sample.Model.Level;
 
-public class DynamicMoveable implements Moveable {
+import java.util.ArrayList;
+import java.util.List;
 
-    private volatile Level currentMap;
+public class DynamicMoveable implements Moveable, Entity {
+
+    private volatile Level level;
 
     private Position previousPosition;
     private Position position;
+    private double vitesse;
+
+
 
     private static boolean isMoving = false;
 
     public DynamicMoveable(Level currentMap, Position position) {
-        this.currentMap = currentMap;
+        this.level = currentMap;
         this.position = position;
     }
 
@@ -21,27 +27,70 @@ public class DynamicMoveable implements Moveable {
         return position;
     }
 
+    @Override
+    public boolean isAccessible() {
+        return false;
+    }
 
-    public Entity move(InputKey.Direction direction){
+    @Override
+    public int getId() {
+        return 0;
+    }
 
-        /*if(isMoving && !wantsToGoBack(direction))
-            return null;
+    @Override
+    public Context getGameContext() {
+        return null;
+    }
 
-        isMoving = true;*/
 
-        Entity nextEntity = getNextCell(direction);
-        if(nextEntity.isAccessible()){
+    @Override
+    public Position computeNextWantedPosition(InputKey.Direction direction) {
+        if(direction == InputKey.Direction.Up)
+            return new Position(position.getxPos(), position.getyPos()-1);
+        else if(direction == InputKey.Direction.Down)
+            return new Position(position.getxPos(), position.getyPos()+1);
+        else if(direction == InputKey.Direction.Right)
+            return new Position(position.getxPos()+1, position.getyPos());
+        else if(direction == InputKey.Direction.Left)
+            return new Position(position.getxPos()-1, position.getyPos());
+        return null;
+    }
+
+    @Override
+    public List<Entity> getEntitiesAt(Position position) {
+        List<Entity> nextPositionEntities = new ArrayList<>();
+        for(Entity e : level.getEntityList()){
+            if(haveSamePositions(e.getPosition(), position))
+                nextPositionEntities.add(e);
+        }
+        return nextPositionEntities;
+    }
+
+    private boolean haveSamePositions(Position position, Position position1) {
+        return position.getyPos() == position1.getyPos() && position.getxPos() == position1.getxPos();
+    }
+
+    public List<Entity> move(InputKey.Direction direction){
+
+        Position nextWantedPosition = computeNextWantedPosition(direction);
+        List<Entity> nextPositionEntities = getEntitiesAt(nextWantedPosition);
+        if(areAccessibleEntities(nextPositionEntities)){
             previousPosition = position;
-            position = nextEntity.getPosition();
+            position = nextWantedPosition;
             //isMoving = false;
-            return nextEntity;
+            return nextPositionEntities;
         }
 
         return null;
     }
 
-    private boolean wantsToGoBack(InputKey.Direction direction) {
-        return previousPosition == getNextCell(direction).getPosition();
+    private boolean areAccessibleEntities(List<Entity> nextPositionEntities) {
+        for(Entity e : nextPositionEntities) {
+            if (!e.isAccessible())
+                return false;
+        }
+        return true;
+
     }
 
     public void setPosition(Position position) {
@@ -49,26 +98,14 @@ public class DynamicMoveable implements Moveable {
     }
 
 
-
-    public Entity getNextCell(InputKey.Direction direction){
-        if(direction == InputKey.Direction.Up)
-            return getCell(position.getxPos()-1, position.getyPos());
-        else if(direction == InputKey.Direction.Down)
-            return getCell(position.getxPos()+1, position.getyPos());
-        else if(direction == InputKey.Direction.Right)
-            return getCell(position.getxPos(), position.getyPos()+1);
-        else if(direction == InputKey.Direction.Left)
-            return getCell(position.getxPos(), position.getyPos()-1);
-
-        return null;
-    }
-
-    public Entity getCell(int xPos, int yPos){
-        return currentMap.getCell(new Position(xPos, yPos));
-    }
-
-
     public Level getCurrentMap() {
-        return currentMap;
+        return level;
+    }
+    public double getVitesse() {
+        return vitesse;
+    }
+
+    public void setVitesse(double vitesse) {
+        this.vitesse = vitesse;
     }
 }

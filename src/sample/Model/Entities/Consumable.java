@@ -1,5 +1,5 @@
 package sample.Model.Entities;
 
 public interface Consumable {
-    void use();
+    void consume();
 }

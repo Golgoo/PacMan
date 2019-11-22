@@ -3,15 +3,21 @@ package sample.Model;
 import sample.Model.Entities.*;
 
 import java.io.*;
+import java.util.List;
 import java.util.Scanner;
 
-import static sample.Model.Entities.FactoryCell.*;
+import static sample.Model.Entities.FactoryEntity.*;
 
 public class Level {
     int columns;
     int rows;
     Entity[][] grid;
-    Pacman pacman;
+    List<Entity> entityList;
+    PacMan pacman;
+
+    public List<Entity> getEntityList() {
+        return entityList;
+    }
 
     public Level(File file) {
         columns = 0;
@@ -53,14 +59,24 @@ public class Level {
             for (int j = 0; j < columns; j++) {
                 if(scanner.hasNextInt()){
                     int result = scanner.nextInt();
-                    grid[i][j] = FactoryCell.getCell(EntityCode.values()[result], new Position(i,j));
-                    if(result == 3)
-                        pacman = new Pacman(new DynamicMoveable(this,new Position(i,j)));
+                    Entity entity = getEntity(result, new Position(j,i));
+                    addEntityToEntityList(entity);
+
+                    /*grid[i][j]*/
+                    if(result == 3) {
+                        pacman = new PacMan(new DynamicMoveable(this, new Position(j, i)));
+                    }
+
                 }
             }
             if(scanner.hasNextLine())
                 scanner.nextLine();
         }
+    }
+
+    private void addEntityToEntityList(Entity entity) {
+        if(entity != null)
+            entityList.add(entity);
     }
 
     private void countColumnsAndRows(Scanner scanner, BufferedReader lineReader) {
@@ -107,7 +123,7 @@ public class Level {
         grid[entity.getPosition().getxPos()][entity.getPosition().getyPos()] = entity;
     }
 
-    public Pacman getPacman() {
+    public PacMan getPacman() {
         return pacman;
     }
 }

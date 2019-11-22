@@ -1,6 +1,5 @@
 package sample.Model.Entities;
 
-import javafx.scene.image.Image;
 
 public class Wall implements Entity {
     Position position;
@@ -17,6 +16,16 @@ public class Wall implements Entity {
     @Override
     public boolean isAccessible() {
         return false;
+    }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
+    public Context getGameContext() {
+        return null;
     }
 
     @Override
