@@ -1,6 +1,8 @@
 package sample.Model.Entities;
 
-public class Position {
+import java.util.Comparator;
+
+public class Position implements Comparator<Position> {
     int xPos, yPos;
 
     public Position(int xPos, int yPos) {
@@ -20,5 +22,11 @@ public class Position {
                 "xPos=" + xPos +
                 ", yPos=" + yPos +
                 '}';
+    }
+
+
+    @Override
+    public int compare(Position position, Position t1) {
+        return 0;
     }
 }

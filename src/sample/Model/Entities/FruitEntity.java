@@ -16,13 +16,23 @@ public class FruitEntity implements Entity, Consumable {
     }
 
     @Override
-    public void use() {
+    public void consume() {
 
     }
 
     @Override
     public boolean isAccessible() {
         return true;
+    }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
+    public Context getGameContext() {
+        return null;
     }
 
 

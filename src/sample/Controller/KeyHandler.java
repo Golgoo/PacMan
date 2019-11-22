@@ -3,14 +3,14 @@ package sample.Controller;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import sample.Model.Entities.Pacman;
+import sample.Model.Entities.PacMan;
 import sample.Model.InputKey;
 
 public class KeyHandler implements EventHandler<KeyEvent> {
-    Pacman pacman;
+    PacMan pacman;
     //static volatile boolean isMoving;
 
-    public KeyHandler(Pacman pacman) {
+    public KeyHandler(PacMan pacman) {
         this.pacman = pacman;
     }
 

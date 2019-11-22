@@ -5,9 +5,10 @@ import sample.Model.InputKey;
 
 import java.util.List;
 
-public class Ghost implements Entity, Moveable {
+public class Ghost implements Entity, Moveable, Living {
 
     DynamicMoveable dynamicGhost;
+    private boolean alive;
 
 
     @Override
@@ -25,13 +26,40 @@ public class Ghost implements Entity, Moveable {
         return false;
     }
 
+    @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
+    public Context getGameContext() {
+        return null;
+    }
+
 
     public Image toImageView() {
         return null;
     }
 
+
     @Override
-    public List<Moveable> move(InputKey.Direction direction) {
+    public Position computeNextWantedPosition(InputKey.Direction direction) {
         return null;
+    }
+
+    @Override
+    public List<Entity> getEntitiesAt(Position position) {
+        return null;
+    }
+
+    @Override
+    public List<Entity> move(InputKey.Direction direction) {
+
+        return null;
+    }
+
+    @Override
+    public boolean isAlive() {
+        return alive;
     }
 }
