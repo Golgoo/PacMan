@@ -11,7 +11,7 @@ public class PacManCollidePastille implements CollisionTreatment{
 	
 	private Model model ;
 	
-		
+	
 	private int score = 20 ;
 	
 	public PacManCollidePastille(GooContext gctx, Model model) {

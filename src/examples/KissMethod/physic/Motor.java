@@ -58,10 +58,7 @@ public class Motor {
 		by2 = bx2 + bd.getHeight();
 		
 		if((ax1 > bx1 && ax1 < bx2) || ( ax2 > bx1 && ax2 < bx2 ) || ( bx1 > ax1 && bx1 < ax2) || (bx2 > ax1 && bx2 < ax2) ) {
-			if( ay1 < by1 && ay2 > by1) {
-				return true;
-			}
-			if( ay2 > by2 && ay1 < by2) {
+			if((ay1 > by1 && ay1 < by2) || (ay2 < by2 && ay2 > by1) || (ay1 < by1 && ay2 > by2)) {
 				return true;
 			}
 		}

@@ -1,6 +1,8 @@
 package examples.KissMethod;
 
 import javax.swing.JFrame;
+
+
 import graphicmotor.GooContext;
 import examples.KissMethod.model.*;
 import examples.KissMethod.physic.*;
@@ -17,7 +19,7 @@ public class Main {
 	private static Kernel kernel ;
 	
 	static Dimension pacManDim = new Dimension(50, 50);
-	static Position pacManPos = new Position(100, 280);
+	static Position pacManPos = new Position(200, 280);
 	static Velocity pacManVel = new Velocity(0, 0);
 	
 	static Dimension pastilleDim = new Dimension(20, 20);
@@ -39,6 +41,10 @@ public class Main {
 		kernel.addCollisionTreatment(collision, collisionTreatment);
 		phyMotor.registerCollision(collision);
 		
+		Collision collision2 = new Collision(model.PacMan, model.RightBound);
+		CollisionTreatment collisionTreatment2 = new PacManCollideBounds();
+		kernel.addCollisionTreatment(collision2, collisionTreatment2);
+		phyMotor.registerCollision(collision2);
 		
 		//User Input Right => 
 		phyMotor.setVelocity(model.PacMan, 2, 0);
@@ -84,6 +90,7 @@ public class Main {
 		Acessors.setModel(model);
 		model.PacMan = new PacMan(GCtx);
 		model.pastille = new Pastille(GCtx);
+		model.RightBound = new Bounds(GCtx);
 	}
 	
 	private static void initPhysic() {
@@ -91,6 +98,7 @@ public class Main {
 		Acessors.setPhysic(phyMotor);
 		phyMotor.add(model.PacMan, new PhisicDatas(pacManPos, pacManDim, pacManVel));
 		phyMotor.add(model.pastille, new PhisicDatas(pastillePos, pastilleDim, pastilleVel));
+		phyMotor.add(model.RightBound, new PhisicDatas(new Position(599, 0), new Dimension(1, 600), new Velocity(0, 0)));
 	}
 
 	private static void bindPhysicToGraphic() {

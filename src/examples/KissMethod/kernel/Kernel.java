@@ -31,6 +31,7 @@ public class Kernel {
 		Entity pacman = model.PacMan;
 		List<Collision> collisions = pyMotor.getFutureCollisions(pacman);
 		for(Collision c : collisions) {
+			System.out.println("Collision");
 			collisionTreatmentMap.get(c).treatCollision(c.getSrc(), c.getDst());
 		}
 		pyMotor.move(pacman);
