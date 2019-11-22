@@ -23,11 +23,11 @@ public class PacMan implements Entity, Moveable, Living, Drawable {
     }
     
 	@Override
-	public int generateGraphicId(GooContext GCtx) {
+	public void generateGraphicId(GooContext GCtx) {
 		AnimationBank<InputKey.Direction> animations = new AnimationBank<InputKey.Direction>();
 		animations.putAnimation(InputKey.Direction.Right, new Animation("Game Files/Sprites/PACMAN/360x640-pacman-spritesheet.png", 5, 100));
 		animations.putAnimation(InputKey.Direction.Left, new Animation("Game Files/Sprites/PACMAN/sprite_left.png", 3, 100));	
-		return GCtx.createMultipleAnimatedEntity(animations);
+		graphicId = GCtx.createMultipleAnimatedEntity(animations);
 	}
 
 	@Override
