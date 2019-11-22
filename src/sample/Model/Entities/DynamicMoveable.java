@@ -12,6 +12,9 @@ public class DynamicMoveable implements Moveable, Entity {
 
     private Position previousPosition;
     private Position position;
+    private double vitesse;
+
+
 
     private static boolean isMoving = false;
 
@@ -97,5 +100,12 @@ public class DynamicMoveable implements Moveable, Entity {
 
     public Level getCurrentMap() {
         return level;
+    }
+    public double getVitesse() {
+        return vitesse;
+    }
+
+    public void setVitesse(double vitesse) {
+        this.vitesse = vitesse;
     }
 }
