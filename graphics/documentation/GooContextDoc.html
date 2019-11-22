@@ -2,7 +2,7 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>GooContext (JOGL Graphic Motor)</title>
+<title>GooContext (JOGL GMotor)</title>
 <meta name="date" content="2015-10-10">
 <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style">
 </head>
@@ -109,7 +109,7 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="#createSingleAnimatedEntity">createAnimatedEntity</a></strong>(<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html" title="class">String</a>&nbsp;pathToSprites, int&nbsp;nbSprites, long&nbsp;animationScheduleTimeMs)</code>
+<td class="colLast"><code><strong><a href="#createSingleAnimatedEntity">createSingleAnimatedEntity</a></strong>(<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html" title="class">String</a>&nbsp;pathToSprites, int&nbsp;nbSprites, long&nbsp;animationScheduleTimeMs)</code>
 <div class="block">Create an animated entity based on sprites in the specified path, with a specified schedule time and return an int reference to it.</div>
 </td>
 </tr>
@@ -121,7 +121,7 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="#createMultipleAnimatedEntity">createMultipleEntity</a></strong>(<a href="./AnimationBank.html" title="class">AnimationBank&lt;KEY&gt;</a>&nbsp;animationBank)</code>
+<td class="colLast"><code><strong><a href="#createMultipleAnimatedEntity">createMultipleAnimatedEntity</a></strong>(<a href="./AnimationBank.html" title="class">AnimationBank&lt;KEY&gt;</a>&nbsp;animationBank)</code>
 <div class="block">Create an animated entity which can change its animation, and return an int reference to it.</div>
 </td>
 </tr>
@@ -276,13 +276,13 @@
 </li>
 </ul>
 
-<a name="createAnimatedEntity">
+<a name="createSingleAnimatedEntity">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>createAnimatedEntity</h4>
-<pre>public&nbsp;int&nbsp;createAnimatedEntity(<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html" title="class">String</a>&nbsp;pathToSprites, int&nbsp;nbSprites, long&nbsp;animationScheduleTimeMs)</pre>
+<h4>createSingleAnimatedEntity</h4>
+<pre>public&nbsp;int&nbsp;createSingleAnimatedEntity(<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html" title="class">String</a>&nbsp;pathToSprites, int&nbsp;nbSprites, long&nbsp;animationScheduleTimeMs)</pre>
 <div class="block">Create an animated entity based on sprites in the specified path, with a specified schedule time and return an int reference to it
 </div>
 
@@ -326,19 +326,83 @@
 <li class="blockList">
 <h4>createMultipleAnimatedEntity</h4>
 <pre>public&nbsp;int&nbsp;createMultipleAnimatedEntity(<a href="./AnimationBank.html" title="class">AnimationBank&lt;T&gt;</a>&nbsp;animationBank)</pre>
-<div class="block">Create a static entity based on the sprite in the specified path and return an int reference to it
-
+<div class="block">Create an animated entity which can change its animation, and return an int reference to it
+  <p>
+    User shall use the same key type of the animation bank when they want to change the current animation.
+  </p>
 </div>
 <dl>
   <dt><span class="strong">Parameters:</span></dt>
-  <dd><code>pathToSprite</code> - the path to the sprite.</dd>
+  <dd><code><a href="./AnimationBank.html" title="class">AnimationBank&lt;T&gt;</a>&nbsp;animationBank</code> - The animations for this entity.</dd>
 </dl>
 <dl>
   <dt><span class="strong">Returns:</span></dt>
-  <dd>--</dd>
+  <dd>An identifiant for this entity for graphic operations</dd>
 </dl>
 </li>
 </ul>
+<!-- startEntityAnimation-->
+<a name="startEntityAnimation">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>startEntityAnimation</h4>
+<pre>public void startEntityAnimation(int entityReference)</pre>
+<div class="block">Start the animation of the specified AnimatedEntity.
+  <p>
+    By default an animated entity is animated.
+  </p>
+  <p>
+    If an entity's animation is pause, users can play it from where it stopped.
+  </p>
+</div>
+<dl>
+  <dt><span class="strong">Parameters:</span></dt>
+  <dd><code> entityReference </code> - The entity reference.</dd>
+</dl>
+</li>
+</ul>
+
+<a name="stopEntityAnimation">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>stopEntityAnimation</h4>
+<pre>public void stopEntityAnimation(int entityReference)</pre>
+<div class="block">Stop the animation of the specified AnimatedEntity.
+  <p>
+    If an entity is animated, the animation can be pause calling this function
+  </p>
+</div>
+<dl>
+  <dt><span class="strong">Parameters:</span></dt>
+  <dd><code> entityReference </code> - The entity reference.</dd>
+</dl>
+</li>
+</ul>
+
+<a name="setMultipledAnimatedEntityAnimation">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setMultipledAnimatedEntityAnimation</h4>
+<pre>public &lt;KEY&gt; void setMultipledAnimatedEntityAnimation(int entityReference, &lt;KEY&gt; key)</pre>
+<div class="block">
+  <p>
+    Change the animation of the referenced entity with the animation set at the specific KEY into the <a href="./AnimationBank.html" title="class">AnimationBank&lt;KEY&gt;</a> passed at the construction of MultipleAnimatedEntity entity.
+  </p>
+</div>
+<dl>
+  <dt><span class="strong">Parameters:</span></dt>
+  <dd><code> entityReference </code> - The entity reference.</dd>
+  <dd><code> key </code> - they key associated with the new wanted <a href="./Animation.html" title="class"> Animation </a> at construction </dd>
+</dl>
+</li>
+</ul>
+
 
 <a name="setEntityPosition">
 <!--   -->
