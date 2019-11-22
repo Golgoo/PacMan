@@ -22,14 +22,13 @@ public class MainFrame extends JFrame implements KeyListener  {
         this.setSize(600, 600);
         this.add(gooCtx.getCanvas());
 
+        this.add(gooCtx.getCanvas());
         this.setVisible(true);
-
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         /*****************START FUNCTION********************/
         gooCtx.start(60);
 
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class MainFrame extends JFrame implements KeyListener  {
             long animationScheduleTimeMs = 60;
 
 
-            int entityReference2 = gooContext.createAnimatedEntity(pathToSprites, nbSpritesInALine, animationScheduleTimeMs * 3 / 4);
+            int entityReference2 = -1/*gooContext.createAnimatedEntity(pathToSprites, nbSpritesInALine, animationScheduleTimeMs * 3 / 4)*/;
 
             gooContext.setEntityPosition(entityReference2, entity.getPosition().getxPos()*10, entity.getPosition().getyPos()*10);
             gooContext.setEntitySize(entityReference2, 10, 10);
