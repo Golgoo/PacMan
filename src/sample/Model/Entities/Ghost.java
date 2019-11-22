@@ -36,6 +36,11 @@ public class Ghost implements Entity, Moveable, Living {
         return null;
     }
 
+    @Override
+    public String getSpritePath() {
+        return "Game Files/Sprites/Blue_up.png";
+    }
+
 
     @Override
     public Position computeNextWantedPosition(InputKey.Direction direction) {

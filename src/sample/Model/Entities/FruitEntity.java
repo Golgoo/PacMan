@@ -34,6 +34,11 @@ public class FruitEntity implements Entity, Consumable {
         return null;
     }
 
+    @Override
+    public String getSpritePath() {
+        return "Game Files/Sprites/smalldot.png";
+    }
+
 
     @Override
     public String toString() {

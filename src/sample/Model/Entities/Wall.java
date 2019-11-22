@@ -29,6 +29,11 @@ public class Wall implements Entity {
     }
 
     @Override
+    public String getSpritePath() {
+        return "Game Files/Sprites/wall.png";
+    }
+
+    @Override
     public String toString() {
         return "W";
     }

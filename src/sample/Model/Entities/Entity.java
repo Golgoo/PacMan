@@ -10,4 +10,5 @@ public interface Entity extends Collideable{
 
     Context getGameContext();
 
+    String getSpritePath();
 }
