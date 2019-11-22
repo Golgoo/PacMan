@@ -1,8 +1,10 @@
 package sample.Controller;
 
+import graphicmotor.GooContext;
 import javafx.fxml.FXML;
 import sample.view.GameView;
 import sample.Model.Model;
+import sample.view.MainFrame;
 
 public class Controller {
 
@@ -10,20 +12,37 @@ public class Controller {
     private KeyHandler keyHandler;
     @FXML private GameView gameView;
     private boolean running;
+    MainFrame mainFrame;
+
+
 
     public Controller() {
         model = new Model();
-        gameView = new GameView();
+        //gameView = new GameView();
 
         this.keyHandler = new KeyHandler(model.getLevel().getPacman());
         this.running = true;
 
-        gameView.update(model.getLevel());
+        //gameView.update(model.getLevel());
+    }
+
+    public Controller(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
+        model = new Model();
+        //gameView = new GameView();
+
+        this.keyHandler = new KeyHandler(model.getLevel().getPacman());
+        this.running = true;
+
+        mainFrame.initialise(model.getLevel().getEntityList());
+
     }
 
     public KeyHandler getKeyHandler() {
         return keyHandler;
     }
 
-
+    public Model getModel() {
+        return model;
+    }
 }

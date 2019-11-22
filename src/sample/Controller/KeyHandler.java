@@ -14,6 +14,7 @@ public class KeyHandler implements EventHandler<KeyEvent> {
         this.pacman = pacman;
     }
 
+
     @Override
     public void handle(KeyEvent keyEvent) {
         InputKey.Direction direction = convertKeyToInputKey(keyEvent);
@@ -33,6 +34,9 @@ public class KeyHandler implements EventHandler<KeyEvent> {
         if(keyEvent.getCode() == KeyCode.RIGHT)
             return InputKey.Direction.Right;
         return null;
+    }
+    public void setPacman(PacMan pacman) {
+        this.pacman = pacman;
     }
 }
 
