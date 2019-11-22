@@ -1,8 +1,8 @@
 package sample.Model.Entities;
 
-import javafx.scene.image.Image;
 import sample.Model.InputKey;
 
+import java.awt.Image;
 import java.util.List;
 
 public class Ghost implements Entity, Moveable, Living {

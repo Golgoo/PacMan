@@ -1,21 +1,39 @@
 package sample.Model.Entities;
 
-import javafx.scene.image.Image;
 import sample.Model.InputKey;
 
 import java.util.List;
 
-public class PacMan implements Entity, Moveable, Living {
+import graphicmotor.GooContext;
+import graphicmotor.animation.Animation;
+import graphicmotor.animation.AnimationBank;
+
+public class PacMan implements Entity, Moveable, Living, Drawable {
 
     private DynamicMoveable dynamicPacman;
 
     private InputKey.Direction direction;
 
+    private int graphicId = -1 ;
+    
     private boolean alive;
 
     public PacMan(DynamicMoveable dynamicPacman) {
         this.dynamicPacman = dynamicPacman;
     }
+    
+	@Override
+	public int generateGraphicId(GooContext GCtx) {
+		AnimationBank<InputKey.Direction> animations = new AnimationBank<InputKey.Direction>();
+		animations.putAnimation(InputKey.Direction.Right, new Animation("Game Files/Sprites/PACMAN/360x640-pacman-spritesheet.png", 5, 100));
+		animations.putAnimation(InputKey.Direction.Left, new Animation("Game Files/Sprites/PACMAN/sprite_left.png", 3, 100));	
+		return GCtx.createMultipleAnimatedEntity(animations);
+	}
+
+	@Override
+	public int getGraphicId() {
+		return graphicId ;
+	}
 
     /*public PacMan(Position position) {
         this.dynamicPacman = new DynamicMoveable()
@@ -77,4 +95,5 @@ public class PacMan implements Entity, Moveable, Living {
     public boolean isAlive() {
         return alive;
     }
+
 }

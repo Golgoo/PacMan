@@ -1,9 +1,6 @@
 package sample.Controller;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import sample.Model.Entities.PacMan;
+
 import sample.Model.InputKey;
 
 public class KeyHandler implements EventHandler<KeyEvent> {

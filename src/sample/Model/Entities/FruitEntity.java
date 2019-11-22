@@ -1,6 +1,5 @@
 package sample.Model.Entities;
 
-import javafx.scene.image.Image;
 
 public class FruitEntity implements Entity, Consumable {
 

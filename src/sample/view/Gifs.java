@@ -1,6 +1,6 @@
 package sample.view;
 
-import javafx.scene.image.Image;
+import java.awt.Image;
 
 public class Gifs {
 
@@ -57,7 +57,7 @@ public class Gifs {
     private Image smallDot;
 
     public Gifs() {
-        this.pacmanRight = new Image(getClass().getResourceAsStream("/ressources/pacmanRight.gif"));
+        /*this.pacmanRight = new Image(getClass().getResourceAsStream("/ressources/pacmanRight.gif"));
         this.pacmanUp = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
         this.pacmanDown = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
         this.pacmanLeft = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
@@ -66,7 +66,7 @@ public class Gifs {
         this.blueGhost = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
         this.wall = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
         this.bigDot = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.smallDot = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
+        this.smallDot = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));*/
     }
 
 }

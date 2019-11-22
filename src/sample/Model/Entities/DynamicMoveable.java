@@ -15,7 +15,6 @@ public class DynamicMoveable implements Moveable, Entity {
     private double vitesse;
 
 
-
     private static boolean isMoving = false;
 
     public DynamicMoveable(Level currentMap, Position position) {
