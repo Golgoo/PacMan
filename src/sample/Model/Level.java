@@ -3,6 +3,7 @@ package sample.Model;
 import sample.Model.Entities.*;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,6 +40,8 @@ public class Level {
 
         countColumnsAndRows(scanner, lineReader);
 
+        entityList = new ArrayList<>();
+
         loadGrid(file);
 
         Collision.setLevel(this);
@@ -65,6 +68,7 @@ public class Level {
                     /*grid[i][j]*/
                     if(result == 3) {
                         pacman = new PacMan(new DynamicMoveable(this, new Position(j, i)));
+                        addEntityToEntityList(pacman);
                     }
 
                 }
@@ -103,16 +107,17 @@ public class Level {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-
-        for(Entity[] T : grid){
+        for(Entity e : entityList)
+            s.append(e.toString()).append(" ");
+        /*for(Entity[] T : grid){
             s.append("\n");
             for(Entity elt: T)
                 s.append(" ").append(elt.toString());
-        }
+        }*/
         return "Level{" +
                 "columns=" + columns +
                 ", rows=" + rows +
-                ", grid=" + s +
+                ", Entities=" + s +
                 '}';
     }
 
