@@ -2,10 +2,10 @@
   <library name="gluegen-rt-natives-linux-i586">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/Librarys/gluegen-rt-natives-linux-i586.jar!/" />
-      <root url="jar://$PROJECT_DIR$/Librarys/gluegen-rt.jar!/" />
-      <root url="jar://$PROJECT_DIR$/Librarys/GMotor.jar!/" />
-      <root url="jar://$PROJECT_DIR$/Librarys/jogl-all-natives-linux-i586.jar!/" />
       <root url="jar://$PROJECT_DIR$/Librarys/jogl-all.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Librarys/jogl-all-natives-linux-i586.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Librarys/GMotor.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Librarys/gluegen-rt.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,0 +1,16 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import sample.view.GameView?>
+<BorderPane fx:controller="sample.Controller.Controller" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml">
+
+    <center>
+        <GameView fx:id="gameView" />
+    </center>
+    <bottom>
+        <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
+            <Label style="-fx-font-size: 140%; -fx-text-fill: white"
+                   text="Move: arrow keys / New game: G" />
+        </HBox>
+    </bottom>
+</BorderPane>
