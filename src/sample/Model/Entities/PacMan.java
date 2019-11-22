@@ -14,7 +14,7 @@ public class PacMan implements Entity, Moveable, Living, Drawable {
 
     private InputKey.Direction direction;
 
-    private int graphicId = -1 ;
+    private int graphicId = -1 ;   
     
     private boolean alive;
 

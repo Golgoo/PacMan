@@ -16,7 +16,7 @@ private static int FPS = 60 ;
 	private static int physicPacX = 200 ;
 	
 	private static boolean toRight = true ;
-	
+	 
 	private static int canvasWidth = 600 ;
 	
 	private static int stepX = 7 ;
