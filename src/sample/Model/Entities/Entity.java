@@ -1,7 +1,7 @@
 package sample.Model.Entities;
 
 
-public interface Entity {
+public interface Entity extends Collideable{
     Position getPosition();
 
     boolean isAccessible();
@@ -10,4 +10,5 @@ public interface Entity {
 
     Context getGameContext();
 
+    String getSpritePath();
 }

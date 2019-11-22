@@ -12,6 +12,7 @@ import static sample.Model.Entities.FactoryEntity.*;
 public class Level {
     int columns;
     int rows;
+    int score;
     Entity[][] grid;
     List<Entity> entityList;
     PacMan pacman;
@@ -41,10 +42,9 @@ public class Level {
         countColumnsAndRows(scanner, lineReader);
 
         entityList = new ArrayList<>();
+        this.score = 0;
 
         loadGrid(file);
-
-        Collision.setLevel(this);
 
         System.out.println(this);
     }
@@ -130,6 +130,22 @@ public class Level {
 
     public PacMan getPacman() {
         return pacman;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isOutsideMap(Position nextWantedPosition) {
+        if(nextWantedPosition.getxPos() < 0 || nextWantedPosition.getxPos() > columns+1)
+            return true;
+        if(nextWantedPosition.getyPos() < 0 || nextWantedPosition.getxPos() > rows+1)
+            return true;
+        return false;
     }
 }
 

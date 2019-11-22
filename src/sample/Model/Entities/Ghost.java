@@ -36,9 +36,9 @@ public class Ghost implements Entity, Moveable, Living {
         return null;
     }
 
-
-    public Image toImageView() {
-        return null;
+    @Override
+    public String getSpritePath() {
+        return "Game Files/Sprites/Blue_up.png";
     }
 
 
@@ -61,5 +61,25 @@ public class Ghost implements Entity, Moveable, Living {
     @Override
     public boolean isAlive() {
         return alive;
+    }
+
+    @Override
+    public void resolveCollision(Collideable collideable) {
+
+    }
+
+    @Override
+    public void resolveCollision(PacMan pacMan) {
+
+    }
+
+    @Override
+    public void resolveCollision(Ghost ghost) {
+
+    }
+
+    @Override
+    public void resolveCollision(FruitEntity fruitEntity) {
+
     }
 }

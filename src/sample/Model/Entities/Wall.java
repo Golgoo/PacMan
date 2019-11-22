@@ -29,7 +29,32 @@ public class Wall implements Entity {
     }
 
     @Override
+    public String getSpritePath() {
+        return "Game Files/Sprites/wall.png";
+    }
+
+    @Override
     public String toString() {
         return "W";
+    }
+
+    @Override
+    public void resolveCollision(Collideable collideable) {
+
+    }
+
+    @Override
+    public void resolveCollision(PacMan pacMan) {
+
+    }
+
+    @Override
+    public void resolveCollision(Ghost ghost) {
+
+    }
+
+    @Override
+    public void resolveCollision(FruitEntity fruitEntity) {
+
     }
 }

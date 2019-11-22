@@ -13,30 +13,30 @@ import java.rmi.server.ExportException;
 public class SoundEffect implements  Sound {
 
 
-    public static File Clap = new File("pacman_beginning.wav");
-    public static File Clap2 = new File("pacman_chomp.wav");
-    public static File Clap3 = new File("pacman_death.wav");
-    public static File Clap4 = new File("pacman_eatfruit.wav");
-    public static File Clap5 = new File("pacman_eatghost.wav");
-    public static File Clap6 = new File("pacman_extrapac.wav");
-    public static File Clap7 = new File("pacman_intermission.wav");
-    public static File Clap8 = new File("credit.wav");
-    public static File Clap9 = new File("siren_1.wav");
-    public static File Clap10 = new File("siren_2.wav");
-    public static File Clap11 = new File("siren_3.wav");
-    public static File Clap12 = new File("siren_4.wav");
-    public static File Clap13 = new File("siren_5.wav");
-    public static File Clap14 = new File("retreating.wav");
-    public static File Clap15 = new File("power_pellet.wav");
-    public static File Clap16 = new File("munch_1.wav");
-    public static File Clap17 = new File("munch_2.wav");
-    public static File Clap18 = new File("game_start.wav");
-    public static File Clap19 = new File("extend.wav");
-    public static File Clap20 = new File("eat_ghost.wav");
-    public static File Clap21 = new File("eat_fruit.wav");
-    public static File Clap22 = new File("death_1.wav");
-    public static File Clap23 = new File("death_2.wav");
-    public static File Clap24 = new File("power_pellet.wav");
+    public static File Clap = new File("Game Files/Sounds/SFX/pacman_beginning.wav");
+    public static File Clap2 = new File("Game Files/Sounds/SFX/pacman_chomp.wav");
+    public static File Clap3 = new File("Game Files/Sounds/SFX/pacman_death.wav");
+    public static File Clap4 = new File("Game Files/Sounds/SFX/pacman_eatfruit.wav");
+    public static File Clap5 = new File("Game Files/Sounds/SFX/pacman_eatghost.wav");
+    public static File Clap6 = new File("Game Files/Sounds/SFX/pacman_extrapac.wav");
+    public static File Clap7 = new File("Game Files/Sounds/SFX/pacman_intermission.wav");
+    public static File Clap8 = new File("Game Files/Sounds/SFX/credit.wav");
+    public static File Clap9 = new File("Game Files/Sounds/SFX/siren_1.wav");
+    public static File Clap10 = new File("Game Files/Sounds/SFX/siren_2.wav");
+    public static File Clap11 = new File("Game Files/Sounds/SFX/siren_3.wav");
+    public static File Clap12 = new File("Game Files/Sounds/SFX/siren_4.wav");
+    public static File Clap13 = new File("Game Files/Sounds/SFX/siren_5.wav");
+    public static File Clap14 = new File("Game Files/Sounds/SFX/retreating.wav");
+    public static File Clap15 = new File("Game Files/Sounds/SFX/power_pellet.wav");
+    public static File Clap16 = new File("Game Files/Sounds/SFX/munch_1.wav");
+    public static File Clap17 = new File("Game Files/Sounds/SFX/munch_2.wav");
+    public static File Clap18 = new File("Game Files/Sounds/SFX/game_start.wav");
+    public static File Clap19 = new File("Game Files/Sounds/SFX/extend.wav");
+    public static File Clap20 = new File("Game Files/Sounds/SFX/eat_ghost.wav");
+    public static File Clap21 = new File("Game Files/Sounds/SFX/eat_fruit.wav");
+    public static File Clap22 = new File("Game Files/Sounds/SFX/death_1.wav");
+    public static File Clap23 = new File("Game Files/Sounds/SFX/death_2.wav");
+    public static File Clap24 = new File("Game Files/Sounds/SFX/power_pellet.wav");
 
 
 
@@ -95,7 +95,7 @@ public class SoundEffect implements  Sound {
 
 
         //PlaySound2();
-        PlaySound(Clap);
+        PlaySound(Clap11);
 
 
 
