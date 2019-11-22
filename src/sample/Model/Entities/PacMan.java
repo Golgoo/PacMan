@@ -79,6 +79,11 @@ public class PacMan implements Entity, Moveable, Living {
         return null;
     }
 
+    @Override
+    public String getSpritePath() {
+        return"Game Files/Sprites/sprite_down.png";
+    }
+
 
     @Override
     public boolean isAlive() {

@@ -69,15 +69,15 @@ public class MainFrame extends JFrame implements KeyListener  {
 
     public void initialise(List<Entity> entityList) {
         for(Entity entity : entityList) {
-            String pathToSprites = "src/sprites_1.png";
+            String pathToSprites = entity.getSpritePath();
             int nbSpritesInALine = 6;
             long animationScheduleTimeMs = 60;
 
 
             int entityReference2 = gooContext.createAnimatedEntity(pathToSprites, nbSpritesInALine, animationScheduleTimeMs * 3 / 4);
 
-            gooContext.setEntityPosition(entityReference2, 300, 200);
-            gooContext.setEntitySize(entityReference2, 150, 180);
+            gooContext.setEntityPosition(entityReference2, entity.getPosition().getxPos()*10, entity.getPosition().getyPos()*10);
+            gooContext.setEntitySize(entityReference2, 10, 10);
             gooContext.setEntityColorMask(entityReference2, 1.0f, 0.4f, 0.1f);
             gooContext.setZIndex(entityReference2, 3);
 
@@ -85,14 +85,14 @@ public class MainFrame extends JFrame implements KeyListener  {
             gooContext.enableEntity(entityReference2);
 
 
-            int entityReference = gooContext.createAnimatedEntity(pathToSprites, nbSpritesInALine, animationScheduleTimeMs);
+            /*int entityReference = gooContext.createAnimatedEntity(pathToSprites, nbSpritesInALine, animationScheduleTimeMs);
 
             gooContext.setEntityPosition(entityReference, 330, 150);
             gooContext.setEntitySize(entityReference, 0.3f, 0.35f);
             gooContext.setEntityColorMask(entityReference, 1.0f, 0.4f, 1.0f);
             gooContext.setZIndex(entityReference, 2);
 
-            gooContext.enableEntity(entityReference);
+            gooContext.enableEntity(entityReference);*/
         }
 
         try {

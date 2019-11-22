@@ -41,6 +41,11 @@ public class DynamicMoveable implements Moveable, Entity {
         return null;
     }
 
+    @Override
+    public String getSpritePath() {
+        return " ";
+    }
+
 
     @Override
     public Position computeNextWantedPosition(InputKey.Direction direction) {
