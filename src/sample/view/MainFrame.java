@@ -1,5 +1,9 @@
 package sample.view;
 
+import examples.KissMethod.physic.Dimension;
+import examples.KissMethod.physic.Position;
+import examples.KissMethod.physic.Velocity;
+import examples.KissMethod.sigletons.Acessors;
 import graphicmotor.GooContext;
 import javafx.scene.input.KeyCode;
 import sample.Controller.KeyHandler;
@@ -14,10 +18,21 @@ import java.awt.event.KeyListener;
 import java.util.List;
 
 public class MainFrame extends JFrame implements KeyListener  {
+
+    static examples.KissMethod.physic.Dimension pacManDim = new examples.KissMethod.physic.Dimension(50, 50);
+    static Position pacManPos = new Position(100, 280);
+    static Velocity pacManVel = new Velocity(0, 0);
+
+    static examples.KissMethod.physic.Dimension pastilleDim = new Dimension(20, 20);
+    static Position pastillePos = new Position(500, 300);
+    static Velocity pastilleVel = new Velocity(0, 0);
+
     PacMan pacMan;
     GooContext gooContext;
+
     public MainFrame(GooContext gooCtx) throws HeadlessException {
         gooContext = gooCtx;
+        Acessors.setGctx(gooContext);
 
         this.setSize(600, 600);
         this.add(gooCtx.getCanvas());
@@ -68,38 +83,15 @@ public class MainFrame extends JFrame implements KeyListener  {
 
     public void initialise(List<Entity> entityList) {
         for(Entity entity : entityList) {
-            String pathToSprites = entity.getSpritePath();
-            int nbSpritesInALine = 6;
-            long animationScheduleTimeMs = 60;
-
-
-            int entityReference2 = -1/*gooContext.createAnimatedEntity(pathToSprites, nbSpritesInALine, animationScheduleTimeMs * 3 / 4)*/;
-
-            gooContext.setEntityPosition(entityReference2, entity.getPosition().getxPos()*10, entity.getPosition().getyPos()*10);
-            gooContext.setEntitySize(entityReference2, 10, 10);
-            gooContext.setEntityColorMask(entityReference2, 1.0f, 0.4f, 0.1f);
-            gooContext.setZIndex(entityReference2, 3);
-
-
-            gooContext.enableEntity(entityReference2);
-
-
-            /*int entityReference = gooContext.createAnimatedEntity(pathToSprites, nbSpritesInALine, animationScheduleTimeMs);
-
-            gooContext.setEntityPosition(entityReference, 330, 150);
-            gooContext.setEntitySize(entityReference, 0.3f, 0.35f);
-            gooContext.setEntityColorMask(entityReference, 1.0f, 0.4f, 1.0f);
-            gooContext.setZIndex(entityReference, 2);
-
-            gooContext.enableEntity(entityReference);*/
+            createEntity(entity);
         }
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-        }
-
-        //gooContext.destroyEntity(entityReference2);
+    }
+    public void createEntity(Entity entity){
+        entity.setGraphicId(gooContext.createSingleAnimatedEntity(entity.getSpritePath(), 5, 50));
+        gooContext.setEntityPosition(entity.getId(), entity.getPosition().getxPos()*10, entity.getPosition().getyPos()*10);
+        gooContext.setEntitySize(entity.getId(), entity.getDimension().getWeight(), entity.getDimension().getHeight());
+        gooContext.setZIndex(entity.getId(), 2);
+        gooContext.enableEntity(entity.getId());
+        System.out.println("Created entity : " +entity.toString()) ;
     }
 }

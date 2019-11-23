@@ -57,16 +57,16 @@ public class Gifs {
     private Image smallDot;
 
     public Gifs() {
-        this.pacmanRight = new Image(getClass().getResourceAsStream("/ressources/pacmanRight.gif"));
-        this.pacmanUp = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.pacmanDown = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.pacmanLeft = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.ghost1 = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.ghost2 = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.blueGhost = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.wall = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.bigDot = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
-        this.smallDot = new Image(getClass().getResourceAsStream("/ressources/pacmanUp.gif"));
+        this.pacmanRight = new Image(getClass().getResourceAsStream("src/ressources/pacmanRight.gif"));
+        this.pacmanUp = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
+        this.pacmanDown = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
+        this.pacmanLeft = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
+        this.ghost1 = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
+        this.ghost2 = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
+        this.blueGhost = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
+        this.wall = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
+        this.bigDot = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
+        this.smallDot = new Image(getClass().getResourceAsStream("src/ressources/pacmanUp.gif"));
     }
 
 }

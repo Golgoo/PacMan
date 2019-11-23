@@ -8,7 +8,11 @@ public interface Entity extends Collideable{
 
     int getId();
 
-    Context getGameContext();
+    Dimension getDimension();
 
     String getSpritePath();
+    void setGraphicId(int graphicId);
+
+
+
 }

@@ -3,6 +3,7 @@ package sample.Model.Entities;
 
 public class Wall implements Entity {
     Position position;
+    int graphicId;
 
     public Wall(Position position) {
         this.position = position;
@@ -20,17 +21,22 @@ public class Wall implements Entity {
 
     @Override
     public int getId() {
-        return 0;
+        return graphicId;
     }
 
     @Override
-    public Context getGameContext() {
-        return null;
+    public Dimension getDimension() {
+        return new Dimension(30,30);
+    }
+
+    @Override
+    public void setGraphicId(int graphicId) {
+        this.graphicId = graphicId;
     }
 
     @Override
     public String getSpritePath() {
-        return "Game Files/Sprites/wall.png";
+        return "src/ressources/wall.png";
     }
 
     @Override

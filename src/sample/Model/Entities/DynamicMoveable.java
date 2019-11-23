@@ -37,13 +37,19 @@ public class DynamicMoveable implements Moveable, Entity {
     }
 
     @Override
-    public Context getGameContext() {
+    public Dimension getDimension() {
         return null;
     }
+
 
     @Override
     public String getSpritePath() {
         return " ";
+    }
+
+    @Override
+    public void setGraphicId(int graphicId) {
+
     }
 
 

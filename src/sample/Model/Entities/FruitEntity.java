@@ -4,6 +4,7 @@ package sample.Model.Entities;
 public class FruitEntity implements Entity, Consumable {
 
     Position position;
+    int graphicId;
 
     public FruitEntity(Position position) {
         this.position = position;
@@ -19,6 +20,10 @@ public class FruitEntity implements Entity, Consumable {
 
     }
 
+    public void setGraphicId(int graphicId) {
+        this.graphicId = graphicId;
+    }
+
     @Override
     public boolean isAccessible() {
         return true;
@@ -26,17 +31,17 @@ public class FruitEntity implements Entity, Consumable {
 
     @Override
     public int getId() {
-        return 0;
+        return graphicId;
     }
 
     @Override
-    public Context getGameContext() {
-        return null;
+    public Dimension getDimension() {
+        return new Dimension(20,20);
     }
 
     @Override
     public String getSpritePath() {
-        return "Game Files/Sprites/smalldot.png";
+        return "src/ressources/smalldot.png";
     }
 
 
