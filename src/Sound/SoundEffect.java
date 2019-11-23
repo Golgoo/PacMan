@@ -1,10 +1,8 @@
 package Sound;
 
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
+import javax.swing.*;
 import java.applet.AudioClip;
 import java.io.File;
 import java.io.IOException;
@@ -56,20 +54,20 @@ public class SoundEffect implements  Sound {
 
 
     @Override
-    public void stop() {
+    public  void stop() {
 
         clip.stop();
     }
 
+// effet sonore qui s'execute 1 fois
 
-
-    static void PlaySound(File Sound) {
+    static void PlaySound1time(File Sound) {
         try {
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(Sound));
             clip.start();
+            Thread.sleep(2000);
 
-            Thread.sleep(5000);
 
 
         } catch (Exception e) {
@@ -77,6 +75,51 @@ public class SoundEffect implements  Sound {
 
         }
     }
+
+// boucle infini d'un son
+        static void PlayMusicboucle(File musicLocation){
+    try {
+        File musicPath = new File(String.valueOf(musicLocation));
+
+        if(musicPath.exists()){
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInput);
+            while (true){
+                clip.loop(1);
+            }
+
+        }
+    }catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+// test de la boucle avec un bouton qui permet de stopper la music
+    static void PlayMusicLoop(File musicLocation){
+        try {
+            File musicPath = new File(String.valueOf(musicLocation));
+
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.loop((Clip.LOOP_CONTINUOUSLY));
+
+                JOptionPane.showMessageDialog(null,"OK to stop");
+                clip.stop();
+
+
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
    /* static void PlaySound2(){
         Application.launch();
@@ -91,11 +134,12 @@ public class SoundEffect implements  Sound {
 
 
     // TEST 1 2 3 4 5
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-
-        //PlaySound2();
-        PlaySound(Clap11);
+        //PlayMusicLoop(Clap);
+        PlayMusicboucle(Clap);
+        //PlaySound1time(Clap3);
+        //PlayMusicLoop(Clap9);
 
 
 
