@@ -13,15 +13,15 @@ public class MainGraphic {
 
     public static void main(String[] args) {
 
-        /*GooContext gooCtx = new GooContext(1000, 1000);
+        GooContext gooCtx = new GooContext(1000, 1000);
 
         MainFrame mainFrame = new MainFrame(gooCtx,1000,1000);
 
         Controller controller = new Controller(mainFrame);
 
-        mainFrame.setPacMan(controller.getModel().getLevel().getPacman());*/
+        mainFrame.setPacMan(controller.getModel().getLevel().getPacman());
 
-        TestFrame frame = new TestFrame();
+        //TestFrame frame = new TestFrame();
 
 
     }
