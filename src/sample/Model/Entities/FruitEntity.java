@@ -36,12 +36,12 @@ public class FruitEntity implements Entity, Consumable {
 
     @Override
     public Dimension getDimension() {
-        return new Dimension(20,20);
+        return new Dimension(50,50);
     }
 
     @Override
     public String getSpritePath() {
-        return "src/ressources/smalldot.png";
+        return "src/ressources/whitedot.png";
     }
 
 

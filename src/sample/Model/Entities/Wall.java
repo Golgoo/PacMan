@@ -26,7 +26,7 @@ public class Wall implements Entity {
 
     @Override
     public Dimension getDimension() {
-        return new Dimension(30,30);
+        return new Dimension(50,50);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Wall implements Entity {
 
     @Override
     public String toString() {
-        return "W";
+        return "W {"+ position.getxPos()+","+position.getyPos()+"}";
     }
 
     @Override

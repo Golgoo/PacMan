@@ -12,7 +12,7 @@ public class Controller {
     private KeyHandler keyHandler;
     @FXML private GameView gameView;
     private boolean running;
-    MainFrame mainFrame;
+    private MainFrame mainFrame;
 
 
 
@@ -28,7 +28,7 @@ public class Controller {
 
     public Controller(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        model = new Model();
+        model = new Model(mainFrame.getWidth(), mainFrame.getHeight());
         //gameView = new GameView();
 
         this.keyHandler = new KeyHandler(model.getLevel().getPacman());

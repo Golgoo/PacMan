@@ -5,8 +5,6 @@ import examples.KissMethod.physic.Position;
 import examples.KissMethod.physic.Velocity;
 import examples.KissMethod.sigletons.Acessors;
 import graphicmotor.GooContext;
-import javafx.scene.input.KeyCode;
-import sample.Controller.KeyHandler;
 import sample.Model.Entities.Entity;
 import sample.Model.Entities.PacMan;
 import sample.Model.InputKey;
@@ -29,15 +27,22 @@ public class MainFrame extends JFrame implements KeyListener  {
 
     PacMan pacMan;
     GooContext gooContext;
+    int width;
+    int height;
 
-    public MainFrame(GooContext gooCtx) throws HeadlessException {
+    public MainFrame(GooContext gooCtx, int width, int height) throws HeadlessException {
         gooContext = gooCtx;
         Acessors.setGctx(gooContext);
 
-        this.setSize(600, 600);
+        this.width = width;
+        this.height = height;
+        this.setSize(width, height);
         this.add(gooCtx.getCanvas());
 
         this.add(gooCtx.getCanvas());
+        this.addKeyListener(this);
+        this.setFocusable(true);
+        this.setFocusTraversalKeysEnabled(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -48,11 +53,12 @@ public class MainFrame extends JFrame implements KeyListener  {
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
-
+        System.out.println("Test");
     }
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
+        System.out.println("Test");
         InputKey.Direction direction = convertKeyToInputKey(keyEvent);
         if(direction != null){
             System.out.println(direction);
@@ -87,11 +93,11 @@ public class MainFrame extends JFrame implements KeyListener  {
         }
     }
     public void createEntity(Entity entity){
-        entity.setGraphicId(gooContext.createSingleAnimatedEntity(entity.getSpritePath(), 5, 50));
-        gooContext.setEntityPosition(entity.getId(), entity.getPosition().getxPos()*10, entity.getPosition().getyPos()*10);
+        entity.setGraphicId(gooContext.createSingleAnimatedEntity(entity.getSpritePath(), 1, 1));
+        gooContext.setEntityPosition(entity.getId(), entity.getPosition().getxPos()*50, entity.getPosition().getyPos()*50);
         gooContext.setEntitySize(entity.getId(), entity.getDimension().getWeight(), entity.getDimension().getHeight());
         gooContext.setZIndex(entity.getId(), 2);
         gooContext.enableEntity(entity.getId());
-        System.out.println("Created entity : " +entity.toString()) ;
+        System.out.println("Created entity : " +entity.toString()+ "  x,y :"+entity.getPosition().getxPos()*50+" ,"+entity.getPosition().getyPos()*50) ;
     }
 }
