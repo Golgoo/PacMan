@@ -1,4 +1,4 @@
-package examples.KissMethod.physic;
+package sample.Model.Entities;
 
 public class Dimension {
 	private int weight, height ;

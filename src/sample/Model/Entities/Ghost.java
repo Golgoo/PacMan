@@ -8,6 +8,7 @@ import java.util.List;
 public class Ghost implements Entity, Moveable, Living {
 
     DynamicMoveable dynamicGhost;
+    private int graphicId;
     private boolean alive;
 
 
@@ -28,13 +29,18 @@ public class Ghost implements Entity, Moveable, Living {
 
     @Override
     public int getId() {
-        return 0;
+        return graphicId;
+    }
+
+    public void setGraphicId(int grapicId) {
+        this.graphicId = grapicId;
     }
 
     @Override
-    public Context getGameContext() {
-        return null;
+    public Dimension getDimension() {
+        return new Dimension(30,30);
     }
+
 
     @Override
     public String getSpritePath() {

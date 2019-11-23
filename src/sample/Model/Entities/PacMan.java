@@ -13,6 +13,12 @@ public class PacMan implements Entity, Moveable, Living {
     private InputKey.Direction direction;
 
     private boolean alive;
+    private int graphicId;
+
+    @Override
+    public void setGraphicId(int graphicId) {
+        this.graphicId = graphicId;
+    }
 
     public PacMan(DynamicMoveable dynamicPacman) {
         this.dynamicPacman = dynamicPacman;
@@ -71,17 +77,18 @@ public class PacMan implements Entity, Moveable, Living {
 
     @Override
     public int getId() {
-        return 0;
+        return graphicId;
     }
 
     @Override
-    public Context getGameContext() {
-        return null;
+    public Dimension getDimension() {
+        return new Dimension(50,50);
     }
+
 
     @Override
     public String getSpritePath() {
-        return"Game Files/Sprites/sprite_down.png";
+        return"src/ressources/pacmanDown.gif";
     }
 
 

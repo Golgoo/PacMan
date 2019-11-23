@@ -17,6 +17,40 @@ public class Level {
     List<Entity> entityList;
     PacMan pacman;
 
+    int windowWidth;
+    int windowHeight;
+
+    public Level(File file, int width, int height) {
+        columns = 0;
+        rows = 0;
+
+        this.windowHeight = height;
+        this.windowWidth = width;
+
+        Scanner scanner = null;
+        BufferedReader lineReader = null;
+
+        try {
+            scanner = new Scanner(file);
+            lineReader = new BufferedReader(new FileReader(file));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        assert scanner != null;
+        assert lineReader != null;
+
+        countColumnsAndRows(scanner, lineReader);
+
+        entityList = new ArrayList<>();
+        this.score = 0;
+
+        loadGrid(file);
+
+        System.out.println(this);
+    }
+
     public List<Entity> getEntityList() {
         return entityList;
     }
@@ -64,6 +98,7 @@ public class Level {
                     int result = scanner.nextInt();
                     Entity entity = getEntity(result, new Position(j,i));
                     addEntityToEntityList(entity);
+
 
                     /*grid[i][j]*/
                     if(result == 3) {
