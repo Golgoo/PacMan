@@ -55,7 +55,7 @@ public class PacMan implements Entity, Moveable, Living {
 
     @Override
     public List<Entity> move(InputKey.Direction direction) {
-        System.out.println(direction);
+        //System.out.println(direction);
         List<Entity> entitiesOnSamePosition = dynamicPacman.move(direction);
         dynamicPacman.getLevel().setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
 
