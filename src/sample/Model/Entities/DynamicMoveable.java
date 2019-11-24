@@ -38,7 +38,7 @@ public class DynamicMoveable implements Moveable, Entity {
 
     @Override
     public Dimension getDimension() {
-        return null;
+        return new Dimension(50,50);
     }
 
 
@@ -53,16 +53,17 @@ public class DynamicMoveable implements Moveable, Entity {
     }
 
 
+
     @Override
     public Position computeNextWantedPosition(InputKey.Direction direction) {
         if(direction == InputKey.Direction.Up)
-            return new Position(position.getxPos(), position.getyPos()-1);
+            return new Position(position.getX(), position.getY()-1);
         else if(direction == InputKey.Direction.Down)
-            return new Position(position.getxPos(), position.getyPos()+1);
+            return new Position(position.getX(), position.getY()+1);
         else if(direction == InputKey.Direction.Right)
-            return new Position(position.getxPos()+1, position.getyPos());
+            return new Position(position.getX()+1, position.getY());
         else if(direction == InputKey.Direction.Left)
-            return new Position(position.getxPos()-1, position.getyPos());
+            return new Position(position.getX()-1, position.getY());
         return null;
     }
 
@@ -70,31 +71,75 @@ public class DynamicMoveable implements Moveable, Entity {
     public List<Entity> getEntitiesAt(Position position) {
         List<Entity> nextPositionEntities = new ArrayList<>();
         for(Entity e : level.getEntityList()){
-            if(haveSamePositions(e.getPosition(), position))
-                nextPositionEntities.add(e);
+            if(!e.toString().equals("P")) {
+                if (areEntitiesIntersected(this, e, position)) {
+                    //System.out.println("INTERSTECTED");
+                    nextPositionEntities.add(e);
+                }
+            }
+            /*if(haveSamePositions(e.getPosition(), position))
+                nextPositionEntities.add(e);*/
         }
         return nextPositionEntities;
     }
 
+    boolean areEntitiesIntersected(Entity firstEntity, Entity secondEntity, Position nextPositionFirstEntity){
+        int x1FirstEntity, x2FirstEntity, y1FirstEntity, y2FirstEntity;
+        int x1SecondEntity, x2SecondEntity, y1SecondEntity, y2SecondEntity;
+
+        x1FirstEntity = /*firstEntity.getPosition().getX()*/nextPositionFirstEntity.getX();
+        x2FirstEntity = x1FirstEntity + firstEntity.getDimension().getWeight();
+        y1FirstEntity = /*firstEntity.getPosition().getY()*/nextPositionFirstEntity.getY();
+        y2FirstEntity = y1FirstEntity + firstEntity.getDimension().getHeight();
+
+        x1SecondEntity = secondEntity.getPosition().getX();
+        x2SecondEntity = x1SecondEntity + secondEntity.getDimension().getWeight();
+        y1SecondEntity = secondEntity.getPosition().getY();
+        y2SecondEntity = y1SecondEntity + secondEntity.getDimension().getHeight();
+
+        if((x1FirstEntity >= x1SecondEntity && x1FirstEntity < x2SecondEntity) || ( x2FirstEntity > x1SecondEntity && x2FirstEntity <= x2SecondEntity) /*|| ( x1SecondEntity > x1FirstEntity && x1SecondEntity < x2FirstEntity) || (x2SecondEntity > x1FirstEntity && x2SecondEntity < x2FirstEntity) */) {
+            if( y1FirstEntity <= y1SecondEntity && y2FirstEntity > y1SecondEntity) {
+
+                //System.out.println(y1FirstEntity +" < "+ y1SecondEntity + "    "+ y2FirstEntity + "> "+y1SecondEntity);
+
+                //System.out.println(secondEntity);
+                return true;
+            }
+            if(y1FirstEntity >= y1SecondEntity && y1FirstEntity < y2SecondEntity) {
+
+
+                //System.out.println(y1FirstEntity +" > "+ y1SecondEntity + "    "+ y1FirstEntity + "< "+y2SecondEntity);
+                //System.out.println(secondEntity);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean haveSamePositions(Position position, Position position1) {
-        return position.getyPos() == position1.getyPos() && position.getxPos() == position1.getxPos();
+        return position.getY() == position1.getY() && position.getX() == position1.getX();
     }
 
     public List<Entity> move(InputKey.Direction direction){
 
         Position nextWantedPosition = computeNextWantedPosition(direction);
 
-        if(isOutsideMap(nextWantedPosition))
+        if(isOutsideMap(nextWantedPosition)) {
+            System.out.println("outside Map");
             return new ArrayList<Entity>();
+        }
 
         List<Entity> nextPositionEntities = getEntitiesAt(nextWantedPosition);
         if(areAccessibleEntities(nextPositionEntities)){
             position = nextWantedPosition;
+            //System.out.println(position.toString());
             //isMoving = false;
             return nextPositionEntities;
         }
-
-        return nextPositionEntities;
+        else{
+            //System.out.println("position inaccessible");
+            return new ArrayList<>();
+        }
     }
 
     private boolean isOutsideMap(Position nextWantedPosition) {
@@ -103,8 +148,10 @@ public class DynamicMoveable implements Moveable, Entity {
 
     private boolean areAccessibleEntities(List<Entity> nextPositionEntities) {
         for(Entity e : nextPositionEntities) {
-            if (!e.isAccessible())
+            if (!e.isAccessible()) {
+                System.out.println(e +"inaccessible");
                 return false;
+            }
         }
         return true;
 

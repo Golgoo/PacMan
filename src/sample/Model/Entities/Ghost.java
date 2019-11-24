@@ -18,6 +18,11 @@ public class Ghost implements Entity, Moveable, Living {
     }
 
     @Override
+    public void setPosition(Position position) {
+        this.dynamicGhost.setPosition(position);
+    }
+
+    @Override
     public Position getPosition() {
         return dynamicGhost.getPosition();
     }

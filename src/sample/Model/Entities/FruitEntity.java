@@ -53,6 +53,11 @@ public class FruitEntity implements Entity, Consumable {
     }
 
     @Override
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    @Override
     public void resolveCollision(Collideable collideable) {
         collideable.resolveCollision(this);
     }

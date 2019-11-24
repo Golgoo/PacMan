@@ -13,6 +13,7 @@ public interface Entity extends Collideable{
     String getSpritePath();
     void setGraphicId(int graphicId);
     String toString();
+    void setPosition(Position position);
 
 
 
