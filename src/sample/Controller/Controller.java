@@ -28,7 +28,7 @@ public class Controller {
 
     public Controller(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        model = new Model(mainFrame.getWidth(), mainFrame.getHeight());
+        model = new Model(mainFrame.getWidth(), mainFrame.getHeight(), mainFrame.getGooContext());
         //gameView = new GameView();
 
         this.keyHandler = new KeyHandler(model.getLevel().getPacman());

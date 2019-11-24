@@ -41,7 +41,12 @@ public class Wall implements Entity {
 
     @Override
     public String toString() {
-        return "W {"+ position.getxPos()+","+position.getyPos()+"}";
+        return "W {"+ position.getX()+","+position.getY()+"}";
+    }
+
+    @Override
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     @Override

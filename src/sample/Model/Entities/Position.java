@@ -10,11 +10,11 @@ public class Position implements Comparator<Position> {
         this.yPos = yPos;
     }
 
-    public int getxPos() {
+    public int getX() {
         return xPos;
     }
 
-    public int getyPos() {return yPos;  }
+    public int getY() {return yPos;  }
 
     @Override
     public String toString() {

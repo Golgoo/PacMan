@@ -1,5 +1,6 @@
 package sample.Model;
 
+import graphicmotor.GooContext;
 import sample.Model.Entities.*;
 
 import java.io.*;
@@ -13,9 +14,9 @@ public class Level {
     int columns;
     int rows;
     int score;
-    Entity[][] grid;
     List<Entity> entityList;
     PacMan pacman;
+    GooContext gooContext;
 
     int windowWidth;
     int windowHeight;
@@ -24,8 +25,8 @@ public class Level {
         columns = 0;
         rows = 0;
 
-        this.windowHeight = height;
-        this.windowWidth = width;
+        /*this.windowHeight = height;
+        this.windowWidth = width;*/
 
         Scanner scanner = null;
         BufferedReader lineReader = null;
@@ -47,6 +48,43 @@ public class Level {
         this.score = 0;
 
         loadGrid(file);
+
+        columns = width;
+        rows = height;
+
+        System.out.println(this);
+    }
+
+    public Level(File file, int width, int height, GooContext gooContext) {
+        columns = 0;
+        rows = 0;
+        this.gooContext = gooContext;
+        /*this.windowHeight = height;
+        this.windowWidth = width;*/
+
+        Scanner scanner = null;
+        BufferedReader lineReader = null;
+
+        try {
+            scanner = new Scanner(file);
+            lineReader = new BufferedReader(new FileReader(file));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        assert scanner != null;
+        assert lineReader != null;
+
+        countColumnsAndRows(scanner, lineReader);
+
+        entityList = new ArrayList<>();
+        this.score = 0;
+
+        loadGrid(file);
+
+        columns = width;
+        rows = height;
 
         System.out.println(this);
     }
@@ -84,7 +122,6 @@ public class Level {
     }
 
     private void loadGrid(File file) {
-        grid = new Entity[rows][columns];
         Scanner scanner = null;
         Entity newEntity;
         try {
@@ -100,7 +137,6 @@ public class Level {
                     addEntityToEntityList(entity);
 
 
-                    /*grid[i][j]*/
                     if(result == 3) {
                         pacman = new PacMan(new DynamicMoveable(this, new Position(j, i)));
                         addEntityToEntityList(pacman);
@@ -137,6 +173,7 @@ public class Level {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        System.out.println("col,row"+columns +" "+rows);
     }
 
     @Override
@@ -156,12 +193,7 @@ public class Level {
                 '}';
     }
 
-    public Entity getCell(Position position) {
-        return grid[position.getxPos()][position.getyPos()];
-    }
-    public void setGridCell(Entity entity){
-        grid[entity.getPosition().getxPos()][entity.getPosition().getyPos()] = entity;
-    }
+
 
     public PacMan getPacman() {
         return pacman;
@@ -176,11 +208,17 @@ public class Level {
     }
 
     public boolean isOutsideMap(Position nextWantedPosition) {
-        if(nextWantedPosition.getxPos() < 0 || nextWantedPosition.getxPos() > columns+1)
+        if(nextWantedPosition.getX() < 0 || nextWantedPosition.getX() > columns+1)
             return true;
-        if(nextWantedPosition.getyPos() < 0 || nextWantedPosition.getxPos() > rows+1)
+        if(nextWantedPosition.getY() < 0 || nextWantedPosition.getY() > rows+1)
             return true;
+
         return false;
+    }
+
+    public void setEntityPosition(int graphicId, int xPos, int yPos) {
+        //System.out.println("setEntPos("+graphicId+",{"+xPos+","+yPos+"}");
+        gooContext.setEntityPosition(graphicId, xPos, yPos);
     }
 }
 

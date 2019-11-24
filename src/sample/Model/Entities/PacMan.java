@@ -1,6 +1,5 @@
 package sample.Model.Entities;
 
-import Sound.Sound;
 import sample.Model.InputKey;
 import sample.Model.Level;
 
@@ -14,6 +13,10 @@ public class PacMan implements Entity, Moveable, Living {
 
     private boolean alive;
     private int graphicId;
+
+    public int getGraphicId() {
+        return graphicId;
+    }
 
     @Override
     public void setGraphicId(int graphicId) {
@@ -34,6 +37,10 @@ public class PacMan implements Entity, Moveable, Living {
         return "P";
     }
 
+    @Override
+    public void setPosition(Position position) {
+        this.dynamicPacman.setPosition(position);
+    }
 
 
     @Override
@@ -50,8 +57,14 @@ public class PacMan implements Entity, Moveable, Living {
     public List<Entity> move(InputKey.Direction direction) {
         System.out.println(direction);
         List<Entity> entitiesOnSamePosition = dynamicPacman.move(direction);
-        if (entitiesOnSamePosition.isEmpty())
+        dynamicPacman.getLevel().setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
+
+
+        if (entitiesOnSamePosition.isEmpty()) {
+            System.out.println("Pas de collision");
             return entitiesOnSamePosition;
+        }
+
         for(Entity entity : entitiesOnSamePosition)
             resolveCollision(entity);
         /*if(newEntity != null){
