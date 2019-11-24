@@ -131,6 +131,7 @@ public class PacMan implements Entity, Moveable, Living {
         Level level = dynamicPacman.getLevel();
         level.setScore(level.getScore()+1);
         level.getEntityList().remove(fruitEntity);
+        level.removeEntity(fruitEntity.graphicId);
         System.out.println("Remove " + fruitEntity.toString());
         System.out.println("Score : " + level.getScore());
     }

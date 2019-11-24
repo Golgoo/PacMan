@@ -18,6 +18,7 @@ public class Level {
     PacMan pacman;
     GooContext gooContext;
 
+
     int windowWidth;
     int windowHeight;
 
@@ -219,6 +220,10 @@ public class Level {
     public void setEntityPosition(int graphicId, int xPos, int yPos) {
         //System.out.println("setEntPos("+graphicId+",{"+xPos+","+yPos+"}");
         gooContext.setEntityPosition(graphicId, xPos, yPos);
+    }
+
+    public void removeEntity(int graphicId){
+        gooContext.disableEntity(graphicId);
     }
 }
 

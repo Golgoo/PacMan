@@ -38,7 +38,7 @@ public class DynamicMoveable implements Moveable, Entity {
 
     @Override
     public Dimension getDimension() {
-        return null;
+        return new Dimension(50,50);
     }
 
 
@@ -71,8 +71,10 @@ public class DynamicMoveable implements Moveable, Entity {
     public List<Entity> getEntitiesAt(Position position) {
         List<Entity> nextPositionEntities = new ArrayList<>();
         for(Entity e : level.getEntityList()){
-            if(areEntitiesIntersected(this,e))
+            if(areEntitiesIntersected(this,e)) {
+                System.out.println("INTERSTECTED");
                 nextPositionEntities.add(e);
+            }
             /*if(haveSamePositions(e.getPosition(), position))
                 nextPositionEntities.add(e);*/
         }
@@ -87,16 +89,19 @@ public class DynamicMoveable implements Moveable, Entity {
         y1FirstEntity = firstEntity.getPosition().getY();
         y2FirstEntity = y1FirstEntity + firstEntity.getDimension().getHeight();
 
-        x1SecondEntity = firstEntity.getPosition().getX();
-        x2SecondEntity = x1SecondEntity + firstEntity.getDimension().getWeight();
-        y1SecondEntity = firstEntity.getPosition().getY();
-        y2SecondEntity = x2SecondEntity + firstEntity.getDimension().getHeight();
+        x1SecondEntity = secondEntity.getPosition().getX();
+        x2SecondEntity = x1SecondEntity + secondEntity.getDimension().getWeight();
+        y1SecondEntity = secondEntity.getPosition().getY();
+        y2SecondEntity = y1SecondEntity + secondEntity.getDimension().getHeight();
 
-        if((x1FirstEntity > x1SecondEntity && x1FirstEntity < x2SecondEntity) || ( x2FirstEntity > x1SecondEntity && x2FirstEntity < x2SecondEntity) || ( x1SecondEntity > x1FirstEntity && x1SecondEntity < x2FirstEntity) || (x2SecondEntity > x1FirstEntity && x2SecondEntity < x2FirstEntity) ) {
+        if((x1FirstEntity > x1SecondEntity && x1FirstEntity < x2SecondEntity) || ( x2FirstEntity > x1SecondEntity && x2FirstEntity < x2SecondEntity) /*|| ( x1SecondEntity > x1FirstEntity && x1SecondEntity < x2FirstEntity) || (x2SecondEntity > x1FirstEntity && x2SecondEntity < x2FirstEntity) */) {
             if( y1FirstEntity < y1SecondEntity && y2FirstEntity > y1SecondEntity) {
+               // System.out.println(secondEntity);
                 return true;
             }
-            if( y2FirstEntity > y2SecondEntity && y1FirstEntity < y2SecondEntity) {
+            if(y1FirstEntity > y1SecondEntity && y1FirstEntity < y2SecondEntity) {
+                //System.out.println(y1FirstEntity +" > "+ y1SecondEntity + "    "+ y1FirstEntity + "< "+y2SecondEntity);
+                //System.out.println(secondEntity);
                 return true;
             }
         }
@@ -125,6 +130,7 @@ public class DynamicMoveable implements Moveable, Entity {
         }
         else{
             System.out.println("position inaccessible");
+            //return empty list
         }
 
         return nextPositionEntities;
@@ -136,8 +142,10 @@ public class DynamicMoveable implements Moveable, Entity {
 
     private boolean areAccessibleEntities(List<Entity> nextPositionEntities) {
         for(Entity e : nextPositionEntities) {
-            if (!e.isAccessible())
+            if (!e.isAccessible()) {
+                System.out.println(e +"inaccessible");
                 return false;
+            }
         }
         return true;
 
