@@ -61,7 +61,7 @@ public class PacMan implements Entity, Moveable, Living {
 
 
         if (entitiesOnSamePosition.isEmpty()) {
-            System.out.println("Pas de collision");
+            //System.out.println("Pas de collision");
             return entitiesOnSamePosition;
         }
 
