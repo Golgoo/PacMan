@@ -9,9 +9,8 @@ public class PacMan implements Entity, Moveable, Living {
 
     private DynamicMoveable dynamicPacman;
 
-    private InputKey.Direction direction;
-
     private boolean alive;
+
     private int graphicId;
 
     public int getGraphicId() {
@@ -27,10 +26,6 @@ public class PacMan implements Entity, Moveable, Living {
         this.dynamicPacman = dynamicPacman;
     }
 
-    /*public PacMan(Position position) {
-        this.dynamicPacman = new DynamicMoveable()
-        this.dynamicPacman = dynamicPacman;
-    }*/
 
     @Override
     public String toString() {
@@ -57,6 +52,7 @@ public class PacMan implements Entity, Moveable, Living {
     public List<Entity> move(InputKey.Direction direction) {
         //System.out.println(direction);
         List<Entity> entitiesOnSamePosition = dynamicPacman.move(direction);
+
         dynamicPacman.getLevel().setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
 
 
@@ -67,13 +63,7 @@ public class PacMan implements Entity, Moveable, Living {
 
         for(Entity entity : entitiesOnSamePosition)
             resolveCollision(entity);
-        /*if(newEntity != null){
-            System.out.println(getPosition());
-            Collision.treatCollision(this, newEntity);
-            ((Consumable) newEntity).consume();
-            System.out.println(dynamicPacman.getCurrentMap());
-            return newEntity;
-        }*/
+
         return null;
     }
 
@@ -128,11 +118,6 @@ public class PacMan implements Entity, Moveable, Living {
 
     @Override
     public void resolveCollision(FruitEntity fruitEntity) {
-        Level level = dynamicPacman.getLevel();
-        level.setScore(level.getScore()+1);
-        level.getEntityList().remove(fruitEntity);
-        level.removeEntity(fruitEntity.graphicId);
-        System.out.println("Remove " + fruitEntity.toString());
-        System.out.println("Score : " + level.getScore());
+        fruitEntity.consume(this,dynamicPacman.getLevel());
     }
 }
