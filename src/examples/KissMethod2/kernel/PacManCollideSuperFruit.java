@@ -17,7 +17,6 @@ public class PacManCollideSuperFruit implements CollisionTreatment {
 		Model model = Acessors.getModel();
 		model.superFruits.remove(superFruit);
 		model.addScore(score);
-		Acessors.getMenuCtx().setText(model.scoreEntity.getGraphicId(), model.getScore()+"");
 		
 		model.stopSuperPack.cancel();
 		model.reloadStopSuperPackTask();

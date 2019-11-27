@@ -2,7 +2,6 @@ package sample.Model;
 
 
 import graphicmotor.GooContext;
-import sample.Controller.Controller;
 
 import java.io.File;
 

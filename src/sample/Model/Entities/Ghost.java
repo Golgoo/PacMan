@@ -1,6 +1,5 @@
 package sample.Model.Entities;
 
-import javafx.scene.image.Image;
 import sample.Model.InputKey;
 
 import java.util.List;
@@ -8,7 +7,9 @@ import java.util.List;
 public class Ghost implements Entity, Moveable, Living {
 
     DynamicMoveable dynamicGhost;
+
     private int graphicId;
+
     private boolean alive;
 
 

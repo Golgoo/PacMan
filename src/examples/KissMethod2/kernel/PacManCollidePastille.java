@@ -18,7 +18,6 @@ public class PacManCollidePastille implements CollisionTreatment{
 		model.fruits.remove(pastille); 
 		
 		model.addScore(score);
-		Acessors.getMenuCtx().setText(model.scoreEntity.getGraphicId(), model.getScore()+"");
 
 		if(model.fruits.isEmpty())
 			model.gameWon = true;

@@ -16,9 +16,7 @@ public class ScoreEntity extends Entity {
 		
 		Font font = FontLoader.load("src/"+fontName, 38.0f);
 		
-		int textRef = MenuCtx.createTextEntity(font);
-		
-		MenuCtx.setText(textRef, "0");
+		int textRef = 1;
 		MenuCtx.setZIndex(textRef, 3);
 		
 		/*TODO :

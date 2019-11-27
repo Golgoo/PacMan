@@ -18,8 +18,8 @@ public class MainGraphic {
         MainFrame mainFrame = new MainFrame(gooCtx,1000,1000);
 
         Controller controller = new Controller(mainFrame);
-
-        mainFrame.setPacMan(controller.getModel().getLevel().getPacman());
+        gooCtx.start(60);
+        mainFrame.setLevel(controller.getModel().getLevel());
 
         //TestFrame frame = new TestFrame();
 
