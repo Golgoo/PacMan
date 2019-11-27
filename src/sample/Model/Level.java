@@ -231,7 +231,30 @@ public class Level {
         if(direction != null){
             //System.out.println(direction);
             pacman.move(direction);
+            //movePacman(direction);
         }
+    }
+
+    public void movePacman(InputKey.Direction direction){
+        Position nextWantedPosition = pacman.computeNextWantedPosition(direction);
+
+        if(isOutsideMap(nextWantedPosition)) {
+            System.out.println("outside Map");
+            return ;
+        }
+
+        List<Entity> nextPositionEntities = intersectTool.getEntitiesIntersecting(pacman,nextWantedPosition, entityList);
+
+        /*if(areAccessibleEntities(nextPositionEntities)){
+            position = nextWantedPosition;
+            //System.out.println(position.toString());
+            //isMoving = false;
+            return nextPositionEntities;
+        }
+        else{
+            //System.out.println("position inaccessible");
+            return new ArrayList<>();
+        }*/
     }
 
     /*public List<Entity> getEntitiesIntersecting(DynamicMoveable dynamicMoveable, Position position) {
