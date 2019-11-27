@@ -121,4 +121,11 @@ public class PacMan implements Entity, Moveable, Living {
     public void resolveCollision(FruitEntity fruitEntity) {
         fruitEntity.consume(this,dynamicPacman.getLevel());
     }
+
+    public void moveMove(Position nextWantedPosition, List<Entity> nextPositionEntities) {
+        setPosition(nextWantedPosition);
+        dynamicPacman.getLevel().setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
+        for(Entity entity : nextPositionEntities)
+            resolveCollision(entity);
+    }
 }

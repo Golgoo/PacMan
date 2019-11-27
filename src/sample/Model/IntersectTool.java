@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IntersectTool {
+
     public List<Entity> getEntitiesIntersecting(Entity entity, Position nextWantedPosition, List<Entity> entityList) {
         List<Entity> nextPositionEntities = new ArrayList<>();
         for(Entity e : entityList){
-            if(!e.toString().equals("P")) {
+            if(e != entity) {
                 if (areEntitiesIntersected(entity, e, nextWantedPosition)) {
                     //System.out.println("INTERSTECTED");
                     nextPositionEntities.add(e);

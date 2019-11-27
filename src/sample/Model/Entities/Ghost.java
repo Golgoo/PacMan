@@ -12,7 +12,6 @@ public class Ghost implements Entity, Moveable, Living {
 
     private boolean alive;
 
-
     @Override
     public String toString() {
         return "G";
