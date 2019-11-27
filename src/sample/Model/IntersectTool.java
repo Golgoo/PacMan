@@ -1,7 +1,6 @@
 package sample.Model;
 
 import sample.Model.Entities.Entity;
-import sample.Model.Entities.PacMan;
 import sample.Model.Entities.Position;
 
 import java.util.ArrayList;
