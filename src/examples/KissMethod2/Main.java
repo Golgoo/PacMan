@@ -55,7 +55,6 @@ public class Main {
 		long previousTime ;
 		long finishedTime ;
 		
-		
 		while(true) {
 			previousTime = System.currentTimeMillis();
 			
