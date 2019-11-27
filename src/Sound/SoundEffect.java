@@ -52,8 +52,6 @@ public class SoundEffect implements Sound{
 
 
 
-    Stage window;
-    Scene scene1, scene2,scene3;
 
 
 // effet sonore qui s'execute 1 fois
