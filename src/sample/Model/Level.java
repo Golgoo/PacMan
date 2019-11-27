@@ -230,14 +230,38 @@ public class Level {
         InputKey.Direction direction = inputKeysHandler.convertKeyToInputKey(keyEvent);
         if(direction != null){
             //System.out.println(direction);
-            pacman.move(direction);
+            //pacman.move(direction);
+            movePacman(direction);
         }
     }
 
-    /*public List<Entity> getEntitiesIntersecting(DynamicMoveable dynamicMoveable, Position position) {
-        intersectTool.get
+    public void movePacman(InputKey.Direction direction){
+        Position nextWantedPosition = pacman.computeNextWantedPosition(direction);
 
-        return null;
-    }*/
+        if(isOutsideMap(nextWantedPosition)) {
+            System.out.println("outside Map");
+            return ;
+        }
+
+        List<Entity> nextPositionEntities = intersectTool.getEntitiesIntersecting(pacman,nextWantedPosition, entityList);
+
+        if(areAccessibleEntities(nextPositionEntities)){
+            pacman.moveMove(nextWantedPosition, nextPositionEntities);
+        }
+        else{
+            //System.out.println("position inaccessible");
+        }
+    }
+
+    private boolean areAccessibleEntities(List<Entity> nextPositionEntities) {
+        for(Entity e : nextPositionEntities) {
+            if (!e.isAccessible()) {
+                System.out.println(e +"inaccessible");
+                return false;
+            }
+        }
+        return true;
+
+    }
 }
 

@@ -35,6 +35,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="gluegen-rt-natives-linux-i586" level="project" />
+    <orderEntry type="library" name="GMotor" level="project" />
   </component>
 </module>

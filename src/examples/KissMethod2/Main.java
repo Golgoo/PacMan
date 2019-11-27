@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import examples.KissMethod2.input.InputMotor;
 import graphicmotor.GooContext;
 import examples.KissMethod2.model.*;
 import examples.KissMethod2.model.Model.InputKey;
@@ -54,8 +55,10 @@ public class Main {
 		
 		long previousTime ;
 		long finishedTime ;
-		
-		
+
+		GCtx.start(FPS);
+		menuCTX.start(FPS);
+
 		while(true) {
 			previousTime = System.currentTimeMillis();
 			
@@ -72,6 +75,7 @@ public class Main {
 		//TODO Phisic.clean()
 		//TODO Clean && load.
 		//TODO GCtx.clean()
+
 		GCtx.stop();
 		menuCTX.stop(); 
 	}
@@ -91,11 +95,10 @@ public class Main {
 	private static void initGraphicCtx() {
 		GCtx = new GooContext(frameWidth, canvasHeight);
 		Acessors.setGctx(GCtx);
-		GCtx.start(FPS);
+
 
 		menuCTX = new GooContext(frameWidth, menuHeight);
 		Acessors.setMenuCtx(menuCTX);
-		menuCTX.start(FPS);
 	}
 	
 
@@ -124,34 +127,7 @@ public class Main {
 	}
 	
 	private static void initInputMotor() {
-		/**
-		 * TODO : Map KeyEvent.getKeyChar() => Fonction Kernel, paramétrable
-		 */
-		mainFrame.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				int velocity = model.PacManVelocity ;
-				if(e.getKeyChar() == 'z') {
-					phyMotor.setVelocity(model.PacMan, 0, -velocity);
-					GCtx.setMultipledAnimatedEntityAnimation(model.PacMan.getGraphicId(), InputKey.Up);
-				}else if(e.getKeyChar() == 'd') {
-					phyMotor.setVelocity(model.PacMan, velocity, 0);
-					GCtx.setMultipledAnimatedEntityAnimation(model.PacMan.getGraphicId(), InputKey.Right);
-				}else if(e.getKeyChar() == 'q') {
-					phyMotor.setVelocity(model.PacMan, -velocity, 0);
-					GCtx.setMultipledAnimatedEntityAnimation(model.PacMan.getGraphicId(), InputKey.Left);
-				}else if(e.getKeyChar() == 's') {
-					phyMotor.setVelocity(model.PacMan, 0, velocity);
-					GCtx.setMultipledAnimatedEntityAnimation(model.PacMan.getGraphicId(), InputKey.Down);
-				}
-			}
-			 
-			@Override
-			public void keyReleased(KeyEvent e) {}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {}
-		});
+		mainFrame.addKeyListener(new InputMotor());
 	}
 	
 	private static void initModel() {
