@@ -44,9 +44,10 @@ public class PacMan implements Entity, Moveable, Living {
     }
 
     @Override
-    public List<Entity> getEntitiesAt(Position position) {
-        return dynamicPacman.getEntitiesAt(position);
+    public List<Entity> getEntitiesIntersecting(Position position) {
+        return null;
     }
+
 
     @Override
     public List<Entity> move(InputKey.Direction direction) {

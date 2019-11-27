@@ -65,8 +65,8 @@ public class DynamicMoveable implements Moveable, Entity {
 
     @Override
     public List<Entity> getEntitiesIntersecting(Position position) {
-        return level.getEntitiesIntersecting(this,position);
-        /*List<Entity> nextPositionEntities = new ArrayList<>();
+        //return level.getEntitiesIntersecting(this,position);
+        List<Entity> nextPositionEntities = new ArrayList<>();
         for(Entity e : level.getEntityList()){
             if(!e.toString().equals("P")) {
                 if (areEntitiesIntersected(this, e, position)) {
@@ -75,7 +75,7 @@ public class DynamicMoveable implements Moveable, Entity {
                 }
             }
         }
-        return nextPositionEntities;*/
+        return nextPositionEntities;
     }
 
     private boolean areEntitiesIntersected(Entity firstEntity, Entity secondEntity, Position nextPositionFirstEntity){
