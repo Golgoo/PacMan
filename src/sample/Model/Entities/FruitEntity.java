@@ -1,6 +1,8 @@
 package sample.Model.Entities;
 
 
+import sample.Model.Level;
+
 public class FruitEntity implements Entity, Consumable {
 
     Position position;
@@ -53,6 +55,11 @@ public class FruitEntity implements Entity, Consumable {
     }
 
     @Override
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    @Override
     public void resolveCollision(Collideable collideable) {
         collideable.resolveCollision(this);
     }
@@ -70,5 +77,13 @@ public class FruitEntity implements Entity, Consumable {
     @Override
     public void resolveCollision(FruitEntity fruitEntity) {
 
+    }
+
+    public void consume(PacMan pacMan, Level level) {
+        level.setScore(level.getScore()+1);
+        level.getEntityList().remove(this);
+        level.removeEntity(this.graphicId);
+        System.out.println("Remove " + this.toString());
+        System.out.println("Score : " + level.getScore());
     }
 }
