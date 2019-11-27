@@ -60,9 +60,10 @@ public class Ghost implements Entity, Moveable, Living {
     }
 
     @Override
-    public List<Entity> getEntitiesAt(Position position) {
+    public List<Entity> getEntitiesIntersecting(Position position) {
         return null;
     }
+
 
     @Override
     public List<Entity> move(InputKey.Direction direction) {

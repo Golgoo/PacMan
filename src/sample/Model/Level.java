@@ -234,8 +234,10 @@ public class Level {
         }
     }
 
-    public List<Entity> getEntitiesIntersecting(DynamicMoveable dynamicMoveable, Position position) {
+    /*public List<Entity> getEntitiesIntersecting(DynamicMoveable dynamicMoveable, Position position) {
+        intersectTool.get
+
         return null;
-    }
+    }*/
 }
 
