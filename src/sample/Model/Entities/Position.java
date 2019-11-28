@@ -1,32 +1,25 @@
 package sample.Model.Entities;
 
-import java.util.Comparator;
+public class Position {
+    private int x, y;
 
-public class Position implements Comparator<Position> {
-    int xPos, yPos;
-
-    public Position(int xPos, int yPos) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    public Position(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {
-        return xPos;
+        return x;
     }
 
-    public int getY() {return yPos;  }
+    public int getY() {return y;  }
 
     @Override
     public String toString() {
         return "Position{" +
-                "x=" + xPos +
-                ", y=" + yPos +
+                "x=" + x +
+                ", y=" + y +
                 '}';
     }
 
-
-    @Override
-    public int compare(Position position, Position t1) {
-        return 0;
-    }
 }

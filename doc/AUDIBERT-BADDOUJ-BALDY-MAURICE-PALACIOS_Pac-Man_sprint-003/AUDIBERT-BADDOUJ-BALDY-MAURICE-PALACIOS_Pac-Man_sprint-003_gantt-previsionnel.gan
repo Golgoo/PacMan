@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Pacman" company="Société TTT" webLink="http://" view-date="2019-11-11" view-index="0" gantt-divider-location="547" resource-divider-location="386" version="2.8.10" locale="fr">
+<?xml version="1.0" encoding="UTF-8"?><project name="Pacman" company="Société TTT" webLink="http://" view-date="2019-11-11" view-index="1" gantt-divider-location="547" resource-divider-location="386" version="2.8.10" locale="fr">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="323" order="0"/>
-        <field id="tpd4" name="Date de début" width="80" order="1"/>
-        <field id="tpd5" name="Date de fin" width="140" order="2"/>
+        <field id="tpd3" name="Nom" width="264" order="0"/>
+        <field id="tpd4" name="Date de début" width="140" order="1"/>
+        <field id="tpd5" name="Date de fin" width="139" order="2"/>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nom" width="382" order="0"/>
+        <field id="0" name="Nom" width="253" order="0"/>
+        <field id="1" name="Rôle par défaut" width="129" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -32,26 +33,6 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="20" name="Modification de la modélisation des entités" color="#8cb6ce" meeting="false" start="2019-11-18" duration="5" complete="100" thirdDate="2019-11-18" thirdDate-constraint="1" expand="true">
-            <notes>
-                <![CDATA[Un diagramme UML repositionne l'architecture logique du projet. La motivation est de stabiliser dnas un document les éléments de vocabulaire, les périmètres et les interactions des différentes entités du projet.]]>
-            </notes>
-        </task>
-        <task id="22" name="Gestion des collisions suivant la nouvelle modélisation définie" color="#8cb6ce" meeting="false" start="2019-11-18" duration="12" complete="10" thirdDate="2019-11-18" thirdDate-constraint="1" expand="true">
-            <notes>
-                <![CDATA[Le but de cette activité est de mettre en place une gestion des 1ers types de collisions et de mettre en place une architecture modulaire pour ajouter facilement de nouvelles stratégies de gestion de collisions. Ceci se fera en s'inspirant du design pattern "chain command". ]]>
-            </notes>
-        </task>
-        <task id="24" name="Nouvelle gestion de la position des entités" color="#8cb6ce" meeting="false" start="2019-11-18" duration="12" complete="0" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[La gestion des entités se faisait précédemment au travers d'une matrice. Cette modélisation se montre inadaptée et nécessite une refonte de la stratégie de gestion de la position des entités. ]]>
-            </notes>
-        </task>
-        <task id="26" name="Consommation de points de fruits de base par Pacman" color="#8cb6ce" meeting="false" start="2019-11-20" duration="12" complete="0" thirdDate="2019-11-20" thirdDate-constraint="1" expand="true">
-            <notes>
-                <![CDATA[La gestion des entités consommables par Pacman et les fantômes est prise en compte au travers d'une 1ère partie : la consommation des points de fruits de base par Pacman.]]>
-            </notes>
-        </task>
     </tasks>
     <resources>
         <resource id="0" name="Maurice Gautier" function="Default:0" contacts="" phone=""/>
@@ -67,8 +48,8 @@
         <allocation task-id="20" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="24" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="26" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="20" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="22" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>
