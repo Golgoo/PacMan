@@ -86,6 +86,11 @@ public class Ghost implements Entity, Moveable, Living {
         return velocity;
     }
 
+    @Override
+    public Position computeNextWantedPosition() {
+        return null;
+    }
+
 
     @Override
     public boolean isAlive() {

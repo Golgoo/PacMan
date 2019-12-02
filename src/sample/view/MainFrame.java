@@ -63,6 +63,7 @@ public class MainFrame extends JFrame {
 
         @Override
         public void keyPressed(KeyEvent keyEvent) {
+            System.out.println("keyrpessed");
             level.proccessKeyPressed(keyEvent);
         }
 

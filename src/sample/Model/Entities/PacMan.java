@@ -11,6 +11,8 @@ public class PacMan implements Entity, Moveable, Living {
 
     private int graphicId;
 
+    private Position velocityPos;
+
     private int velocity;
 
     private Position position;
@@ -32,7 +34,8 @@ public class PacMan implements Entity, Moveable, Living {
         this.position = position;
         this.level = level;
         this.livesCount = 3;
-        this.velocity = 5;
+        this.velocity = 20;
+        this.velocityPos = new Position(0,0);
     }
 
 
@@ -123,5 +126,30 @@ public class PacMan implements Entity, Moveable, Living {
     @Override
     public int getVelocity() {
         return velocity;
+    }
+
+    public void setVelocityPos(Position velocityPos){
+        this.velocityPos = velocityPos;
+    }
+
+    @Override
+    public Position computeNextWantedPosition() {
+        if(velocityPos.getY() < 0 ) {
+            velocityPos.setY(velocityPos.getY()+1);
+            return new Position(position.getX(), position.getY() - 1);
+        }
+        else if(velocityPos.getY() > 0 ) {
+            velocityPos.setY(velocityPos.getY()-1);
+            return new Position(position.getX(), position.getY() + 1);
+        }
+        else if(velocityPos.getX() > 0 ) {
+            velocityPos.setX(velocityPos.getX()-1);
+            return new Position(position.getX() + 1, position.getY());
+        }
+        else if(velocityPos.getX() < 0 ) {
+            velocityPos.setX(velocityPos.getX()+1);
+            return new Position(position.getX() - 1, position.getY());
+        }
+        return null;
     }
 }

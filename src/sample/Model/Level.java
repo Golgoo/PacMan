@@ -53,6 +53,14 @@ public class Level {
         inputKeysHandler = new InputKeysHandler();
 
         System.out.println(this);
+
+        startGame();
+    }
+
+    private void startGame() {
+        while(true){
+            moveEntity(pacman);
+        }
     }
 
     public Level(File file, int width, int height, GooContext gooContext) {
@@ -226,9 +234,21 @@ public class Level {
         if(direction != null){
             //System.out.println(direction);
             //pacman.move(direction);
+            //moveEnt(direction);
             moveEntityVelocityTimes(direction,pacman);
 
         }
+    }
+
+    private void moveEnt(InputKey.Direction direction) {
+        if(direction == InputKey.Direction.Up)
+            pacman.setVelocityPos(new Position(0,-pacman.getVelocity()));
+        else if(direction == InputKey.Direction.Down)
+            pacman.setVelocityPos(new Position(0,pacman.getVelocity()));
+        else if(direction == InputKey.Direction.Right)
+            pacman.setVelocityPos(new Position(pacman.getVelocity(),0));
+        else if(direction == InputKey.Direction.Left)
+            pacman.setVelocityPos(new Position(-pacman.getVelocity(),0));
     }
 
     private void moveEntityVelocityTimes(InputKey.Direction direction, Moveable entity) {
@@ -240,6 +260,25 @@ public class Level {
 
     private boolean moveEntity(InputKey.Direction direction, Moveable entity){
         Position nextWantedPosition = entity.computeNextWantedPosition(direction);
+
+        if(isOutsideMap(nextWantedPosition)) {
+            System.out.println("outside Map");
+            return false;
+        }
+
+        List<Entity> nextPositionEntities = intersectTool.getEntitiesIntersecting((Entity) entity,nextWantedPosition, entityList);
+
+        if(areAccessibleEntities(nextPositionEntities)){
+            entity.move(nextWantedPosition, nextPositionEntities);
+            return true;
+        }
+        else{
+            //System.out.println("position inaccessible");
+            return false;
+        }
+    }
+    private boolean moveEntity(Moveable entity){
+        Position nextWantedPosition = entity.computeNextWantedPosition();
 
         if(isOutsideMap(nextWantedPosition)) {
             System.out.println("outside Map");
