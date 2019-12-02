@@ -2,6 +2,7 @@ package sample.Model.Entities;
 
 
 public class Wall implements Entity {
+
     Position position;
     int graphicId;
 

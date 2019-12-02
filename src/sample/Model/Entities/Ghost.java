@@ -1,6 +1,5 @@
 package sample.Model.Entities;
 
-import javafx.scene.image.Image;
 import sample.Model.InputKey;
 
 import java.util.List;
@@ -8,9 +7,10 @@ import java.util.List;
 public class Ghost implements Entity, Moveable, Living {
 
     DynamicMoveable dynamicGhost;
-    private int graphicId;
-    private boolean alive;
 
+    private int graphicId;
+
+    private boolean alive;
 
     @Override
     public String toString() {
@@ -59,9 +59,10 @@ public class Ghost implements Entity, Moveable, Living {
     }
 
     @Override
-    public List<Entity> getEntitiesAt(Position position) {
+    public List<Entity> getEntitiesIntersecting(Position position) {
         return null;
     }
+
 
     @Override
     public List<Entity> move(InputKey.Direction direction) {

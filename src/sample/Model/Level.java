@@ -3,6 +3,7 @@ package sample.Model;
 import graphicmotor.GooContext;
 import sample.Model.Entities.*;
 
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +18,13 @@ public class Level {
     List<Entity> entityList;
     PacMan pacman;
     GooContext gooContext;
+    InputKeysHandler inputKeysHandler;
+    IntersectTool intersectTool = new IntersectTool();
 
-
-    int windowWidth;
-    int windowHeight;
 
     public Level(File file, int width, int height) {
         columns = 0;
         rows = 0;
-
-        /*this.windowHeight = height;
-        this.windowWidth = width;*/
 
         Scanner scanner = null;
         BufferedReader lineReader = null;
@@ -52,6 +49,8 @@ public class Level {
 
         columns = width;
         rows = height;
+
+        inputKeysHandler = new InputKeysHandler();
 
         System.out.println(this);
     }
@@ -60,8 +59,6 @@ public class Level {
         columns = 0;
         rows = 0;
         this.gooContext = gooContext;
-        /*this.windowHeight = height;
-        this.windowWidth = width;*/
 
         Scanner scanner = null;
         BufferedReader lineReader = null;
@@ -86,6 +83,8 @@ public class Level {
 
         columns = width;
         rows = height;
+
+        inputKeysHandler = new InputKeysHandler();
 
         System.out.println(this);
     }
@@ -118,6 +117,7 @@ public class Level {
         this.score = 0;
 
         loadGrid(file);
+        inputKeysHandler = new InputKeysHandler();
 
         System.out.println(this);
     }
@@ -224,6 +224,44 @@ public class Level {
 
     public void removeEntity(int graphicId){
         gooContext.disableEntity(graphicId);
+    }
+
+    public void proccessKeyPressed(KeyEvent keyEvent) {
+        InputKey.Direction direction = inputKeysHandler.convertKeyToInputKey(keyEvent);
+        if(direction != null){
+            //System.out.println(direction);
+            //pacman.move(direction);
+            movePacman(direction);
+        }
+    }
+
+    public void movePacman(InputKey.Direction direction){
+        Position nextWantedPosition = pacman.computeNextWantedPosition(direction);
+
+        if(isOutsideMap(nextWantedPosition)) {
+            System.out.println("outside Map");
+            return ;
+        }
+
+        List<Entity> nextPositionEntities = intersectTool.getEntitiesIntersecting(pacman,nextWantedPosition, entityList);
+
+        if(areAccessibleEntities(nextPositionEntities)){
+            pacman.moveMove(nextWantedPosition, nextPositionEntities);
+        }
+        else{
+            //System.out.println("position inaccessible");
+        }
+    }
+
+    private boolean areAccessibleEntities(List<Entity> nextPositionEntities) {
+        for(Entity e : nextPositionEntities) {
+            if (!e.isAccessible()) {
+                System.out.println(e +"inaccessible");
+                return false;
+            }
+        }
+        return true;
+
     }
 }
 
