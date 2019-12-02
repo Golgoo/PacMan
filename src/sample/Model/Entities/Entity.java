@@ -6,11 +6,12 @@ public interface Entity extends Collideable{
 
     boolean isAccessible();
 
-    int getId();
+
 
     Dimension getDimension();
 
     String getSpritePath();
+    int getGraphicId();
     void setGraphicId(int graphicId);
     String toString();
     void setPosition(Position position);

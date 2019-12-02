@@ -32,13 +32,13 @@ public class FruitEntity implements Entity, Consumable {
     }
 
     @Override
-    public int getId() {
+    public int getGraphicId() {
         return graphicId;
     }
 
     @Override
     public Dimension getDimension() {
-        return new Dimension(50,50);
+        return new Dimension(20,20);
     }
 
     @Override

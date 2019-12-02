@@ -3,8 +3,8 @@ package sample.Model.Entities;
 
 public class Wall implements Entity {
 
-    Position position;
-    int graphicId;
+    private Position position;
+    private int graphicId;
 
     public Wall(Position position) {
         this.position = position;
@@ -21,7 +21,7 @@ public class Wall implements Entity {
     }
 
     @Override
-    public int getId() {
+    public int getGraphicId() {
         return graphicId;
     }
 

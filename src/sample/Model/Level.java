@@ -12,14 +12,14 @@ import java.util.Scanner;
 import static sample.Model.Entities.FactoryEntity.*;
 
 public class Level {
-    int columns;
-    int rows;
-    int score;
-    List<Entity> entityList;
-    PacMan pacman;
-    GooContext gooContext;
-    InputKeysHandler inputKeysHandler;
-    IntersectTool intersectTool = new IntersectTool();
+    private int columns;
+    private int rows;
+    private int score;
+    private List<Entity> entityList;
+    private PacMan pacman;
+    private GooContext gooContext;
+    private InputKeysHandler inputKeysHandler;
+    private IntersectTool intersectTool = new IntersectTool();
 
 
     public Level(File file, int width, int height) {
@@ -93,7 +93,7 @@ public class Level {
         return entityList;
     }
 
-    public Level(File file) {
+    Level(File file) {
         columns = 0;
         rows = 0;
 
@@ -124,7 +124,6 @@ public class Level {
 
     private void loadGrid(File file) {
         Scanner scanner = null;
-        Entity newEntity;
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
@@ -134,15 +133,14 @@ public class Level {
             for (int j = 0; j < columns; j++) {
                 if(scanner.hasNextInt()){
                     int result = scanner.nextInt();
-                    Entity entity = getEntity(result, new Position(j,i));
+                    Entity entity = getEntity(result, new Position(j,i),this);
                     addEntityToEntityList(entity);
 
-
                     if(result == 3) {
-                        pacman = new PacMan(new DynamicMoveable(this, new Position(j, i)));
-                        addEntityToEntityList(pacman);
+                        pacman = (PacMan) entity;
+                        /*pacman = new PacMan(new DynamicMoveable(),new Position(j, i),this);
+                        addEntityToEntityList(pacman);*/
                     }
-
                 }
             }
             if(scanner.hasNextLine())
@@ -208,13 +206,10 @@ public class Level {
         this.score = score;
     }
 
-    public boolean isOutsideMap(Position nextWantedPosition) {
+    private boolean isOutsideMap(Position nextWantedPosition) {
         if(nextWantedPosition.getX() < 0 || nextWantedPosition.getX() > columns+1)
             return true;
-        if(nextWantedPosition.getY() < 0 || nextWantedPosition.getY() > rows+1)
-            return true;
-
-        return false;
+        return nextWantedPosition.getY() < 0 || nextWantedPosition.getY() > rows + 1;
     }
 
     public void setEntityPosition(int graphicId, int xPos, int yPos) {
@@ -231,25 +226,35 @@ public class Level {
         if(direction != null){
             //System.out.println(direction);
             //pacman.move(direction);
-            movePacman(direction);
+            moveEntityVelocityTimes(direction,pacman);
+
         }
     }
 
-    public void movePacman(InputKey.Direction direction){
-        Position nextWantedPosition = pacman.computeNextWantedPosition(direction);
+    private void moveEntityVelocityTimes(InputKey.Direction direction, Moveable entity) {
+        for (int i = 0; i < entity.getVelocity(); i++) {
+            if(!moveEntity(direction, entity))
+                break;
+        }
+    }
+
+    private boolean moveEntity(InputKey.Direction direction, Moveable entity){
+        Position nextWantedPosition = entity.computeNextWantedPosition(direction);
 
         if(isOutsideMap(nextWantedPosition)) {
             System.out.println("outside Map");
-            return ;
+            return false;
         }
 
-        List<Entity> nextPositionEntities = intersectTool.getEntitiesIntersecting(pacman,nextWantedPosition, entityList);
+        List<Entity> nextPositionEntities = intersectTool.getEntitiesIntersecting((Entity) entity,nextWantedPosition, entityList);
 
         if(areAccessibleEntities(nextPositionEntities)){
-            pacman.moveMove(nextWantedPosition, nextPositionEntities);
+            entity.move(nextWantedPosition, nextPositionEntities);
+            return true;
         }
         else{
             //System.out.println("position inaccessible");
+            return false;
         }
     }
 

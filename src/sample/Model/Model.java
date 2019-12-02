@@ -19,7 +19,7 @@ public class Model {
 
 
     public Model(int width, int height, GooContext gooContext) {
-        level = new Level(new File("src/levels/level.txt"), width,height, gooContext);
+        level = new Level(new File("src/levels/level1.txt"), width,height, gooContext);
     }
 
     private void initializeLevel() {

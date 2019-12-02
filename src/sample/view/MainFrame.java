@@ -6,7 +6,6 @@ import graphicmotor.GooContext;
 import sample.Model.Entities.Entity;
 import sample.Model.Entities.PacMan;
 import sample.Model.Entities.Position;
-import sample.Model.InputKey;
 import sample.Model.Level;
 
 import javax.swing.*;
@@ -89,16 +88,11 @@ public class MainFrame extends JFrame {
     }
     public void createEntity(Entity entity){
         entity.setGraphicId(gooContext.createSingleAnimatedEntity(entity.getSpritePath(), 1, 400));
-        gooContext.setEntityPosition(entity.getId(), entity.getPosition().getX()*50, entity.getPosition().getY()*50);
-        gooContext.setEntitySize(entity.getId(), entity.getDimension().getWeight(), entity.getDimension().getHeight());
+        gooContext.setEntityPosition(entity.getGraphicId(), entity.getPosition().getX()*50, entity.getPosition().getY()*50);
+        gooContext.setEntitySize(entity.getGraphicId(), entity.getDimension().getWeight(), entity.getDimension().getHeight());
         entity.setPosition(new Position(entity.getPosition().getX()*50, entity.getPosition().getY()*50));
-        gooContext.setZIndex(entity.getId(), 2);
-        gooContext.enableEntity(entity.getId());
-        System.out.println("Created entity : " +entity.toString()+ "  x,y :"+entity.getPosition().getX()+" ,"+entity.getPosition().getY()) ;
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        gooContext.setZIndex(entity.getGraphicId(), 2);
+        gooContext.enableEntity(entity.getGraphicId());
+        System.out.println("Created entity : " +entity.toString()+ "  x,y :"+entity.getPosition().getX()+" ,"+entity.getPosition().getY());
     }
 }

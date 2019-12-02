@@ -1,16 +1,29 @@
 package sample.Model.Entities;
 
 import sample.Model.InputKey;
+import sample.Model.Level;
 
 import java.util.List;
 
 public class Ghost implements Entity, Moveable, Living {
 
-    DynamicMoveable dynamicGhost;
 
     private int graphicId;
 
     private boolean alive;
+    private int velocity;
+
+    private Position position;
+    private Level level;
+
+    private DynamicMoveable dynamicGhost;
+
+    public Ghost(DynamicMoveable dynamicGhost, Position position, Level level) {
+        this.dynamicGhost = dynamicGhost;
+        this.position = position;
+        this.level = level;
+        this.velocity = 5;
+    }
 
     @Override
     public String toString() {
@@ -19,21 +32,21 @@ public class Ghost implements Entity, Moveable, Living {
 
     @Override
     public void setPosition(Position position) {
-        this.dynamicGhost.setPosition(position);
+        this.position = position;
     }
 
     @Override
     public Position getPosition() {
-        return dynamicGhost.getPosition();
+        return position;
     }
 
     @Override
     public boolean isAccessible() {
-        return false;
+        return true;
     }
 
     @Override
-    public int getId() {
+    public int getGraphicId() {
         return graphicId;
     }
 
@@ -63,12 +76,16 @@ public class Ghost implements Entity, Moveable, Living {
         return null;
     }
 
+    @Override
+    public void move(Position nextWantedPosition, List<Entity> nextPositionEntities) {
+
+    }
 
     @Override
-    public List<Entity> move(InputKey.Direction direction) {
-
-        return null;
+    public int getVelocity() {
+        return velocity;
     }
+
 
     @Override
     public boolean isAlive() {
@@ -77,12 +94,12 @@ public class Ghost implements Entity, Moveable, Living {
 
     @Override
     public void resolveCollision(Collideable collideable) {
-
+        collideable.resolveCollision(this);
     }
 
     @Override
     public void resolveCollision(PacMan pacMan) {
-
+        pacMan.resolveCollision(this);
     }
 
     @Override

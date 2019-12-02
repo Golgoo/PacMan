@@ -7,23 +7,32 @@ import java.util.List;
 
 public class PacMan implements Entity, Moveable, Living {
 
-    private DynamicMoveable dynamicPacman;
-
     private boolean alive;
 
     private int graphicId;
 
-    public int getGraphicId() {
-        return graphicId;
-    }
+    private int velocity;
+
+    private Position position;
+    private Level level;
+
+    private DynamicMoveable dynamicPacman;
+
+    private int livesCount;
+
+
 
     @Override
     public void setGraphicId(int graphicId) {
         this.graphicId = graphicId;
     }
 
-    public PacMan(DynamicMoveable dynamicPacman) {
+    public PacMan(DynamicMoveable dynamicPacman, Position position, Level level) {
         this.dynamicPacman = dynamicPacman;
+        this.position = position;
+        this.level = level;
+        this.livesCount = 3;
+        this.velocity = 5;
     }
 
 
@@ -34,13 +43,13 @@ public class PacMan implements Entity, Moveable, Living {
 
     @Override
     public void setPosition(Position position) {
-        this.dynamicPacman.setPosition(position);
+        this.position = position;
     }
 
 
     @Override
     public Position computeNextWantedPosition(InputKey.Direction direction) {
-        return dynamicPacman.computeNextWantedPosition(direction);
+        return dynamicPacman.computeNextWantedPosition(position,direction);
     }
 
     @Override
@@ -50,27 +59,8 @@ public class PacMan implements Entity, Moveable, Living {
 
 
     @Override
-    public List<Entity> move(InputKey.Direction direction) {
-        //System.out.println(direction);
-        List<Entity> entitiesOnSamePosition = dynamicPacman.move(direction);
-
-        dynamicPacman.getLevel().setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
-
-
-        if (entitiesOnSamePosition.isEmpty()) {
-            //System.out.println("Pas de collision");
-            return entitiesOnSamePosition;
-        }
-
-        for(Entity entity : entitiesOnSamePosition)
-            resolveCollision(entity);
-
-        return null;
-    }
-
-    @Override
     public Position getPosition() {
-        return dynamicPacman.getPosition();
+        return position;
     }
 
 
@@ -80,13 +70,13 @@ public class PacMan implements Entity, Moveable, Living {
     }
 
     @Override
-    public int getId() {
+    public int getGraphicId() {
         return graphicId;
     }
 
     @Override
     public Dimension getDimension() {
-        return new Dimension(50,50);
+        return new Dimension(40,40);
     }
 
 
@@ -114,18 +104,24 @@ public class PacMan implements Entity, Moveable, Living {
 
     @Override
     public void resolveCollision(Ghost ghost) {
-
+        livesCount--;
+        System.out.println("vie perdue" +livesCount);
     }
 
     @Override
     public void resolveCollision(FruitEntity fruitEntity) {
-        fruitEntity.consume(this,dynamicPacman.getLevel());
+        fruitEntity.consume(this,level);
     }
 
-    public void moveMove(Position nextWantedPosition, List<Entity> nextPositionEntities) {
+    public void move(Position nextWantedPosition, List<Entity> nextPositionEntities) {
         setPosition(nextWantedPosition);
-        dynamicPacman.getLevel().setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
+        level.setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
         for(Entity entity : nextPositionEntities)
             resolveCollision(entity);
+    }
+
+    @Override
+    public int getVelocity() {
+        return velocity;
     }
 }

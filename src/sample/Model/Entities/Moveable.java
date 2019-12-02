@@ -8,5 +8,6 @@ public interface Moveable {
 
    Position computeNextWantedPosition(InputKey.Direction direction);
    List<Entity> getEntitiesIntersecting(Position position);
-   List<Entity> move(InputKey.Direction direction);
+   void move(Position nextWantedPosition, List<Entity> nextPositionEntities);
+   int getVelocity();
 }
