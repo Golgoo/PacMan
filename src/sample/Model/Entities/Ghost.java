@@ -5,7 +5,7 @@ import sample.Model.Level;
 
 import java.util.List;
 
-public class Ghost implements Entity, Moveable, Living {
+public class Ghost implements Entity, Moveable {
 
 
     private int graphicId;
@@ -56,13 +56,13 @@ public class Ghost implements Entity, Moveable, Living {
 
     @Override
     public Dimension getDimension() {
-        return new Dimension(30,30);
+        return new Dimension(40,40);
     }
 
 
     @Override
     public String getSpritePath() {
-        return "Game Files/Sprites/Blue_up.png";
+        return "src/ressources/redghost.gif";
     }
 
 
@@ -91,11 +91,6 @@ public class Ghost implements Entity, Moveable, Living {
         return null;
     }
 
-
-    @Override
-    public boolean isAlive() {
-        return alive;
-    }
 
     @Override
     public void resolveCollision(Collideable collideable) {

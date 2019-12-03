@@ -15,4 +15,7 @@ public class InputKeysHandler {
             return InputKey.Direction.Right;
         return null;
     }
+    public boolean areSameKeys(KeyEvent keyEvent, KeyEvent secondKeyEvent) {
+        return keyEvent.getKeyCode() == secondKeyEvent.getKeyCode();
+    }
 }

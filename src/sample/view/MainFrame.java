@@ -4,9 +4,9 @@ package sample.view;
 
 import graphicmotor.GooContext;
 import sample.Model.Entities.Entity;
-import sample.Model.Entities.PacMan;
 import sample.Model.Entities.Position;
 import sample.Model.Level;
+import sample.Model.PhysicMotor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,13 +16,13 @@ import java.util.List;
 
 public class MainFrame extends JFrame {
 
-
-    PacMan pacMan;
     GooContext gooContext;
     int width;
     int height;
     int graphicIdCount;
     Level level;
+    PhysicMotor physicMotor;
+
 
     public void setLevel(Level level) {
         this.level = level;
@@ -48,14 +48,12 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+        gooCtx.start(60);
         /*****************START FUNCTION********************/
-
-
-
     }
 
     public class KeyListenerMain implements  KeyListener{
+
 
         @Override
         public void keyTyped(KeyEvent keyEvent) {
@@ -63,12 +61,13 @@ public class MainFrame extends JFrame {
 
         @Override
         public void keyPressed(KeyEvent keyEvent) {
-            System.out.println("keyrpessed");
-            level.proccessKeyPressed(keyEvent);
+            //System.out.println("keyrpessed");
+            physicMotor.proccessKeyPressed(keyEvent);
         }
 
         @Override
         public void keyReleased(KeyEvent keyEvent) {
+            physicMotor.proccessKeyRealeased(keyEvent);
             /*InputKey.Direction direction = convertKeyToInputKey(keyEvent);
             if(direction != null){
                 pacMan.move(direction);
@@ -76,13 +75,11 @@ public class MainFrame extends JFrame {
         }
     }
 
-
-    public void setPacMan(PacMan pacMan) {
-        this.pacMan = pacMan;
+    public void setPhysicMotor(PhysicMotor physicMotor) {
+        this.physicMotor = physicMotor;
     }
 
     public void initialise(List<Entity> entityList) {
-        int count= 0;
         for(Entity entity : entityList) {
                 createEntity(entity);
         }

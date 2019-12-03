@@ -5,7 +5,7 @@ import sample.Model.Level;
 
 import java.util.List;
 
-public class PacMan implements Entity, Moveable, Living {
+public class PacMan implements Entity, Moveable{
 
     private boolean alive;
 
@@ -34,7 +34,7 @@ public class PacMan implements Entity, Moveable, Living {
         this.position = position;
         this.level = level;
         this.livesCount = 3;
-        this.velocity = 20;
+        this.velocity = 5;
         this.velocityPos = new Position(0,0);
     }
 
@@ -89,10 +89,6 @@ public class PacMan implements Entity, Moveable, Living {
     }
 
 
-    @Override
-    public boolean isAlive() {
-        return alive;
-    }
 
 
     @Override
