@@ -2,6 +2,7 @@ package sample.Model;
 
 import graphicmotor.GooContext;
 import sample.Model.Entities.*;
+import sample.Model.PathFinding.AStar;
 
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -19,6 +20,8 @@ public class Level {
     private PacMan pacman;
     private List<Ghost> ghosts;
     private GooContext gooContext;
+    private AStar aStar;
+    private int[][] maze;
 
 
     public Level(File file, int width, int height, GooContext gooContext) {
@@ -44,10 +47,11 @@ public class Level {
         assert lineReader != null;
 
         countColumnsAndRows(scanner, lineReader);
+        maze = new int[rows][columns];
 
         this.score = 0;
 
-        loadGrid(file);
+        loadEntities(file);
 
         columns = width;
         rows = height;
@@ -63,7 +67,7 @@ public class Level {
     }
 
 
-    private void loadGrid(File file) {
+    private void loadEntities(File file) {
         Scanner scanner = null;
         try {
             scanner = new Scanner(file);
@@ -76,11 +80,20 @@ public class Level {
                     int result = scanner.nextInt();
                     Entity entity = getEntity(result, new Position(j,i),this);
                     addEntityToEntityList(entity);
+
+                    addToMaze(result,i ,j);
                 }
             }
             if(scanner.hasNextLine())
                 scanner.nextLine();
         }
+    }
+
+    private void addToMaze(int number, int i, int j){
+        if(number == 0)
+            maze[i][j] = 100;
+        else
+            maze[i][j] = 0;
     }
 
     private void addEntityToEntityList(Entity entity) {
@@ -173,6 +186,11 @@ public class Level {
 
     public List<Ghost> getGhosts() {
         return ghosts;
+    }
+
+    public void computeGhostsNextMove() {
+        for(Ghost ghost : ghosts)
+            ghost.computeShortestPathToGivenEntity(aStar, maze, pacman);
     }
 }
 

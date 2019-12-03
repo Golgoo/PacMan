@@ -18,13 +18,20 @@ public class PhysicMotor {
     }
 
     public void startGame() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         while(true){
             if(keyPressed != null){
                 moveEntity(inputKeysHandler.convertKeyToInputKey(keyPressed),level.getPacman());
-                moveEntity(inputKeysHandler.convertKeyToInputKey(keyPressed), level.getGhosts().get(0));
             }
+            level.computeGhostsNextMove();
+            moveEntity(level.getGhosts().get(0).getDirection(), level.getGhosts().get(0));
             try {
-                Thread.sleep(5);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -28,7 +28,7 @@ public class FactoryEntity {
         if(entityCode == EntityCode.getFruitEntityCode())
             return new Fruit(position);
         if(entityCode == EntityCode.getWallCode())
-            return new AccessibilityDecorator(new Wall(position),true);
+            return /*new AccessibilityDecorator(*/new Wall(position)/*,true)*/;
 
         if(entityCode == EntityCode.getPacManCode()) {
             PacMan pacMan = new PacMan(new DynamicMoveable(), position, level);

@@ -32,7 +32,7 @@ public class PacMan implements MoveableEntity {
         this.position = position;
         this.level = level;
         this.livesCount = 3;
-        this.velocity = 5;
+        this.velocity = 2;
         this.velocityPos = new Position(0,0);
     }
 
@@ -50,7 +50,7 @@ public class PacMan implements MoveableEntity {
 
     @Override
     public Position computeNextWantedPosition(InputKey.Direction direction) {
-        return dynamicPacman.computeNextWantedPosition(position,direction);
+        return dynamicPacman.computeNextWantedPosition(position,direction,getVelocity());
     }
 
     @Override
