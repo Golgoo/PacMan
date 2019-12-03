@@ -125,8 +125,12 @@ public class Ghost implements MoveableEntity {
         AStar as = new AStar(maze, ghostPositionMaze.getX(), ghostPositionMaze.getY(), false);
         List<AStar.Node> path = as.findPathTo(entityPositionMaze.getX(), entityPositionMaze.getY());
 
-        if(path.get(1) == null || path.get(0) == null)
+        if(path.size() <= 1) {
+            //positionToGo = position;
+            direction = InputKey.Direction.None;
             return;
+        }
+
 
         Position nextPosition = new Position(path.get(1).x, path.get(1).y);
 

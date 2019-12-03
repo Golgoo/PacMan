@@ -61,7 +61,7 @@ public class PacMan implements MoveableEntity {
 
     @Override
     public boolean isAccessible() {
-        return false;
+        return true;
     }
 
     @Override

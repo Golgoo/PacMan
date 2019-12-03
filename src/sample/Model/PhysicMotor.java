@@ -1,6 +1,7 @@
 package sample.Model;
 
 import sample.Model.Entities.Entity;
+import sample.Model.Entities.Ghost;
 import sample.Model.Entities.MoveableEntity;
 import sample.Model.Entities.Position;
 
@@ -29,7 +30,9 @@ public class PhysicMotor {
                 moveEntity(inputKeysHandler.convertKeyToInputKey(keyPressed),level.getPacman());
             }
             level.computeGhostsNextMove();
-            moveEntity(level.getGhosts().get(0).getDirection(), level.getGhosts().get(0));
+            for(Ghost ghost : level.getGhosts())
+                moveEntity(ghost.getDirection(), ghost);
+                //moveEntity(level.getGhosts().get(0).getDirection(), level.getGhosts().get(0));
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
