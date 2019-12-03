@@ -50,6 +50,7 @@ public class Wall implements Entity {
         this.position = position;
     }
 
+
     @Override
     public void resolveCollision(Collideable collideable) {
 
@@ -66,7 +67,7 @@ public class Wall implements Entity {
     }
 
     @Override
-    public void resolveCollision(FruitEntity fruitEntity) {
+    public void resolveCollision(Fruit fruitEntity) {
 
     }
 }

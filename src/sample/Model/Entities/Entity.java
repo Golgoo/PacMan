@@ -1,7 +1,7 @@
 package sample.Model.Entities;
 
 
-public interface Entity extends Collideable{
+public interface Entity extends Collideable {
 
     Position getPosition();
     void setPosition(Position position);

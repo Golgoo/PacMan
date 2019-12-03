@@ -17,6 +17,8 @@ public class DynamicMoveable  {
             return new Position(position.getX()+1, position.getY());
         else if(direction == InputKey.Direction.Left)
             return new Position(position.getX()-1, position.getY());
+        else if(direction == InputKey.Direction.None)
+            return null;
         return null;
     }
 }

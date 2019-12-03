@@ -5,7 +5,7 @@ import sample.Model.Level;
 
 import java.util.List;
 
-public class Ghost implements Entity, Moveable {
+public class Ghost implements MoveableEntity {
 
 
     private int graphicId;
@@ -68,13 +68,16 @@ public class Ghost implements Entity, Moveable {
 
     @Override
     public Position computeNextWantedPosition(InputKey.Direction direction) {
-        return null;
+        return dynamicGhost.computeNextWantedPosition(position,direction);
     }
 
 
     @Override
     public void move(Position nextWantedPosition, List<Entity> nextPositionEntities) {
-
+        setPosition(nextWantedPosition);
+        level.setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
+        for(Entity entity : nextPositionEntities)
+            resolveCollision(entity);
     }
 
     @Override
@@ -99,7 +102,7 @@ public class Ghost implements Entity, Moveable {
     }
 
     @Override
-    public void resolveCollision(FruitEntity fruitEntity) {
+    public void resolveCollision(Fruit fruitEntity) {
 
     }
 }

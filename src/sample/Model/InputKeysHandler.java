@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 public class InputKeysHandler {
 
     public InputKey.Direction convertKeyToInputKey(KeyEvent keyEvent) {
+        if(keyEvent == null)
+            return InputKey.Direction.None;
         if(keyEvent.getKeyCode() == KeyEvent.VK_DOWN)
             return InputKey.Direction.Down;
         if(keyEvent.getKeyCode() == KeyEvent.VK_UP)

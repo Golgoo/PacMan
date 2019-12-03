@@ -91,6 +91,6 @@ public class MainFrame extends JFrame {
         entity.setPosition(new Position(entity.getPosition().getX()*50, entity.getPosition().getY()*50));
         gooContext.setZIndex(entity.getGraphicId(), 2);
         gooContext.enableEntity(entity.getGraphicId());
-        System.out.println("Created entity : " +entity.toString()+ "  x,y :"+entity.getPosition().getX()+" ,"+entity.getPosition().getY());
+        //System.out.println("Created entity : " +entity.toString()+ "  x,y :"+entity.getPosition().getX()+" ,"+entity.getPosition().getY());
     }
 }

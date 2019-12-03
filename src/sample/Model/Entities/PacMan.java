@@ -5,9 +5,7 @@ import sample.Model.Level;
 
 import java.util.List;
 
-public class PacMan implements Entity, Moveable{
-
-    private boolean alive;
+public class PacMan implements MoveableEntity {
 
     private int graphicId;
 
@@ -102,7 +100,7 @@ public class PacMan implements Entity, Moveable{
     }
 
     @Override
-    public void resolveCollision(FruitEntity fruitEntity) {
+    public void resolveCollision(Fruit fruitEntity) {
         fruitEntity.consume(this,level);
     }
 

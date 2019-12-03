@@ -3,12 +3,12 @@ package sample.Model.Entities;
 
 import sample.Model.Level;
 
-public class FruitEntity implements Entity, Consumable {
+public class Fruit implements Entity, Consumable {
 
     Position position;
     int graphicId;
 
-    public FruitEntity(Position position) {
+    public Fruit(Position position) {
         this.position = position;
     }
 
@@ -75,7 +75,7 @@ public class FruitEntity implements Entity, Consumable {
     }
 
     @Override
-    public void resolveCollision(FruitEntity fruitEntity) {
+    public void resolveCollision(Fruit fruitEntity) {
 
     }
 

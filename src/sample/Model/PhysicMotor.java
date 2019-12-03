@@ -1,7 +1,7 @@
 package sample.Model;
 
 import sample.Model.Entities.Entity;
-import sample.Model.Entities.Moveable;
+import sample.Model.Entities.MoveableEntity;
 import sample.Model.Entities.Position;
 
 import java.awt.event.KeyEvent;
@@ -21,6 +21,7 @@ public class PhysicMotor {
         while(true){
             if(keyPressed != null){
                 moveEntity(inputKeysHandler.convertKeyToInputKey(keyPressed),level.getPacman());
+                moveEntity(inputKeysHandler.convertKeyToInputKey(keyPressed), level.getGhosts().get(0));
             }
             try {
                 Thread.sleep(5);
@@ -29,15 +30,18 @@ public class PhysicMotor {
             }
         }
     }
-    private boolean moveEntity(InputKey.Direction direction, Moveable entity){
+    private boolean moveEntity(InputKey.Direction direction, MoveableEntity entity){
         Position nextWantedPosition = entity.computeNextWantedPosition(direction);
+
+        if(nextWantedPosition == null)
+            return false;
 
         if(level.isOutsideMap(nextWantedPosition)) {
             System.out.println("outside Map");
             return false;
         }
 
-        List<Entity> nextPositionEntities = intersectTool.getEntitiesIntersecting((Entity) entity,nextWantedPosition, level.getEntityList());
+        List<Entity> nextPositionEntities = intersectTool.getEntitiesIntersecting(entity,nextWantedPosition, level.getEntityList());
 
         if(level.areAccessibleEntities(nextPositionEntities)){
             entity.move(nextWantedPosition, nextPositionEntities);

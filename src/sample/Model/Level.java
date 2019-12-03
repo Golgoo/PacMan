@@ -17,6 +17,7 @@ public class Level {
     private int score;
     private List<Entity> entityList;
     private PacMan pacman;
+    private List<Ghost> ghosts;
     private GooContext gooContext;
 
 
@@ -24,6 +25,9 @@ public class Level {
         columns = 0;
         rows = 0;
         this.gooContext = gooContext;
+
+        entityList = new ArrayList<>();
+        ghosts = new ArrayList<>();
 
         Scanner scanner = null;
         BufferedReader lineReader = null;
@@ -41,7 +45,6 @@ public class Level {
 
         countColumnsAndRows(scanner, lineReader);
 
-        entityList = new ArrayList<>();
         this.score = 0;
 
         loadGrid(file);
@@ -73,10 +76,6 @@ public class Level {
                     int result = scanner.nextInt();
                     Entity entity = getEntity(result, new Position(j,i),this);
                     addEntityToEntityList(entity);
-
-                    if(result == 3) {
-                        pacman = (PacMan) entity;
-                    }
                 }
             }
             if(scanner.hasNextLine())
@@ -134,6 +133,10 @@ public class Level {
         return pacman;
     }
 
+    public void setPacman(PacMan pacman) {
+        this.pacman = pacman;
+    }
+
     public int getScore() {
         return score;
     }
@@ -168,5 +171,8 @@ public class Level {
         gooContext.disableEntity(graphicId);
     }
 
+    public List<Ghost> getGhosts() {
+        return ghosts;
+    }
 }
 
