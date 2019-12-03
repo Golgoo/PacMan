@@ -56,12 +56,6 @@ public class PacMan implements Entity, Moveable{
     }
 
     @Override
-    public List<Entity> getEntitiesIntersecting(Position position) {
-        return null;
-    }
-
-
-    @Override
     public Position getPosition() {
         return position;
     }
@@ -128,24 +122,4 @@ public class PacMan implements Entity, Moveable{
         this.velocityPos = velocityPos;
     }
 
-    @Override
-    public Position computeNextWantedPosition() {
-        if(velocityPos.getY() < 0 ) {
-            velocityPos.setY(velocityPos.getY()+1);
-            return new Position(position.getX(), position.getY() - 1);
-        }
-        else if(velocityPos.getY() > 0 ) {
-            velocityPos.setY(velocityPos.getY()-1);
-            return new Position(position.getX(), position.getY() + 1);
-        }
-        else if(velocityPos.getX() > 0 ) {
-            velocityPos.setX(velocityPos.getX()-1);
-            return new Position(position.getX() + 1, position.getY());
-        }
-        else if(velocityPos.getX() < 0 ) {
-            velocityPos.setX(velocityPos.getX()+1);
-            return new Position(position.getX() - 1, position.getY());
-        }
-        return null;
-    }
 }

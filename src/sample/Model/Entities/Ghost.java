@@ -71,10 +71,6 @@ public class Ghost implements Entity, Moveable {
         return null;
     }
 
-    @Override
-    public List<Entity> getEntitiesIntersecting(Position position) {
-        return null;
-    }
 
     @Override
     public void move(Position nextWantedPosition, List<Entity> nextPositionEntities) {
@@ -84,11 +80,6 @@ public class Ghost implements Entity, Moveable {
     @Override
     public int getVelocity() {
         return velocity;
-    }
-
-    @Override
-    public Position computeNextWantedPosition() {
-        return null;
     }
 
 
