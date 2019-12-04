@@ -1,7 +1,6 @@
-package sample.Model.Entities.Tools;
+package sample.Model.Tools;
 
 import sample.Model.Entities.Position;
-import sample.Model.InputKey;
 import sample.Model.PathFinding.Node;
 
 import java.util.List;

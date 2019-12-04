@@ -2,15 +2,14 @@ package sample.Model;
 
 import graphicmotor.GooContext;
 import sample.Model.Entities.*;
+import sample.Model.Entities.Decorators.AStarGhost;
+import sample.Model.Entities.Decorators.DumbGhost;
+import sample.Model.Tools.LevelGeneratorFromTxt;
 import sample.Model.PathFinding.AStar;
 
-import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import static sample.Model.Entities.FactoryEntity.*;
 
 public class Level {
     private int columns;
@@ -18,7 +17,7 @@ public class Level {
     private int score;
     private List<Entity> entityList;
     private PacMan pacman;
-    private List<Ghost> ghosts;
+    private List<MoveableIntellectualEntity> ghosts;
     private GooContext gooContext;
     private AStar aStar;
     private int[][] maze;
@@ -28,35 +27,23 @@ public class Level {
         columns = 0;
         rows = 0;
         this.gooContext = gooContext;
+        LevelGeneratorFromTxt levelGeneratorFromTxt = new LevelGeneratorFromTxt(file,this);
 
         entityList = new ArrayList<>();
         ghosts = new ArrayList<>();
 
-        Scanner scanner = null;
-        BufferedReader lineReader = null;
+        levelGeneratorFromTxt.countColumnsAndRows();
 
-        try {
-            scanner = new Scanner(file);
-            lineReader = new BufferedReader(new FileReader(file));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        assert scanner != null;
-        assert lineReader != null;
-
-        countColumnsAndRows(scanner, lineReader);
         maze = new int[rows][columns];
 
         this.score = 0;
 
-        loadEntities(file);
+        levelGeneratorFromTxt.loadEntities();
 
         columns = width;
         rows = height;
 
-        //inputKeysHandler = new InputKeysHandler();
+        decorateGhostsBehaviour();
 
         System.out.println(this);
 
@@ -67,61 +54,33 @@ public class Level {
     }
 
 
-    private void loadEntities(File file) {
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                if(scanner.hasNextInt()){
-                    int result = scanner.nextInt();
-                    Entity entity = getEntity(result, new Position(j,i),this);
-                    addEntityToEntityList(entity);
 
-                    addToMaze(result,i ,j);
-                }
-            }
-            if(scanner.hasNextLine())
-                scanner.nextLine();
+    public void decorateGhostsBehaviour() {
+        int count = 0;
+        List<MoveableIntellectualEntity> newGhosts = new ArrayList<>();
+        for(MoveableIntellectualEntity ghost : ghosts){
+            if(count % 2 == 1)
+                newGhosts.add(new DumbGhost(ghost));
+            else
+                newGhosts.add(new AStarGhost(ghost, this));
+            count++;
         }
+        ghosts = newGhosts;
     }
 
-    private void addToMaze(int number, int i, int j){
+    public void addToMaze(int number, int i, int j){
         if(number == 0)
             maze[i][j] = 100;
         else
             maze[i][j] = 0;
     }
 
-    private void addEntityToEntityList(Entity entity) {
+    public void addEntityToEntityList(Entity entity) {
         if(entity != null)
             entityList.add(entity);
     }
 
-    private void countColumnsAndRows(Scanner scanner, BufferedReader lineReader) {
-        try {
-            String line = lineReader.readLine();
-            Scanner lineScan = new Scanner(line);
 
-            while(lineScan.hasNextInt()){
-                lineScan.nextInt();
-                columns++;
-            }
-            lineScan.close();
-            lineReader.close();
-
-            while(scanner.hasNextLine()) {
-                scanner.nextLine();
-                rows++;
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        System.out.println("col,row"+columns +" "+rows);
-    }
 
     @Override
     public String toString() {
@@ -168,7 +127,7 @@ public class Level {
     protected boolean areAccessibleEntities(List<Entity> nextPositionEntities) {
         for(Entity e : nextPositionEntities) {
             if (!e.isAccessible()) {
-                System.out.println(e +"inaccessible");
+                //System.out.println(e +"inaccessible");
                 return false;
             }
         }
@@ -184,17 +143,33 @@ public class Level {
         gooContext.disableEntity(graphicId);
     }
 
-    public List<Ghost> getGhosts() {
+    public List<MoveableIntellectualEntity> getGhosts() {
         return ghosts;
     }
 
     public void computeGhostsNextMove() {
-        for(Ghost ghost : ghosts)
+        for(MoveableIntellectualEntity ghost : ghosts)
             ghost.computeDirectionToGivenEntity(pacman);
     }
 
     public int[][] getMaze() {
         return maze;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
     }
 }
 

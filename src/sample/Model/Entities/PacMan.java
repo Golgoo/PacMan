@@ -3,7 +3,6 @@ package sample.Model.Entities;
 import sample.Model.InputKey;
 import sample.Model.Level;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class PacMan implements MoveableEntity {
@@ -78,7 +77,7 @@ public class PacMan implements MoveableEntity {
 
     @Override
     public String getSpritePath() {
-        return"src/ressources/pacmanDown.gif";
+        return"src/ressources/pacmanRight.gif";
     }
 
 

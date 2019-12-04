@@ -16,9 +16,7 @@ public class MainGraphic {
 
         MainFrame mainFrame = new MainFrame(gooCtx,1000,1000);
 
-        //Controller controller = new Controller(mainFrame);
         Level level = new Level(new File("src/levels/level1.txt"),mainFrame.getWidth(), mainFrame.getHeight(), mainFrame.getGooContext());
-        //gameView = new GameView();
 
         mainFrame.initialise(level.getEntityList());
 
@@ -28,9 +26,7 @@ public class MainGraphic {
         mainFrame.setPhysicMotor(physicMotor);
 
         physicMotor.startGame();
-        //mainFrame.setLevel(controller.getModel().getLevel());
 
-        //TestFrame frame = new TestFrame();
 
 
     }

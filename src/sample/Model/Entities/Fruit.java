@@ -3,8 +3,6 @@ package sample.Model.Entities;
 
 import sample.Model.Level;
 
-import java.io.InputStream;
-
 public class Fruit implements Entity, Consumable {
 
     Position position;
