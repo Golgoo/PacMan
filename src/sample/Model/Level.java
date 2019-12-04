@@ -2,6 +2,7 @@ package sample.Model;
 
 import graphicmotor.GooContext;
 import sample.Model.Entities.*;
+import sample.Model.Entities.Decorators.AStarGhost;
 import sample.Model.Entities.Decorators.DumbGhost;
 import sample.Model.Entities.Tools.LevelGeneratorFromTxt;
 import sample.Model.PathFinding.AStar;
@@ -65,7 +66,7 @@ public class Level {
             if(count % 2 == 1)
                 newGhosts.add(new DumbGhost(ghost));
             else
-                newGhosts.add(ghost);
+                newGhosts.add(new AStarGhost(ghost, this));
             count++;
         }
         ghosts = newGhosts;
@@ -130,7 +131,7 @@ public class Level {
     protected boolean areAccessibleEntities(List<Entity> nextPositionEntities) {
         for(Entity e : nextPositionEntities) {
             if (!e.isAccessible()) {
-                System.out.println(e +"inaccessible");
+                //System.out.println(e +"inaccessible");
                 return false;
             }
         }

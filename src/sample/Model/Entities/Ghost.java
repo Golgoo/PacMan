@@ -1,9 +1,7 @@
 package sample.Model.Entities;
 
-import sample.Model.Entities.Tools.PathConverter;
 import sample.Model.InputKey;
 import sample.Model.Level;
-import sample.Model.PathFinding.AStar;
 import sample.Model.PathFinding.Node;
 import sample.Model.PathFinding.PathFindingAlgorithm;
 
@@ -24,8 +22,6 @@ public class Ghost implements MoveableIntellectualEntity {
 
     private InputKey.Direction direction;
 
-    private Position positionToReach;
-
     private PathFindingAlgorithm pathFindingAlgorithm;
 
     public void setDirection(InputKey.Direction direction) {
@@ -38,7 +34,6 @@ public class Ghost implements MoveableIntellectualEntity {
         this.level = level;
         this.velocity = 1;
         direction = InputKey.Direction.None;
-        positionToReach = position;
     }
 
     @Override
@@ -49,7 +44,6 @@ public class Ghost implements MoveableIntellectualEntity {
     @Override
     public void setPosition(Position position) {
         this.position = position;
-        this.positionToReach = position;
     }
 
     @Override
@@ -91,7 +85,6 @@ public class Ghost implements MoveableIntellectualEntity {
 
     @Override
     public void move(Position nextWantedPosition, List<Entity> nextPositionEntities) {
-        System.out.println("ghost moving");
         position = nextWantedPosition;
         level.setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
         for(Entity entity : nextPositionEntities)
@@ -130,6 +123,7 @@ public class Ghost implements MoveableIntellectualEntity {
         float yFloat = (float) position.getY();
         return new Position(Math.round(xFloat/50), Math.round(yFloat/50));
     }
+
     private Position toPixelPosition(Position position) {
         return new Position(position.getX()*50,position.getY()*50);
     }
@@ -143,45 +137,20 @@ public class Ghost implements MoveableIntellectualEntity {
         return pathFindingAlgorithm;
     }
 
+    @Override
+    public void setPathFindingAlgorithm(PathFindingAlgorithm pathFindingAlgorithm) {
+        this.pathFindingAlgorithm = pathFindingAlgorithm;
+    }
+
 
     @Override
     public List<Node> computePathToGivenEntity(Entity entity) {
-        if(positionToReach.getX() != position.getX() || positionToReach.getY() != position.getY())
-            return null;
-
-        //System.out.println("ghost"+position);
-
-        Position ghostPositionMaze = toMazePosition(position);
-        Position entityPositionMaze = toMazePosition(entity.getPosition());
-
-        //System.out.println(ghostPositionMaze);
-
-
-        return pathFindingAlgorithm.findPathFromTo(ghostPositionMaze.getX(),ghostPositionMaze.getY(),entityPositionMaze.getX(), entityPositionMaze.getY());
+        return null;
     }
 
     @Override
     public void computeDirectionToGivenEntity(Entity entity) {
 
-        pathFindingAlgorithm = new AStar(level.getMaze(),false);
-
-        List<Node> path = computePathToGivenEntity(entity);
-
-        if(path == null)
-            return;
-
-
-        Position nextPosition = new PathConverter().convertPathToPosition(path);
-
-
-        if(nextPosition == null){
-            direction = InputKey.Direction.None;
-            return;
-        }
-
-        positionToReach = toPixelPosition(nextPosition);
-
-        setDirectionToTake(toMazePosition(position),nextPosition);
     }
 
     public void setDirectionToTake(Position actualPosition ,Position positionToGo){

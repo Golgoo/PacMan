@@ -1,18 +1,31 @@
 package sample.Model.Entities.Decorators;
 
-
 import sample.Model.Entities.*;
+import sample.Model.Entities.Tools.PathConverter;
 import sample.Model.InputKey;
+import sample.Model.Level;
+import sample.Model.PathFinding.AStar;
 import sample.Model.PathFinding.Node;
 import sample.Model.PathFinding.PathFindingAlgorithm;
 
 import java.util.List;
-import java.util.Random;
 
-public class DumbGhost extends MoveableIntellectualEntityDecorator {
+public class AStarGhost extends MoveableIntellectualEntityDecorator {
 
-    public DumbGhost(MoveableIntellectualEntity decoratedEntity) {
+    private Position positionToReach;
+    private Level level;
+
+
+    public AStarGhost(MoveableIntellectualEntity decoratedEntity, Level level) {
         super(decoratedEntity);
+        //positionToReach = new Position(decoratedEntity.getPosition());
+        this.level = level;
+    }
+
+
+    @Override
+    public PathFindingAlgorithm getPathFindingAlgorithm() {
+        return decoratedEntity.getPathFindingAlgorithm();
     }
 
     @Override
@@ -21,9 +34,49 @@ public class DumbGhost extends MoveableIntellectualEntityDecorator {
     }
 
     @Override
-    public InputKey.Direction getDirection() {
-        return decoratedEntity.getDirection();
+    public List<Node> computePathToGivenEntity(Entity entity) {
+        if(positionToReach == null)
+            positionToReach = decoratedEntity.getPosition();
+
+        if(positionToReach.getX() != decoratedEntity.getPosition().getX() || positionToReach.getY() != decoratedEntity.getPosition().getY())
+            return null;
+
+
+       // System.out.println("ghost"+decoratedEntity.getPosition());
+
+        Position ghostPositionMaze = toMazePosition(decoratedEntity.getPosition());
+        Position entityPositionMaze = toMazePosition(entity.getPosition());
+
+       // System.out.println(ghostPositionMaze);
+
+
+        return decoratedEntity.getPathFindingAlgorithm().findPathFromTo(ghostPositionMaze.getX(),ghostPositionMaze.getY(),entityPositionMaze.getX(), entityPositionMaze.getY());
     }
+
+    @Override
+    public void computeDirectionToGivenEntity(Entity entity) {
+        setPathFindingAlgorithm(new AStar(level.getMaze(),false));
+
+        List<Node> path = computePathToGivenEntity(entity);
+
+        if(path == null) {
+            return;
+        }
+
+
+        Position nextPosition = new PathConverter().convertPathToPosition(path);
+
+
+        if(nextPosition == null){
+            decoratedEntity.setDirection(InputKey.Direction.None);
+            return;
+        }
+
+        positionToReach = toPixelPosition(nextPosition);
+
+        decoratedEntity.setDirectionToTake(toMazePosition(decoratedEntity.getPosition()),nextPosition);
+    }
+
 
     @Override
     public void setDirection(InputKey.Direction direction) {
@@ -35,22 +88,19 @@ public class DumbGhost extends MoveableIntellectualEntityDecorator {
         decoratedEntity.setDirectionToTake(actualPosition,positionToGo);
     }
 
-    @Override
-    public PathFindingAlgorithm getPathFindingAlgorithm() {
-        return decoratedEntity.getPathFindingAlgorithm();
+    private Position toMazePosition(Position position) {
+        float xFloat = (float) position.getX();
+        float yFloat = (float) position.getY();
+        return new Position(Math.round(xFloat/50), Math.round(yFloat/50));
+    }
+
+    private Position toPixelPosition(Position position) {
+        return new Position(position.getX()*50,position.getY()*50);
     }
 
     @Override
-    public List<Node> computePathToGivenEntity(Entity entity) {
-        return decoratedEntity.computePathToGivenEntity(entity);
-    }
-
-    @Override
-    public void computeDirectionToGivenEntity(Entity entity) {
-        int rand = new Random().nextInt(5);
-        setDirection(InputKey.Direction.values()[rand]);
-
-        //decoratedEntity.computeDirectionToGivenEntity(entity);
+    public InputKey.Direction getDirection() {
+        return decoratedEntity.getDirection();
     }
 
     @Override
@@ -127,6 +177,4 @@ public class DumbGhost extends MoveableIntellectualEntityDecorator {
     public void resolveCollision(Fruit fruitEntity) {
         decoratedEntity.resolveCollision(fruitEntity);
     }
-
-
 }

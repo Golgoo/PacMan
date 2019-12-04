@@ -3,7 +3,6 @@ package sample.Model.Entities;
 import sample.Model.InputKey;
 import sample.Model.Level;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class PacMan implements MoveableEntity {

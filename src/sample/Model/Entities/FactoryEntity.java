@@ -1,7 +1,5 @@
 package sample.Model.Entities;
 
-import sample.Model.Entities.Decorators.AccessibilityDecorator;
-import sample.Model.Entities.Decorators.DumbGhost;
 import sample.Model.Level;
 
 public class FactoryEntity {

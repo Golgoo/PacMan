@@ -30,7 +30,6 @@ public class PhysicMotor {
             for(MoveableIntellectualEntity ghost : level.getGhosts()) {
                 moveEntity(ghost.getDirection(), ghost);
             }
-                //moveEntity(level.getGhosts().get(0).getDirection(), level.getGhosts().get(0));
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
