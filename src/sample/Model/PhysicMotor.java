@@ -1,9 +1,6 @@
 package sample.Model;
 
-import sample.Model.Entities.Entity;
-import sample.Model.Entities.Ghost;
-import sample.Model.Entities.MoveableEntity;
-import sample.Model.Entities.Position;
+import sample.Model.Entities.*;
 
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -30,8 +27,9 @@ public class PhysicMotor {
                 moveEntity(inputKeysHandler.convertKeyToInputKey(keyPressed),level.getPacman());
             }
             level.computeGhostsNextMove();
-            for(Ghost ghost : level.getGhosts())
+            for(MoveableIntellectualEntity ghost : level.getGhosts()) {
                 moveEntity(ghost.getDirection(), ghost);
+            }
                 //moveEntity(level.getGhosts().get(0).getDirection(), level.getGhosts().get(0));
             try {
                 Thread.sleep(10);
@@ -43,8 +41,9 @@ public class PhysicMotor {
     private boolean moveEntity(InputKey.Direction direction, MoveableEntity entity){
         Position nextWantedPosition = entity.computeNextWantedPosition(direction);
 
-        if(nextWantedPosition == null)
+        if(nextWantedPosition == null) {
             return false;
+        }
 
         if(level.isOutsideMap(nextWantedPosition)) {
             System.out.println("outside Map");

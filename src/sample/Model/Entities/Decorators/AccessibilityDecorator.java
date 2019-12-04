@@ -2,7 +2,6 @@ package sample.Model.Entities.Decorators;
 
 import sample.Model.Entities.*;
 
-import java.io.InputStream;
 
 public class AccessibilityDecorator extends EntityDecorator {
     boolean isAccessible;

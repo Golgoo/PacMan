@@ -24,6 +24,7 @@ public class AStar implements PathFindingAlgorithm {
         this.xstart = startX;
         this.ystart = startY;
 
+        this.now = new Node(null, xstart, ystart, 0, 0);
         return findPathTo(xend, yend);
     }
 

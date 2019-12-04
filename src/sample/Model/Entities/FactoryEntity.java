@@ -1,6 +1,7 @@
 package sample.Model.Entities;
 
 import sample.Model.Entities.Decorators.AccessibilityDecorator;
+import sample.Model.Entities.Decorators.DumbGhost;
 import sample.Model.Level;
 
 public class FactoryEntity {
@@ -36,7 +37,7 @@ public class FactoryEntity {
             return pacMan;
         }
         if(entityCode == EntityCode.getGhostCode()) {
-            Ghost ghost = new Ghost(new DynamicMoveable(), position, level);
+            MoveableIntellectualEntity ghost = new Ghost(new DynamicMoveable(), position, level);
             level.getGhosts().add(ghost);
             System.out.println("Added ghost");
             return ghost;
