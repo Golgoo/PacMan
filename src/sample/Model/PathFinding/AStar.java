@@ -7,37 +7,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class AStar {
+public class AStar implements PathFindingAlgorithm {
     private final List<Node> open;
     private final List<Node> closed;
     private final List<Node> path;
     private final int[][] maze;
     private Node now;
-    private final int xstart;
-    private final int ystart;
+    private int xstart;
+    private int ystart;
     private int xend, yend;
     private final boolean diag;
 
-    // Node class for convienience
-    public static class Node implements Comparable {
-        public Node parent;
-        public int x, y;
-        public double g;
-        public double h;
-        Node(Node parent, int xpos, int ypos, double g, double h) {
-            this.parent = parent;
-            this.x = xpos;
-            this.y = ypos;
-            this.g = g;
-            this.h = h;
-        }
-        // Compare by f value (g + h)
-        @Override
-        public int compareTo(Object o) {
-            Node that = (Node) o;
-            return (int)((this.g + this.h) - (that.g + that.h));
-        }
+
+    @Override
+    public List<Node> findPathFromTo(int startX, int startY, int xend, int yend) {
+        this.xstart = startX;
+        this.ystart = startY;
+
+        return findPathTo(xend, yend);
     }
+
 
     public AStar(int[][] maze, int xstart, int ystart, boolean diag) {
         this.open = new ArrayList<>();
@@ -49,6 +38,16 @@ public class AStar {
         this.ystart = ystart;
         this.diag = diag;
     }
+
+    public AStar(int[][] maze, boolean diag) {
+        this.open = new ArrayList<>();
+        this.closed = new ArrayList<>();
+        this.path = new ArrayList<>();
+        this.maze = maze;
+        this.now = new Node(null, 0, 0, 0, 0);
+        this.diag = diag;
+    }
+
     /*
      ** Finds path to xend/yend or returns null
      **
@@ -77,6 +76,7 @@ public class AStar {
         }
         return this.path;
     }
+
     /*
      ** Looks in a given List<> for a node
      **
@@ -85,6 +85,7 @@ public class AStar {
     private static boolean findNeighborInList(List<Node> array, Node node) {
         return array.stream().anyMatch((n) -> (n.x == node.x && n.y == node.y));
     }
+
     /*
      ** Calulate distance between this.now and xend/yend
      **
@@ -97,6 +98,7 @@ public class AStar {
             return Math.abs(this.now.x + dx - this.xend) + Math.abs(this.now.y + dy - this.yend); // else return "Manhattan distance"
         }
     }
+
     private void addNeigborsToOpenList() {
         Node node;
         for (int x = -1; x <= 1; x++) {
@@ -131,7 +133,7 @@ public class AStar {
     private static int[][] loadGrid(File file) {
         int rows = 21;
         int columns = 19;
-        int maze[][] = new int [rows][columns];
+        int maze[][] = new int[rows][columns];
 
         Scanner scanner = null;
         try {
@@ -141,20 +143,19 @@ public class AStar {
         }
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                if(scanner.hasNextInt()){
+                if (scanner.hasNextInt()) {
                     int result = scanner.nextInt();
-                    if(result == 0)
+                    if (result == 0)
                         maze[i][j] = 100;
                     else
                         maze[i][j] = 0;
                 }
             }
-            if(scanner.hasNextLine())
+            if (scanner.hasNextLine())
                 scanner.nextLine();
         }
         return maze;
     }
-
 
 
     public static void main(String[] args) {
@@ -177,8 +178,8 @@ public class AStar {
                 {  0,  0,  1,  1,  1,  1,  0,  0},
                 {  0,  0,  0,  0,  0,  0,  0,  0},
         };*/
-        AStar as = new AStar(maze, 0, 0, false);
-        List<Node> path = as.findPathTo(3, 3);
+        AStar as = new AStar(maze, false);
+        List<Node> path = as.findPathFromTo(1, 1, 6, 3);
         if (path != null) {
             path.forEach((n) -> {
                 System.out.print("[" + n.x + ", " + n.y + "] ");

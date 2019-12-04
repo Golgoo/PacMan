@@ -12,6 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class MainFrame extends JFrame {
@@ -85,7 +88,11 @@ public class MainFrame extends JFrame {
         }
     }
     public void createEntity(Entity entity){
-        entity.setGraphicId(gooContext.createSingleAnimatedEntity(entity.getSpritePath(), 1, 400));
+        try {
+            entity.setGraphicId(gooContext.createSingleAnimatedEntity(new FileInputStream(new File(entity.getSpritePath())), 1, 400));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         gooContext.setEntityPosition(entity.getGraphicId(), entity.getPosition().getX()*50, entity.getPosition().getY()*50);
         gooContext.setEntitySize(entity.getGraphicId(), entity.getDimension().getWeight(), entity.getDimension().getHeight());
         entity.setPosition(new Position(entity.getPosition().getX()*50, entity.getPosition().getY()*50));

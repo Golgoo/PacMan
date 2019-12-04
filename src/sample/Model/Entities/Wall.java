@@ -1,6 +1,7 @@
 package sample.Model.Entities;
 
 
+
 public class Wall implements Entity {
 
     private Position position;

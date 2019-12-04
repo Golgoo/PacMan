@@ -190,7 +190,11 @@ public class Level {
 
     public void computeGhostsNextMove() {
         for(Ghost ghost : ghosts)
-            ghost.computeShortestPathToGivenEntity(aStar, maze, pacman);
+            ghost.computeDirectionToGivenEntity(pacman);
+    }
+
+    public int[][] getMaze() {
+        return maze;
     }
 }
 

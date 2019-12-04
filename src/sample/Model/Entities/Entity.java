@@ -1,6 +1,7 @@
 package sample.Model.Entities;
 
 
+
 public interface Entity extends Collideable {
 
     Position getPosition();
