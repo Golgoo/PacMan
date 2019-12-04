@@ -23,6 +23,7 @@ public class IntersectTool {
     }
 
 
+
     private boolean areEntitiesIntersected(Entity firstEntity, Entity secondEntity, Position nextPositionFirstEntity){
         int x1FirstEntity, x2FirstEntity, y1FirstEntity, y2FirstEntity;
         int x1SecondEntity, x2SecondEntity, y1SecondEntity, y2SecondEntity;
@@ -37,7 +38,7 @@ public class IntersectTool {
         y1SecondEntity = secondEntity.getPosition().getY();
         y2SecondEntity = y1SecondEntity + secondEntity.getDimension().getHeight();
 
-        if((x1FirstEntity >= x1SecondEntity && x1FirstEntity < x2SecondEntity) || ( x2FirstEntity > x1SecondEntity && x2FirstEntity <= x2SecondEntity) /*|| ( x1SecondEntity > x1FirstEntity && x1SecondEntity < x2FirstEntity) || (x2SecondEntity > x1FirstEntity && x2SecondEntity < x2FirstEntity) */) {
+        if((x1FirstEntity >= x1SecondEntity && x1FirstEntity < x2SecondEntity) || ( x2FirstEntity > x1SecondEntity && x2FirstEntity <= x2SecondEntity) || (x1SecondEntity > x1FirstEntity && x2SecondEntity < x2FirstEntity) || (x1SecondEntity == x1FirstEntity && x2SecondEntity == x2FirstEntity)) {
             if( y1FirstEntity <= y1SecondEntity && y2FirstEntity > y1SecondEntity) {
 
                 //System.out.println(y1FirstEntity +" < "+ y1SecondEntity + "    "+ y2FirstEntity + "> "+y1SecondEntity);

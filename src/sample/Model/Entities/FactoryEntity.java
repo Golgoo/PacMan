@@ -1,5 +1,8 @@
 package sample.Model.Entities;
 
+import sample.Model.Entities.Decorators.AccessibilityDecorator;
+import sample.Model.Level;
+
 public class FactoryEntity {
 
     public static class EntityCode {
@@ -20,16 +23,24 @@ public class FactoryEntity {
 
     };
 
-    public static Entity getEntity(int entityCode, Position position){
+    public static Entity getEntity(int entityCode, Position position, Level level){
 
         if(entityCode == EntityCode.getFruitEntityCode())
-            return new FruitEntity(position);
+            return new Fruit(position);
         if(entityCode == EntityCode.getWallCode())
-            return new Wall(position);
-        /*if(entityCode == EntityCode.getPacManCode())
-            return new PacMan(position);*/
-        if(entityCode == EntityCode.getGhostCode())
-            return new Ghost();
+            return /*new AccessibilityDecorator(*/new Wall(position)/*,true)*/;
+
+        if(entityCode == EntityCode.getPacManCode()) {
+            PacMan pacMan = new PacMan(new DynamicMoveable(), position, level);
+            level.setPacman(pacMan);
+            return pacMan;
+        }
+        if(entityCode == EntityCode.getGhostCode()) {
+            Ghost ghost = new Ghost(new DynamicMoveable(), position, level);
+            level.getGhosts().add(ghost);
+            System.out.println("Added ghost");
+            return ghost;
+        }
 
 
         return  null;
