@@ -14,6 +14,4 @@ public interface Entity extends Collideable {
     int getGraphicId();
     void setGraphicId(int graphicId);
 
-    String toString();
-
 }

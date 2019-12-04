@@ -77,7 +77,7 @@ public class PacMan implements MoveableEntity {
 
     @Override
     public String getSpritePath() {
-        return"src/ressources/pacmanDown.gif";
+        return"src/ressources/pacmanRight.gif";
     }
 
 

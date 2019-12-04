@@ -4,16 +4,12 @@ import graphicmotor.GooContext;
 import sample.Model.Entities.*;
 import sample.Model.Entities.Decorators.AStarGhost;
 import sample.Model.Entities.Decorators.DumbGhost;
-import sample.Model.Entities.Tools.LevelGeneratorFromTxt;
+import sample.Model.Tools.LevelGeneratorFromTxt;
 import sample.Model.PathFinding.AStar;
 
-import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import static sample.Model.Entities.FactoryEntity.*;
 
 public class Level {
     private int columns;

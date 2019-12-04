@@ -37,7 +37,6 @@ public class FactoryEntity {
         if(entityCode == EntityCode.getGhostCode()) {
             MoveableIntellectualEntity ghost = new Ghost(new DynamicMoveable(), position, level);
             level.getGhosts().add(ghost);
-            System.out.println("Added ghost");
             return ghost;
         }
 

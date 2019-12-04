@@ -1,4 +1,4 @@
-package sample.Model.Entities.Tools;
+package sample.Model.Tools;
 
 import sample.Model.Entities.Entity;
 import sample.Model.Entities.Position;

@@ -1,7 +1,7 @@
 package sample.Model.Entities.Decorators;
 
 import sample.Model.Entities.*;
-import sample.Model.Entities.Tools.PathConverter;
+import sample.Model.Tools.PathConverter;
 import sample.Model.InputKey;
 import sample.Model.Level;
 import sample.Model.PathFinding.AStar;
