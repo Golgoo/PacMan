@@ -86,12 +86,27 @@ public class MainFrame extends JFrame {
         }
     }
     public void createEntity(Entity entity){
-        entity.setGraphicId(gooContext.createSingleAnimatedEntity(entity.getSpritePath(), 1, 400));
-        gooContext.setEntityPosition(entity.getGraphicId(), entity.getPosition().getX()*50, entity.getPosition().getY()*50);
-        gooContext.setEntitySize(entity.getGraphicId(), entity.getDimension().getWeight(), entity.getDimension().getHeight());
-        entity.setPosition(new Position(entity.getPosition().getX()*50, entity.getPosition().getY()*50));
-        gooContext.setZIndex(entity.getGraphicId(), 2);
-        gooContext.enableEntity(entity.getGraphicId());
+        entity.createGraphicEntity(gooContext);
+        /*if(entity.toString().substring(0, 1).equals("P")) {
+            entity.setGraphicId(gooContext.createSingleAnimatedEntity(entity.getSpritePath(), 5, 80));
+        }
+        else{
+            entity.setGraphicId(gooContext.createSingleAnimatedEntity(entity.getSpritePath(), 1, 400));
+        }
+        if(entity.toString().substring(0, 1).equals("F")){
+            gooContext.setEntityPosition(entity.getGraphicId(), entity.getPosition().getX()*50 + ((50-entity.getDimension().getWeight())/2), entity.getPosition().getY()*50 + ((50-entity.getDimension().getHeight())/2));
+            gooContext.setEntitySize(entity.getGraphicId(), entity.getDimension().getWeight(), entity.getDimension().getHeight());
+            entity.setPosition(new Position(entity.getPosition().getX()*50 + ((50-entity.getDimension().getWeight())/2), entity.getPosition().getY()*50 + ((50-entity.getDimension().getHeight())/2)));
+            gooContext.setZIndex(entity.getGraphicId(), 2);
+            gooContext.enableEntity(entity.getGraphicId());
+        }
+        else {
+            gooContext.setEntityPosition(entity.getGraphicId(), entity.getPosition().getX() * 50, entity.getPosition().getY() * 50);
+            gooContext.setEntitySize(entity.getGraphicId(), entity.getDimension().getWeight(), entity.getDimension().getHeight());
+            entity.setPosition(new Position(entity.getPosition().getX() * 50, entity.getPosition().getY() * 50));
+            gooContext.setZIndex(entity.getGraphicId(), 2);
+            gooContext.enableEntity(entity.getGraphicId());
+        }*/
         //System.out.println("Created entity : " +entity.toString()+ "  x,y :"+entity.getPosition().getX()+" ,"+entity.getPosition().getY());
     }
 }

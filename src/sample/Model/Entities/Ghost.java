@@ -1,5 +1,6 @@
 package sample.Model.Entities;
 
+import graphicmotor.GooContext;
 import sample.Model.InputKey;
 import sample.Model.Level;
 import sample.Model.PathFinding.Node;
@@ -63,6 +64,16 @@ public class Ghost implements MoveableIntellectualEntity {
 
     public void setGraphicId(int grapicId) {
         this.graphicId = grapicId;
+    }
+
+    @Override
+    public void createGraphicEntity(GooContext gooContext) {
+        setGraphicId(gooContext.createSingleAnimatedEntity(getSpritePath()/*.substring(4)*/, 1, 400));
+        gooContext.setEntityPosition(getGraphicId(), getPosition().getX() * 50, getPosition().getY() * 50);
+        gooContext.setEntitySize(getGraphicId(), getDimension().getWeight(), getDimension().getHeight());
+        setPosition(new Position(getPosition().getX() * 50, getPosition().getY() * 50));
+        gooContext.setZIndex(getGraphicId(), 2);
+        gooContext.enableEntity(getGraphicId());
     }
 
     @Override

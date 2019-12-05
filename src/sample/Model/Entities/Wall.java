@@ -1,6 +1,7 @@
 package sample.Model.Entities;
 
 
+import graphicmotor.GooContext;
 
 public class Wall implements Entity {
 
@@ -34,6 +35,16 @@ public class Wall implements Entity {
     @Override
     public void setGraphicId(int graphicId) {
         this.graphicId = graphicId;
+    }
+
+    @Override
+    public void createGraphicEntity(GooContext gooContext) {
+        setGraphicId(gooContext.createStaticEntity(getSpritePath()));
+        gooContext.setEntityPosition(getGraphicId(), getPosition().getX() * 50, getPosition().getY() * 50);
+        gooContext.setEntitySize(getGraphicId(), getDimension().getWeight(), getDimension().getHeight());
+        setPosition(new Position(getPosition().getX() * 50, getPosition().getY() * 50));
+        gooContext.setZIndex(getGraphicId(), 2);
+        gooContext.enableEntity(getGraphicId());
     }
 
     @Override

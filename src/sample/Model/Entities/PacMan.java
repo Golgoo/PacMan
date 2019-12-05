@@ -1,5 +1,6 @@
 package sample.Model.Entities;
 
+import graphicmotor.GooContext;
 import sample.Model.InputKey;
 import sample.Model.Level;
 
@@ -25,6 +26,18 @@ public class PacMan implements MoveableEntity {
     @Override
     public void setGraphicId(int graphicId) {
         this.graphicId = graphicId;
+    }
+
+    @Override
+    public void createGraphicEntity(GooContext gooContext) {
+
+        setGraphicId(gooContext.createSingleAnimatedEntity(getSpritePath()/*.substring(4)*/, 5, 80));
+        gooContext.setEntityColorMask(getGraphicId(),1,1,0);
+        gooContext.setEntityPosition(getGraphicId(), getPosition().getX() * 50, getPosition().getY() * 50);
+        gooContext.setEntitySize(getGraphicId(), getDimension().getWeight(), getDimension().getHeight());
+        setPosition(new Position(getPosition().getX() * 50, getPosition().getY() * 50));
+        gooContext.setZIndex(getGraphicId(), 2);
+        gooContext.enableEntity(getGraphicId());
     }
 
     public PacMan(DynamicMoveable dynamicPacman, Position position, Level level) {
@@ -77,10 +90,8 @@ public class PacMan implements MoveableEntity {
 
     @Override
     public String getSpritePath() {
-        return"src/ressources/pacmanRight.gif";
+        return"src/ressources/pac-down.png";
     }
-
-
 
 
     @Override

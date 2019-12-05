@@ -1,6 +1,7 @@
 package sample.Model.Entities;
 
 
+import graphicmotor.GooContext;
 import sample.Model.Level;
 
 public class Fruit implements Entity, Consumable {
@@ -24,6 +25,16 @@ public class Fruit implements Entity, Consumable {
 
     public void setGraphicId(int graphicId) {
         this.graphicId = graphicId;
+    }
+
+    @Override
+    public void createGraphicEntity(GooContext gooContext) {
+        setGraphicId(gooContext.createStaticEntity(getSpritePath()));
+        gooContext.setEntityPosition(getGraphicId(), getPosition().getX()*50 + ((50-getDimension().getWeight())/2), getPosition().getY()*50 + ((50-getDimension().getHeight())/2));
+        gooContext.setEntitySize(getGraphicId(), getDimension().getWeight(), getDimension().getHeight());
+        setPosition(new Position(getPosition().getX()*50 + ((50-getDimension().getWeight())/2), getPosition().getY()*50 + ((50-getDimension().getHeight())/2)));
+        gooContext.setZIndex(getGraphicId(), 0);
+        gooContext.enableEntity(getGraphicId());
     }
 
     @Override

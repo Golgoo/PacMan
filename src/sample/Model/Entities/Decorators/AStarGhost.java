@@ -1,5 +1,6 @@
 package sample.Model.Entities.Decorators;
 
+import graphicmotor.GooContext;
 import sample.Model.Entities.*;
 import sample.Model.Tools.PathConverter;
 import sample.Model.InputKey;
@@ -151,6 +152,11 @@ public class AStarGhost extends MoveableIntellectualEntityDecorator {
     @Override
     public void setGraphicId(int graphicId) {
         decoratedEntity.setGraphicId(graphicId);
+    }
+
+    @Override
+    public void createGraphicEntity(GooContext gooContext) {
+        decoratedEntity.createGraphicEntity(gooContext);
     }
 
     @Override

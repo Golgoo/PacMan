@@ -1,6 +1,7 @@
 package sample.Model.Entities.Decorators;
 
 
+import graphicmotor.GooContext;
 import sample.Model.Entities.*;
 import sample.Model.InputKey;
 import sample.Model.PathFinding.Node;
@@ -101,6 +102,11 @@ public class DumbGhost extends MoveableIntellectualEntityDecorator {
     @Override
     public void setGraphicId(int graphicId) {
         decoratedEntity.setGraphicId(graphicId);
+    }
+
+    @Override
+    public void createGraphicEntity(GooContext gooContext) {
+        decoratedEntity.createGraphicEntity(gooContext);
     }
 
     @Override

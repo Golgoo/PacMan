@@ -6,4 +6,5 @@ public interface Collideable{
     void resolveCollision( PacMan pacMan );
     void resolveCollision( Ghost ghost );
     void resolveCollision( Fruit fruitEntity );
+
 }

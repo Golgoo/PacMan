@@ -1,5 +1,6 @@
 package sample.Model.Entities.Decorators;
 
+import graphicmotor.GooContext;
 import sample.Model.Entities.*;
 
 
@@ -45,6 +46,11 @@ public class AccessibilityDecorator extends EntityDecorator {
     @Override
     public void setGraphicId(int graphicId) {
         decoratedEntity.setGraphicId(graphicId);
+    }
+
+    @Override
+    public void createGraphicEntity(GooContext gooContext) {
+        decoratedEntity.createGraphicEntity(gooContext);
     }
 
 
