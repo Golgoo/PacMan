@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Pacman" company="Société TTT" webLink="http://" view-date="2019-11-11" view-index="0" gantt-divider-location="547" resource-divider-location="386" version="2.8.10" locale="fr">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="264" order="0"/>
+        <field id="tpd4" name="Date de début" width="140" order="1"/>
+        <field id="tpd5" name="Date de fin" width="139" order="2"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="253" order="0"/>
+        <field id="1" name="Rôle par défaut" width="129" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="true"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Permettre à Pacman de traverser les murs du labyrinthe" color="#8cb6ce" meeting="false" start="2019-11-25" duration="4" complete="100" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[en tant que joueur, je souhaite sous certaines conditions (à définir), le Pacman puisse transpercer des murs afin de passer d’un tunnel à l’autre rapidement.]]>
+            </notes>
+        </task>
+        <task id="2" name="Permettre à Pacman de diminuer de taille au cours de la partie" color="#8cb6ce" meeting="false" start="2019-11-25" duration="4" complete="100" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[En tant que joueur, je souhaite sous certaines conditions (à définir aussi) que le Pacman se voit
+réduire significativement sa taille afin qu’il puisse se déplacer dans les 4 directions dans le même
+tunnel (on peut également étendre cette fonction aux fantômes).]]>
+            </notes>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Maurice Gautier" function="Default:0" contacts="" phone=""/>
+        <resource id="1" name="Baldy Rémi" function="Default:0" contacts="" phone=""/>
+        <resource id="2" name="Baddouj Youssef" function="Default:0" contacts="" phone=""/>
+        <resource id="3" name="Audibert Hervé" function="Default:0" contacts="" phone=""/>
+        <resource id="4" name="Palacios Franck" function="Default:1" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="0" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="2" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="0" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="2" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
