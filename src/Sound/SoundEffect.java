@@ -117,34 +117,4 @@ public class SoundEffect implements Sound{
 
 
 
-
-   /* static void PlaySound2(){
-        Application.launch();
-        String bip = "Game Files/Sounds/SFX/pacman_beginning.wav";
-        Media Sound2 = new Media(new File(bip).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(Sound2);
-        mediaPlayer.play();
-    }*/
-   //Un listenner sur javaFx
-
-
-
-
-    // TEST 1 2 3 4 5
-    public static void main(String[] args) throws InterruptedException {
-
-        //PlaySound2();
-
-        //PlayMusicLoop(Clap);
-        //PlayMusicboucle(Clap);
-        //PlaySound1time(Clap3);
-        //PlayMusicLoop(Clap9);
-
-
-
-    }
-
-
-
-
 }
