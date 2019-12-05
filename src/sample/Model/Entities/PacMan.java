@@ -1,6 +1,8 @@
 package sample.Model.Entities;
 
 import graphicmotor.GooContext;
+import graphicmotor.animation.Animation;
+import graphicmotor.animation.AnimationBank;
 import sample.Model.InputKey;
 import sample.Model.Level;
 
@@ -10,7 +12,6 @@ public class PacMan implements MoveableEntity {
 
     private int graphicId;
 
-    private Position velocityPos;
 
     private int velocity;
 
@@ -31,13 +32,28 @@ public class PacMan implements MoveableEntity {
     @Override
     public void createGraphicEntity(GooContext gooContext) {
 
-        setGraphicId(gooContext.createSingleAnimatedEntity(getSpritePath()/*.substring(4)*/, 5, 80));
+        AnimationBank<InputKey.Direction> animationsBank = new AnimationBank<InputKey.Direction>();
+        int nbSprite = 5 ;
+        long scheduleTime = 60 ;
+
+        animationsBank.putAnimation(InputKey.Direction.Right, new Animation(getSpritePath()+"right.png", nbSprite, scheduleTime));
+        animationsBank.putAnimation(InputKey.Direction.Down, new Animation(getSpritePath()+"down.png", nbSprite, scheduleTime));
+        animationsBank.putAnimation(InputKey.Direction.Left, new Animation(getSpritePath()+"left.png", nbSprite, scheduleTime));
+        animationsBank.putAnimation(InputKey.Direction.Up, new Animation(getSpritePath()+"up.png", nbSprite, scheduleTime));
+
+        int ref = gooContext.createMultipleAnimatedEntity(animationsBank);
+
+
+        setGraphicId(ref/*gooContext.createSingleAnimatedEntity(getSpritePath(), 5, 80)*/);
         gooContext.setEntityColorMask(getGraphicId(),1,1,0);
         gooContext.setEntityPosition(getGraphicId(), getPosition().getX() * 50, getPosition().getY() * 50);
         gooContext.setEntitySize(getGraphicId(), getDimension().getWeight(), getDimension().getHeight());
         setPosition(new Position(getPosition().getX() * 50, getPosition().getY() * 50));
         gooContext.setZIndex(getGraphicId(), 2);
         gooContext.enableEntity(getGraphicId());
+
+
+
     }
 
     public PacMan(DynamicMoveable dynamicPacman, Position position, Level level) {
@@ -46,7 +62,6 @@ public class PacMan implements MoveableEntity {
         this.level = level;
         this.livesCount = 3;
         this.velocity = 2;
-        this.velocityPos = new Position(0,0);
     }
 
 
@@ -90,7 +105,7 @@ public class PacMan implements MoveableEntity {
 
     @Override
     public String getSpritePath() {
-        return"src/ressources/pac-down.png";
+        return"src/ressources/pac-";
     }
 
 
@@ -127,8 +142,5 @@ public class PacMan implements MoveableEntity {
         return velocity;
     }
 
-    public void setVelocityPos(Position velocityPos){
-        this.velocityPos = velocityPos;
-    }
 
 }

@@ -24,7 +24,10 @@ public class PhysicMotor {
 
         while(true){
             if(keyPressed != null){
-                moveEntity(inputKeysHandler.convertKeyToInputKey(keyPressed),level.getPacman());
+                InputKey.Direction direction = inputKeysHandler.convertKeyToInputKey(keyPressed);
+
+                moveEntity(direction/*inputKeysHandler.convertKeyToInputKey(keyPressed)*/,level.getPacman());
+                level.getGooContext().setMultipledAnimatedEntityAnimation(level.getPacman().getGraphicId(), direction);
             }
             level.computeGhostsNextMove();
             for(MoveableIntellectualEntity ghost : level.getGhosts()) {

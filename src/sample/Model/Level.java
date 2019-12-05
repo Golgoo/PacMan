@@ -171,5 +171,9 @@ public class Level {
     public void setRows(int rows) {
         this.rows = rows;
     }
+
+    public GooContext getGooContext() {
+        return gooContext;
+    }
 }
 
