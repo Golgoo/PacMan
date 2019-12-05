@@ -2,13 +2,28 @@ package Sound;
 
 
 import javax.sound.sampled.*;
-import javax.swing.*;
-import java.applet.AudioClip;
-import java.io.File;
-import java.io.IOException;
-import java.rmi.server.ExportException;
 
-public class SoundEffect implements  Sound {
+
+
+import java.applet.Applet;
+import java.io.File;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.*;
+import javafx.stage.Stage;
+
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.server.ExportException;
+import java.util.ResourceBundle;
+
+public class SoundEffect implements Sound{
 
 
     public static File Clap = new File("Game Files/Sounds/SFX/pacman_beginning.wav");
@@ -39,25 +54,7 @@ public class SoundEffect implements  Sound {
 
 
 
-    private AudioClip clip;
-    public void play() {
 
-
-        clip.play();
-    }
-
-    @Override
-    public void loop() {
-        clip.loop();
-
-    }
-
-
-    @Override
-    public  void stop() {
-
-        clip.stop();
-    }
 
 // effet sonore qui s'execute 1 fois
 
@@ -67,14 +64,16 @@ public class SoundEffect implements  Sound {
             clip.open(AudioSystem.getAudioInputStream(Sound));
             clip.start();
             Thread.sleep(2000);
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
 
         }
     }
+
+
+
+
+
 
 // boucle infini d'un son
         static void PlayMusicboucle(File musicLocation){
@@ -88,7 +87,6 @@ public class SoundEffect implements  Sound {
             while (true){
                 clip.loop(1);
             }
-
         }
     }catch (Exception e) {
         e.printStackTrace();
@@ -96,22 +94,19 @@ public class SoundEffect implements  Sound {
 }
 
 
+
+
+
+
 // test de la boucle avec un bouton qui permet de stopper la music
     static void PlayMusicLoop(File musicLocation){
         try {
             File musicPath = new File(String.valueOf(musicLocation));
-
             if(musicPath.exists()){
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.loop((Clip.LOOP_CONTINUOUSLY));
-
-                JOptionPane.showMessageDialog(null,"OK to stop");
-                clip.stop();
-
-
-
             }
         }catch (Exception e) {
             e.printStackTrace();
@@ -121,9 +116,11 @@ public class SoundEffect implements  Sound {
 
 
 
+
+
    /* static void PlaySound2(){
         Application.launch();
-        String bip = "pacman_beginning.wav";
+        String bip = "Game Files/Sounds/SFX/pacman_beginning.wav";
         Media Sound2 = new Media(new File(bip).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(Sound2);
         mediaPlayer.play();
@@ -136,12 +133,18 @@ public class SoundEffect implements  Sound {
     // TEST 1 2 3 4 5
     public static void main(String[] args) throws InterruptedException {
 
+        //PlaySound2();
+
         //PlayMusicLoop(Clap);
-        PlayMusicboucle(Clap);
+        //PlayMusicboucle(Clap);
         //PlaySound1time(Clap3);
         //PlayMusicLoop(Clap9);
 
 
 
     }
+
+
+
+
 }

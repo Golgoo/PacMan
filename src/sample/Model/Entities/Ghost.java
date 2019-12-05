@@ -1,16 +1,40 @@
 package sample.Model.Entities;
 
 import sample.Model.InputKey;
+import sample.Model.Level;
+import sample.Model.PathFinding.Node;
+import sample.Model.PathFinding.PathFindingAlgorithm;
 
 import java.util.List;
 
-public class Ghost implements Entity, Moveable, Living {
+public class Ghost implements MoveableIntellectualEntity {
 
-    DynamicMoveable dynamicGhost;
 
     private int graphicId;
 
-    private boolean alive;
+    private int velocity;
+
+    private Position position;
+
+    private Level level;
+
+    private DynamicMoveable dynamicGhost;
+
+    private InputKey.Direction direction;
+
+    private PathFindingAlgorithm pathFindingAlgorithm;
+
+    public void setDirection(InputKey.Direction direction) {
+        this.direction = direction;
+    }
+
+    public Ghost(DynamicMoveable dynamicGhost, Position position, Level level) {
+        this.dynamicGhost = dynamicGhost;
+        this.position = position;
+        this.level = level;
+        this.velocity = 1;
+        direction = InputKey.Direction.None;
+    }
 
     @Override
     public String toString() {
@@ -19,21 +43,21 @@ public class Ghost implements Entity, Moveable, Living {
 
     @Override
     public void setPosition(Position position) {
-        this.dynamicGhost.setPosition(position);
+        this.position = position;
     }
 
     @Override
     public Position getPosition() {
-        return dynamicGhost.getPosition();
+        return position;
     }
 
     @Override
     public boolean isAccessible() {
-        return false;
+        return true;
     }
 
     @Override
-    public int getId() {
+    public int getGraphicId() {
         return graphicId;
     }
 
@@ -43,46 +67,44 @@ public class Ghost implements Entity, Moveable, Living {
 
     @Override
     public Dimension getDimension() {
-        return new Dimension(30,30);
+        return new Dimension(40,40);
     }
 
 
     @Override
     public String getSpritePath() {
-        return "Game Files/Sprites/Blue_up.png";
+        return "src/ressources/redghost.gif";
     }
 
 
     @Override
     public Position computeNextWantedPosition(InputKey.Direction direction) {
-        return null;
-    }
-
-    @Override
-    public List<Entity> getEntitiesIntersecting(Position position) {
-        return null;
+        return dynamicGhost.computeNextWantedPosition(position,direction, getVelocity());
     }
 
 
     @Override
-    public List<Entity> move(InputKey.Direction direction) {
-
-        return null;
+    public void move(Position nextWantedPosition, List<Entity> nextPositionEntities) {
+        position = nextWantedPosition;
+        level.setEntityPosition(this.getGraphicId(), getPosition().getX(), getPosition().getY());
+        for(Entity entity : nextPositionEntities)
+            resolveCollision(entity);
     }
 
     @Override
-    public boolean isAlive() {
-        return alive;
+    public int getVelocity() {
+        return velocity;
     }
+
 
     @Override
     public void resolveCollision(Collideable collideable) {
-
+        collideable.resolveCollision(this);
     }
 
     @Override
     public void resolveCollision(PacMan pacMan) {
-
+        pacMan.resolveCollision(this);
     }
 
     @Override
@@ -91,7 +113,54 @@ public class Ghost implements Entity, Moveable, Living {
     }
 
     @Override
-    public void resolveCollision(FruitEntity fruitEntity) {
+    public void resolveCollision(Fruit fruitEntity) {
 
+    }
+
+
+    private Position toMazePosition(Position position) {
+        float xFloat = (float) position.getX();
+        float yFloat = (float) position.getY();
+        return new Position(Math.round(xFloat/50), Math.round(yFloat/50));
+    }
+
+    private Position toPixelPosition(Position position) {
+        return new Position(position.getX()*50,position.getY()*50);
+    }
+
+    public InputKey.Direction getDirection() {
+        return direction;
+    }
+
+    @Override
+    public PathFindingAlgorithm getPathFindingAlgorithm() {
+        return pathFindingAlgorithm;
+    }
+
+    @Override
+    public void setPathFindingAlgorithm(PathFindingAlgorithm pathFindingAlgorithm) {
+        this.pathFindingAlgorithm = pathFindingAlgorithm;
+    }
+
+
+    @Override
+    public List<Node> computePathToGivenEntity(Entity entity) {
+        return null;
+    }
+
+    @Override
+    public void computeDirectionToGivenEntity(Entity entity) {
+
+    }
+
+    public void setDirectionToTake(Position actualPosition ,Position positionToGo){
+        if(actualPosition.getX() < positionToGo.getX())
+            direction = InputKey.Direction.Right;
+        else if(actualPosition.getX() > positionToGo.getX())
+            direction = InputKey.Direction.Left;
+        else if(actualPosition.getY() > positionToGo.getY())
+            direction = InputKey.Direction.Up;
+        else if(actualPosition.getY() < positionToGo.getY())
+            direction = InputKey.Direction.Down;
     }
 }
